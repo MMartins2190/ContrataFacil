@@ -64,4 +64,8 @@
         padding: 0.5rem 3rem;
         border-radius: 10px;
     }
+
+
+    /*Funni 🤓*/
+
 </style>
