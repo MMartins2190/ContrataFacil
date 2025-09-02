@@ -1,3 +1,19 @@
+<script>
+    load();
+
+    async function load(){
+    try{
+        const data = await fetch("https://jsonplaceholder.typicode.com/posts/");
+        const dataJSON = await data.json();
+        console.log(dataJSON);''
+        return dataJSON;
+    }
+    catch(e){
+        console.warn(e, "NOOOOOOOOOOOO");
+    }
+}
+</script>
+
 <div class="list-vacancies">
     <input class="search-vacancies" id="search-input" name="query" type="search" placeholder="Procure por uma vaga   %lupa%">
     <div class="vacancies-data" id="vacancies-data">
