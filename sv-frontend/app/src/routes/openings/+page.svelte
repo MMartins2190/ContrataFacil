@@ -1,17 +1,7 @@
 <script>
-    load();
+    let { data } = $props();
 
-    async function load(){
-    try{
-        const data = await fetch("https://jsonplaceholder.typicode.com/posts/");
-        const dataJSON = await data.json();
-        console.log(dataJSON);''
-        return dataJSON;
-    }
-    catch(e){
-        console.warn(e, "NOOOOOOOOOOOO");
-    }
-}
+    console.log(data);
 </script>
 
 <div class="list-vacancies">

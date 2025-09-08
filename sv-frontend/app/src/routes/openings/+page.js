@@ -1,10 +1,15 @@
-// export async function load(){
-//     try{
-//         const data = await fetch("https://jsonplaceholder.typicode.com/posts/");
-//         const dataJSON = await data.json();
-//         return dataJSON;
-//     }
-//     catch(e){
-//         console.warn(e, "NOOOOOOOOOOOO");
-//     }
-// }
+export async function load({ fetch }){
+    try{
+    const users = async () => {
+        const fetchUsers = await fetch("https://jsonplaceholder.typicode.com/users/");
+        return await fetchUsers.json();
+    }
+
+    return {
+        users: await users(),
+    }
+    }
+    catch(e){
+        console.error(e);
+    }
+}
