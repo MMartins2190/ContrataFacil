@@ -1,10 +1,9 @@
 <script>
-    let { nome } = $props();
+    
 </script>
 
-<a href="./">
+<a href="#hash">
     <div class="vacancy-item">
-        <p>Nome: {nome}</p>
         <!-- <div class="overlay"><button class="choose-vacancy">Escolher Vaga</button></div> -->
     </div>
 </a>

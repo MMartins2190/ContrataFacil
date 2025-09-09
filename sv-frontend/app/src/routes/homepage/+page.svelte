@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="submit-area">
-            <input type="submit" value="Buscar">
+            <input class="pr-blue-btn" type="submit" value="Buscar">
         </div>
     </form>
 </div>
@@ -105,12 +105,19 @@
         outline: 2px solid orange;
         display: flex;
         flex-direction: column;
+        width: 30%;
+    }
+
+    input[type="text"]{
+        height: 2.5rem;
+        border: 1px solid black;
     }
 
     .submit-area{
         width: 100%;
         display: flex;
         justify-content: center;
+        margin-top: 3rem;
     }
     input[type="submit"]{
         padding: 0.5rem 5rem;
@@ -124,7 +131,7 @@
         outline: 2px solid darkred;
         display: flex;
         justify-content: space-between;
-        margin: 0 1rem;
+        margin: 4rem 1rem 2rem 1rem;
     }
     .see-more{
         outline: 2px solid royalblue;
