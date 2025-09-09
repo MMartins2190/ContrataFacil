@@ -1,4 +1,8 @@
-<!-- zikaram minha transferencia -->
+<script>
+    import Opening from '$lib/components/opening.svelte';
+    let { data } = $props();
+
+</script>
 
 <header>
     <h1>ContrataFácil</h1>
@@ -33,7 +37,9 @@
                 <input type="text" id="salary" placeholder="Digite um salário desejado">
             </div>
         </div>
-        <input type="submit" value="Buscar">
+        <div class="submit-area">
+            <input type="submit" value="Buscar">
+        </div>
     </form>
 </div>
 
@@ -43,9 +49,9 @@
         <button class="see-more">Ver mais</button>
     </div>
     <div class="vacancies-data" id="vacancies-data">
-        <div class="vacancy-item"></div>
-        <div class="vacancy-item"></div>
-        <div class="vacancy-item"></div>
+        {#each data.users as user}
+        <Opening />
+        {/each}
     </div>
 </div>
 
@@ -98,10 +104,14 @@
         border-radius: 20px;
     }
 
+    form{
+        width: 100%;
+    }
+
     .fields{
         outline: 2px solid darkcyan;
         display: flex;
-        align-items: center;
+        justify-content: space-evenly;
     }
 
     .field{
@@ -110,7 +120,12 @@
         flex-direction: column;
     }
 
-    input[value="Buscar"]{
+    .submit-area{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    input[type="submit"]{
         padding: 0.5rem 5rem;
     }
 /* bottom */
@@ -136,12 +151,5 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
-    }
-    .vacancy-item{
-        outline: 2px solid lavender;
-        background-color: #D9D9D9;
-        border-radius: 15px;
-        height: 30vh;
-        margin: 0.5rem;
     }
 </style>
