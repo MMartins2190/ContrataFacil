@@ -1,0 +1,90 @@
+:root{
+    --blue-70: rgb(80, 100, 150);
+    --m-blue-90: rgb(80, 116, 183);
+    --m-blue-100: rgb(76, 114, 239);
+    --blue-80: rgb(76, 76, 200);
+    --m-gray-100: rgb(217, 217, 217);
+    --gray-90: rgb(180, 180, 180);
+    --m-gray-80: rgb(152, 152, 152);
+}
+
+*{
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+/* buttons */
+
+.pr-blue-btn{
+    background-color: var(--m-blue-90);
+    color: white;
+}
+.pr-blue-btn:hover{
+    background-color: var(--blue-80);
+    color: var(--gray-80);
+}
+.pr-blue-btn:active{
+    background-color: var(--m-blue-100);
+    color: white;
+}
+
+.sr-blue-btn{
+    background-color: var(--m-blue-100);
+    color: white;
+}
+.sr-blue-btn:hover{
+    background-color: var(--blue-70);
+    color: var(--gray-80);
+}
+.sr-blue-btn:active{
+    background-color: var(--blue-100);
+    color: white;
+}
+
+.pr-gray-btn{
+    background-color: var(--m-gray-100);
+    color: black;
+}
+.pr-gray-btn:hover{
+    background-color: var(--gray-90);
+    color: black;
+}
+.pr-gray-btn:active{
+    background-color: var(--m-gray-80);
+    color: black;
+}
+
+.sr-gray-btn{
+    background-color: var(--m-gray-80);
+    color: black;
+}
+.sr-gray-btn:hover{
+    background-color: var(--gray-90);
+    color: black;
+}
+.sr-gray-btn:active{
+    background-color: var(--gray-100);
+    color: black;
+}
+
+/* border-radius */
+
+.round-10{
+    border-radius: 10px;
+}
+
+.round-20{
+    border-radius: 20px;
+}
+
+.round-30{
+    border-radius: 30px;
+}

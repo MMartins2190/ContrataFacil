@@ -12,7 +12,7 @@
 <style>
     .vacancy-item{
         outline: 2px solid lavender;
-        background-color: #D9D9D9;
+        background-color: var(--primary-gray);
         border-radius: 15px;
         height: 40vh;
         margin: 0.5rem;

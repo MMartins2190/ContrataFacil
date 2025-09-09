@@ -56,19 +56,6 @@
 </div>
 
 <style>
-     *{
-        border: none;
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    a{
-        text-decoration: none;
-        color: rgb(0, 0, 0);
-    }
-
     header{
         outline: 2px solid blue;
         display: flex;
