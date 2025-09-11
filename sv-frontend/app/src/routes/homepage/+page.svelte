@@ -1,20 +1,13 @@
 <script>
     import Opening from '$lib/components/opening.svelte';
+    import Header from '$lib/components/header.svelte';
     let { data } = $props();
 
 </script>
 
-<header>
-    <h1>ContrataFácil</h1>
-    <div class="header-right">
-        <div class="navigation">
-            <a href="./">Vagas</a>
-            <a href="./">Currículos</a>
-            <a href="./">Para Empresas</a>
-        </div>
-        <a href="./">!Nome! <img src="" alt="pfp"></a>
-    </div>
-</header>
+<title>Home</title>
+
+<Header />
 
 <div class="arrow-nav">
     <i>L</i>
@@ -38,7 +31,7 @@
             </div>
         </div>
         <div class="submit-area">
-            <input class="pr-blue-btn" type="submit" value="Buscar">
+            <input class="pr-blue-btn round-10" type="submit" value="Buscar" style="color: black">
         </div>
     </form>
 </div>
@@ -56,21 +49,6 @@
 </div>
 
 <style>
-    header{
-        outline: 2px solid blue;
-        display: flex;
-        width: 100%;
-        height: 10vh;
-        padding: 2rem;
-    }
-    .header-right{
-        display: flex;
-        margin-left: auto;
-    }
-    .navigation{
-        outline: 2px solid yellowgreen;
-        margin-right: 3rem;
-    }
 
     .arrow-nav{
         outline: 2px solid purple;
@@ -111,6 +89,8 @@
     input[type="text"]{
         height: 2.5rem;
         border: 1px solid black;
+        background-color: #D9D9D9;
+        border-radius: 10px;
     }
 
     .submit-area{
@@ -120,7 +100,8 @@
         margin-top: 3rem;
     }
     input[type="submit"]{
-        padding: 0.5rem 5rem;
+        padding: 0.75rem 4rem;
+        border: 1px solid black;
     }
 /* bottom */
     .list-vacancies{

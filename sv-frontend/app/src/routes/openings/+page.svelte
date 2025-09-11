@@ -2,26 +2,19 @@
     import Opening from "$lib/components/opening.svelte";
     
     let { data } = $props();
-    console.log(data);
 </script>
+
+<title>Vagas</title>
 
 <div class="list-vacancies">
     <input class="search-vacancies" id="search-input" name="query" type="search" placeholder="Procure por uma vaga   %lupa%">
     <div class="vacancies-data" id="vacancies-data">
         {#each data.users as user}
-        <Opening name={user.name}/>
+        <Opening />
         {/each}
     </div>
 </div>
 <style>
-    *{
-        border: none;
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
     .search-vacancies{
         outline: 2px solid purple;
         background-color: #d9d9d9;
@@ -33,7 +26,7 @@
     }
     
     .list-vacancies{
-        margin: 1rem 5rem;
+        margin: 3rem 5rem;
         outline: 2px solid yellowgreen;
     }
     .vacancies-data{

@@ -1,32 +1,31 @@
-<header>
-    <h1>ContrataFácil</h1>
-    <div class="header-right">
-        <a href="./">Como Funciona</a>
-        <a href="./">Sobre</a>
-        <button>Entrar</button>
-    </div>
-</header>
+<script>
+    import Header from "$lib/components/header.svelte";
+</script>
+
+<title>Início</title>
+
+<Header />
 <div class="body">
-    <div class="main">
+    <main>
         <h1>Encontre talentos com facilidade</h1>
         <p>Uma plataforma inteligente de currículo com foco em filtragem e categorização para facilitar contratações.</p>
-        <button>Começar Agora</button>
+        <button class="pr-blue-btn round-10">Começar Agora</button>
         <br>
-        <button>Entrar com Linkedin</button>
-    </div>
+        <button class="outline-btn round-10">Entrar com Linkedin</button>
+    </main>
     <div class="bottom">
         <h3 style="outline: 2px solid orange;"><strong>Como Funciona</strong> em 3 passos simples</h3>
-        <div class="passos">
-            <div class="passo">
-                <i>Línkedin</i>
-                <span>Login rápido com Linkedin</span>
+        <div class="steps">
+            <div class="step">
+                <div class="circle"></div>
+                <span>Cadastro rápido com Linkedin</span>
             </div>
-            <div class="passo">
-                <i>Línkedin</i>
+            <div class="step">
+                <div class="circle"></div>
                 <span>Categorização Inteligente</span>
             </div>
-            <div class="passo">
-                <i>Línkedin</i>
+            <div class="step">
+                <div class="circle"></div>
                 <span>Contrata com assertividade</span>
             </div>
         </div>
@@ -34,47 +33,59 @@
 </div>
 
 <style>
-    *{
-        border: none;
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    header{
-        outline: 2px solid blue;
-        display: flex;
-        width: 100%;
-        height: 10vh;
-        padding: 2rem;
-    }
-    .header-right{
-        margin-left: auto;
-    }
-
     .body{
         outline: 2px solid purple;
         height: 90vh;
+        padding: 3rem;
     }
 
-    .main{
+    main{
         outline: 2px solid green;
+        height: 60vh;
         width: 20rem;
     }
 
-    .bottom{
-        margin-top: 3rem;
+    p{
+        margin: 1.5ch 0;
     }
 
-    .passos{
+    button{
+        padding: 0.5rem ;
+        border-radius: 5px;
+        margin-bottom: .4rem;
+    }
+
+    .outline-btn{
+        background-color: white;
+        color: rgb(80, 100, 150);
+        border: 2px solid rgb(80, 100, 150);
+    }
+    .outline-btn:hover{
+        color: rgb(120, 120, 200);
+        border: 2px solid rgb(120, 120, 200);
+    }
+
+    .bottom{
+        outline: green;
+        margin: auto 0 0 0;
+    }
+
+    .steps{
         outline: 2px solid red;
-        margin-top: 2rem;
+        margin: 2rem 4rem 0 0;
         display: flex;
         justify-content: space-evenly;
     }
-    .passo{
+    .step{
         outline: 2px solid brown;
         display: inline;
+    }
+
+    .circle{
+        display: inline-block;
+        width: 3ch;
+        height: 3ch;
+        border-radius: 100%;
+        background-color: rgb(80, 100, 150);
     }
 </style>
