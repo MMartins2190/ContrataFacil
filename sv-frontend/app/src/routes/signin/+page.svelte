@@ -1,53 +1,60 @@
+<title>Cadastro</title>
+
 <div class="all">
-    <h1>Cadastrar</h1>
-    <div>
+    <h1 
+    style:font-weight=600
+    style:margin-bottom=1rem
+    >Cadastrar</h1>
         <form method="post">
                 <div class="field-item">
                     <label for="nameid">Nome Completo:</label>
-                    <input type="text" id="nameid">
+                    <input type="text" id="nameid" required>
                 </div>
                 <div class="field-item">
                     <label for="emailid">E-mail:</label>
-                    <input type="email" id="emailid">
+                    <input type="email" id="emailid" required>
                 </div>
                 <div class="field-item">
                     <label for="passwordid">Senha:</label>
-                    <input type="password" id="passwordid">
+                    <input type="password" id="passwordid" required>
                 </div>
                 <div class="field-item">
                     <label for="password-again">Confirmar Senha</label>
-                    <input type="password" id="password-again">
+                    <input type="password" id="password-again" required>
                 </div>
                 <div class="field-item">
                     <label for="acting-field">Área de Atuação</label>
                     <div class="acting-field-input">
-                        <input type="text" id="acting-field"><button id="select-acting-field" type="button">^</button>
+                        <div style:position=relative>
+                            <input type="text" id="acting-field">
+                            <button id="select-acting-field" class="pr-blue-btn" type="button"
+                            style:height=3ch
+                            style:position=absolute
+                            style:right=0
+                            style:background-color=darkslateblue
+                            style:color=white
+                            style:border-radius="0 20px 20px 0"
+                            >^</button>
+                        </div>
                     </div>
                 </div>
                 <div class="field-item">
                     <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf">
+                    <input type="text" id="cpf" required>
                 </div>
                 <div class="field-item">
                     <label for="telephone">Telefone:</label>
-                    <input type="text" id="telephone">
+                    <input type="text" id="telephone" required>
                 </div>
                 <div class="submit">
-                    <input type="submit" value="Cadastrar">
+                    <input class="sr-blue-btn" type="submit" value="Criar"
+                     style:padding="0.25rem 1.5rem"
+                     style:border-radius=30px;>
                 </div>
             </form>
-    </div>
 </div>
 
 <style>
-    *{
-        border: none;
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
     .all{
         width: 100vw;
         height: 100vh;
@@ -57,16 +64,16 @@
         align-items: center;
     }
 
-    h1{
-        margin: 1.5rem;
-    }
-
     form{
+        height: 75%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         background-color: #d9d9d9;
-        padding: 1.5rem;
+        padding: 1.5rem .5rem;
         border: 1px solid black;
         border-radius: 20px;
-        outline: 2px solid red;
+        justify-content: space-between;
     }
     
     .field-item{ 
@@ -75,25 +82,16 @@
         outline: 2px solid green;
     }
 
+    input[required], #acting-field{
+        height: 3ch;
+        border-radius: 10px;
+        border: 1px solid black;
+    }
+
     .submit{
         height: 2.5rem;
         display: flex;
         justify-content: center;
         outline: 2px solid yellow;
-    }
-
-    input[type="submit"]{
-        margin-top: 1rem;
-        padding: 0.25rem 0.75rem;
-        background-color: blue;
-        border-radius: 30px;
-        color: white;
-    }
-
-    #select-acting-field{
-        background-color: darkslateblue;
-        color: white;
-        border-radius: 0 20px 20px 0;
-        padding-left: 0.5rem;
     }
 </style>

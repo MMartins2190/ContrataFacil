@@ -1,5 +1,9 @@
-<div class="main">
-    <h1 class="title">Currículos:</h1>
+<title>Currículos</title>
+
+<main>
+    <h1 class="title"
+    style:margin="2rem 0 0 4rem"
+    style:font-weight=600>Currículos:</h1>
     <div class="curriculums">
         <ul class="curriculums-list">
             <!-- Data -->
@@ -7,29 +11,18 @@
                 <span class="person-name">Nome pessoa</span>
                 <span class="cpf">000.000.000-00</span>
                 <span class="phone-number">99 9999-9999</span>
-                <button class="detail-button">Ver Currículo</button>
+                <button class="pr-blue-btn"
+                style:color=black
+                style:padding="0rem 2rem"
+                style:border="1px solid black"
+                style:border-radius=25px>Ver Currículo</button>
             </li>
         </ul>
     </div>
-</div>
+</main>
 
 <style>
-    *{
-        border: none;
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .title{
-        outline: 1px solid blue;
-        margin: 2rem 0 0 4rem;
-        font-weight: 100;
-    }
-
-    .main{
-       outline: 1px solid green;
+    main{
        min-height: 100vh; 
     }
 
@@ -46,12 +39,6 @@
         padding: 0rem 3rem;
         display: flex;
         justify-content: space-between;
-    }
-
-    .detail-button{
-        background-color: blue;
-        padding: 0rem 2rem;
-        border-radius: 25px;
     }
 
     span{
