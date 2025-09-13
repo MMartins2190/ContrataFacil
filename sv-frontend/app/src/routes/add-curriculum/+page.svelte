@@ -1,3 +1,8 @@
+<script>
+    import Loading from '$lib/components/loading.svelte';
+</script>
+
+<Loading />
 <title>Novo Currículo</title>
 
 <div class="all-father">
