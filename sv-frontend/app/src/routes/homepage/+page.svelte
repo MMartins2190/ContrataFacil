@@ -1,16 +1,13 @@
-<!-- zikaram minha transferencia -->
+<script>
+    import Opening from '$lib/components/opening.svelte';
+    import Header from '$lib/components/header.svelte';
+    let { data } = $props();
 
-<header>
-    <h1>ContrataFácil</h1>
-    <div class="header-right">
-        <div class="navigation">
-            <a href="./">Vagas</a>
-            <a href="./">Currículos</a>
-            <a href="./">Para Empresas</a>
-        </div>
-        <a href="./">!Nome! <img src="" alt="pfp"></a>
-    </div>
-</header>
+</script>
+
+<title>Home</title>
+
+<Header />
 
 <div class="arrow-nav">
     <i>L</i>
@@ -33,7 +30,13 @@
                 <input type="text" id="salary" placeholder="Digite um salário desejado">
             </div>
         </div>
-        <input type="submit" value="Buscar">
+        <div class="submit-area">
+            <input class="pr-blue-btn" type="submit" value="Buscar"
+            style:color=black
+            style:border="1px solid black"
+            style:border-radius=10px
+            >
+        </div>
     </form>
 </div>
 
@@ -43,41 +46,13 @@
         <button class="see-more">Ver mais</button>
     </div>
     <div class="vacancies-data" id="vacancies-data">
-        <div class="vacancy-item"></div>
-        <div class="vacancy-item"></div>
-        <div class="vacancy-item"></div>
+        {#each data.users as user}
+        <Opening />
+        {/each}
     </div>
 </div>
 
 <style>
-     *{
-        border: none;
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    a{
-        text-decoration: none;
-        color: rgb(0, 0, 0);
-    }
-
-    header{
-        outline: 2px solid blue;
-        display: flex;
-        width: 100%;
-        height: 10vh;
-        padding: 2rem;
-    }
-    .header-right{
-        display: flex;
-        margin-left: auto;
-    }
-    .navigation{
-        outline: 2px solid yellowgreen;
-        margin-right: 3rem;
-    }
 
     .arrow-nav{
         outline: 2px solid purple;
@@ -98,20 +73,39 @@
         border-radius: 20px;
     }
 
+    form{
+        width: 100%;
+    }
+
     .fields{
         outline: 2px solid darkcyan;
         display: flex;
-        align-items: center;
+        justify-content: space-evenly;
     }
 
     .field{
         outline: 2px solid orange;
         display: flex;
         flex-direction: column;
+        width: 30%;
     }
 
-    input[value="Buscar"]{
-        padding: 0.5rem 5rem;
+    input[type="text"]{
+        height: 2.5rem;
+        border: 1px solid black;
+        background-color: #D9D9D9;
+        border-radius: 10px;
+    }
+
+    .submit-area{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+    }
+    input[type="submit"]{
+        padding: 0.75rem 4rem;
+        border: 1px solid black;
     }
 /* bottom */
     .list-vacancies{
@@ -122,7 +116,7 @@
         outline: 2px solid darkred;
         display: flex;
         justify-content: space-between;
-        margin: 0 1rem;
+        margin: 4rem 1rem 2rem 1rem;
     }
     .see-more{
         outline: 2px solid royalblue;
@@ -136,12 +130,5 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
-    }
-    .vacancy-item{
-        outline: 2px solid lavender;
-        background-color: #D9D9D9;
-        border-radius: 15px;
-        height: 30vh;
-        margin: 0.5rem;
     }
 </style>

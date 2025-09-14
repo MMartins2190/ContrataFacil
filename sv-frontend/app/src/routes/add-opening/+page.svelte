@@ -1,20 +1,30 @@
+<title>Adicionar Vaga</title>
+
 <div class="main">
     <div></div>
 
     <div class="container">
-        <h1 class="title">Adicionar Vaga:</h1>
+        <h1 class="title" 
+        style:font-weight=normal
+        style:margin-bottom=3rem
+        >Adicionar Vaga:</h1>
 
         <form method="post">
-            <label>Vaga:
-                <br><input type="text">
-            </label>
-            <label>Salário:
-                <br>R$ <input type="number" min="0" placeholder="0.00">
-            </label>
-            <label>Descrição da vaga:
-                <br><textarea name="vacancy-description" id="vacancy-description" cols="60" rows="100">Insípido</textarea>
-            </label>
-            <input type="submit" value="Enviar">
+            <div class="field">
+                <label for="vacancy-name">Vaga:</label>
+                <input id="vacancy-name" type="text">
+            </div>
+            <div class="field">
+                <label for="salary">Salário:</label>
+                <input type="number" min="0" placeholder="0.00" id="salary">
+            </div>
+            <div class="field">
+                <label for="vacancy-description">Descrição da vaga:</label>
+                <textarea name="vacancy-description" id="vacancy-description" cols="60" rows="100"></textarea>
+            </div>
+            <div class="submit">
+                <input type="submit" class="sr-blue-btn" value="Enviar">
+            </div>
         </form>
     </div>
 
@@ -22,14 +32,6 @@
 </div>
 
 <style>
-    *{
-        border: none;
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
     .main{
         width: 100vw;
         height: 100vh;
@@ -45,22 +47,40 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        border: 1px solid black;
     }
 
     form{
+        height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: space-between;
     }
 
-    textarea{
-        height: 40ch;
+    .field{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+    }
+
+    input[type="text"], input[type="number"]{
+        height: 3ch;
+        border-radius: 10px;
+        border: 1px solid black;
+        margin-top: 0.5ch;
     }
 
     input[type="submit"]{
-        background-color: blue;
-        border-radius: 20px;
-        color: white;
-        padding: .5rem 1.5rem;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        border: 1px solid black;
+    }
+
+    textarea{
+        height: 30ch;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin-top: 0.5ch;
     }
 </style>
