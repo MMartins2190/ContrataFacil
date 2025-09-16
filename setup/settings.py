@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'contratafacil',
-    'pillow',
-    'mysqlclient',
+    'drf_yasg',
     ]
 
 MIDDLEWARE = [
