@@ -1,10 +1,18 @@
 <script>
-    let { name, description } = $props();
+    let { 
+    id = "não há", 
+    title = "Vaga00", 
+    salary = "0000,00", 
+    requisites = "Nenhum Requisito foi posto para essa vaga",
+    } = $props();
 </script>
 
     <div class="vacancy-item">
-        <h3>{name}</h3>
-        <p>{description}</p>
+        <a href="openings/{id}" aria-label="Vaga">
+            <p>{title}</p>
+            <p>{salary}</p>
+            <p>{requisites}</p>
+        </a>
         
         <div class="overlay">
             <button class="pr-gray-btn">Enviar Currículo</button>
@@ -14,9 +22,9 @@
 <style>
     .vacancy-item{
         position: relative;
-        outline: 2px solid lavender;
-        cursor: pointer;
-        background-color: #d9d9d9;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(210, 210, 210);
         border-radius: 15px;
         height: 40vh;
         margin: 1rem;
@@ -25,7 +33,6 @@
 
     .vacancy-item:hover{
         border: 1px solid black;
-
         .overlay{
             display: flex;
         }
@@ -45,6 +52,7 @@
         border-top: 1px solid black;
     }
     button{
+        cursor: pointer;
         height: 50%;
         padding: 0.25ch 1.5rem;
         border-radius: 20px;

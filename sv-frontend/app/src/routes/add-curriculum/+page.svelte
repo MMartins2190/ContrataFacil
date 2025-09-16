@@ -1,10 +1,12 @@
 <script>
     import Loading from '$lib/components/loading.svelte';
-
+    import Header from "$lib/components/header.svelte";
 </script>
 
 <!-- <Loading /> -->
 <title>Novo Currículo</title>
+
+<Header />
 
 <div class="all-father">
     <form action="/add-curriculum" method="post">

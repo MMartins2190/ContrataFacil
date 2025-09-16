@@ -1,10 +1,13 @@
 <script>
     import Opening from "$lib/components/opening.svelte";
-    
+    import Header from "$lib/components/header.svelte";
+
     let { data } = $props();
 </script>
 
 <title>Vagas</title>
+
+<Header />
 
 <div class="list-vacancies">
     <input class="search-vacancies" id="search-input" name="query" type="search" placeholder="Procure por uma vaga   %lupa%">

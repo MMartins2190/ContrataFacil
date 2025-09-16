@@ -51,7 +51,10 @@
     
     <div class="vacancies-data" id="vacancies-data">
         {#each data.posts as post}
-        <Opening name={post.title} description={post.body}/>
+        <Opening
+        title={post.title}
+        requisites={post.body}
+        />
         {/each}
     </div>
 

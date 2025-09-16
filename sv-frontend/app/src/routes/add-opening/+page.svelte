@@ -1,4 +1,10 @@
+<script>
+    import Header from "$lib/components/header.svelte";
+</script>
+
 <title>Adicionar Vaga</title>
+
+<Header />
 
 <div class="main">
     <div></div>

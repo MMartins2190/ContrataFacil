@@ -1,5 +1,9 @@
 <title>Cadastro</title>
 
+<header>
+    <h1 style:font-weight=600>ContrataFácil</h1>
+</header>
+
 <div class="all">
     <h1 
     style:font-weight=600

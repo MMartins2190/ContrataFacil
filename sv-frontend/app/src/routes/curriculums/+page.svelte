@@ -1,10 +1,13 @@
 <script>
     import CurriculumItem from '$lib/components/curriculum-item.svelte';
+    import Header from "$lib/components/header.svelte";
 
     let { data } = $props();
 </script>
 
 <title>Currículos</title>
+
+<Header />
 
 <main>
     <h1
