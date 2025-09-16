@@ -1,10 +1,10 @@
 export async function load({ fetch }){
-    const users = async () => {
-        const fetchUsers = await fetch("https://jsonplaceholder.typicode.com/users/");
-        return await fetchUsers.json();
+    const posts = async () => {
+        const fetchPosts = await fetch("https://jsonplaceholder.typicode.com/posts/");
+        return await fetchPosts.json();
     }
 
     return {
-        users: await users(),
+        posts: await posts(),
     }
 }

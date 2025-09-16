@@ -1,8 +1,11 @@
+<!-- 
+ -> Implementar limite de vagas exibidas
+-->
 <script>
     import Opening from '$lib/components/opening.svelte';
-    import Header from '$lib/components/header.svelte';
     let { data } = $props();
-
+    console.log(data);
+    import Header from '$lib/components/header.svelte';
 </script>
 
 <title>Home</title>
@@ -43,13 +46,15 @@
 <div class="list-vacancies">
     <div class="list-desc">
         <h2>Vagas</h2>
-        <button class="see-more">Ver mais</button>
+        <a href="./openings" class="see-more pr-gray-btn">Ver mais</a>
     </div>
+    
     <div class="vacancies-data" id="vacancies-data">
-        {#each data.users as user}
-        <Opening />
+        {#each data.posts as post}
+        <Opening name={post.title} description={post.body}/>
         {/each}
     </div>
+
 </div>
 
 <style>

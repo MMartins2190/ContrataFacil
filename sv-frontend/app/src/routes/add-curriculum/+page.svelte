@@ -1,17 +1,20 @@
 <script>
     import Loading from '$lib/components/loading.svelte';
+
 </script>
 
-<Loading />
+<!-- <Loading /> -->
 <title>Novo Currículo</title>
 
 <div class="all-father">
-    <textarea name="cv-presentation" id="cv-presentation-textarea" cols="100" rows="100">Apresentação Rápida</textarea>
-    <div>
-        <label for="image">Selecionar arquivo: </label>
-        <input id="image" type="file" value="Imagem" accept="image/*">
-    </div>
-    <button>Enviar</button>
+    <form action="/add-curriculum" method="post">
+        <textarea name="cv-presentation" id="cv-presentation-textarea" cols="100" rows="100">Apresentação Rápida</textarea>
+        <div class="image-input">
+            <label for="image">Selecionar arquivo: </label>
+            <input id="image" type="file" value="Imagem" accept="image/*">
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
 </div>
 
 <style>
@@ -22,6 +25,12 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     textarea, input, label, button{
@@ -35,7 +44,7 @@
         padding: 0.5rem;
     }
 
-    .all-father > div{
+    .image-input{
         border: 2px solid rgb(80, 116, 183);
         border-radius: 20px;
         padding: 0.5rem;

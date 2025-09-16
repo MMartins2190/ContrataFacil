@@ -1,5 +1,6 @@
 <script>
-    //External data and auth
+    // Na prática esse trecho provavelmente precisa ocorrer client-side
+    // Aqui é mera demonstração
     let user = {
         isAuthenticated: false,
         name: "Jo`so",

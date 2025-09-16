@@ -1,13 +1,13 @@
 <script>
-    
+    let { name, description } = $props();
 </script>
 
     <div class="vacancy-item">
-        <p>Some text here</p>
-        <p>More text</p>
-        <p>even more peepeepoopoo</p>
+        <h3>{name}</h3>
+        <p>{description}</p>
+        
         <div class="overlay">
-            <button>Enviar Currículo</button>
+            <button class="pr-gray-btn">Enviar Currículo</button>
         </div>
     </div>
 
@@ -20,6 +20,7 @@
         border-radius: 15px;
         height: 40vh;
         margin: 1rem;
+        padding: 1rem;
     }
 
     .vacancy-item:hover{
@@ -33,12 +34,13 @@
     .overlay{
         display: none;
         position: absolute;
+        bottom: 0%;
+        left: 0%;
         justify-content: center;
         align-items: center;
         height: 20%;
         width: 100%;
         background-color: rgba(80, 80, 80, 0.25);
-        bottom: 0%;
         border-radius: 0 0 15px 15px;
         border-top: 1px solid black;
     }
@@ -46,9 +48,5 @@
         height: 50%;
         padding: 0.25ch 1.5rem;
         border-radius: 20px;
-    }
-
-    p{
-        height: 33%;
     }
 </style>
