@@ -32,7 +32,6 @@
     }
 
     ul{
-        outline: 1px solid red;
         margin-top: 5rem;
     }
 </style>

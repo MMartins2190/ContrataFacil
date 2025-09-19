@@ -14,7 +14,7 @@
         <button class="outline-btn round-10">Entrar com Linkedin</button>
     </main>
     <div class="bottom">
-        <h3 style="outline: 2px solid orange;"><strong>Como Funciona</strong> em 3 passos simples</h3>
+        <h3><strong>Como Funciona</strong> em 3 passos simples</h3>
         <div class="steps">
             <div class="step">
                 <div class="circle"></div>
@@ -34,13 +34,11 @@
 
 <style>
     .body{
-        outline: 2px solid purple;
         height: 90vh;
         padding: 3rem;
     }
 
     main{
-        outline: 2px solid green;
         height: 60vh;
         width: 20rem;
     }
@@ -66,18 +64,15 @@
     }
 
     .bottom{
-        outline: green;
         margin: auto 0 0 0;
     }
 
     .steps{
-        outline: 2px solid red;
         margin: 2rem 4rem 0 0;
         display: flex;
         justify-content: space-evenly;
     }
     .step{
-        outline: 2px solid brown;
         display: inline;
     }
 

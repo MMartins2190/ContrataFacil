@@ -23,7 +23,9 @@
                     </div>
                     <input type="password" id="password-input">
                 </div>
-                <div style:place-items=center style:display=grid style:outline="1px solid blue">
+                <div 
+                style:place-items=center 
+                style:display=grid>
                     <input class="sr-blue-btn" type="submit" id="login-submit" value="Logar">
                 </div>
             </form>
@@ -44,7 +46,6 @@
 
 <style>
     header{
-        outline: 1px solid blue;
         padding: 1rem;
         height: 10vh;
     }
@@ -70,16 +71,11 @@
         border-radius: 10px;
     }
 
-    .field{
-        outline: 1px solid pink;
-    }
-
     label, input, button{
         font: inherit;
     }
 
     .password-labels{
-        outline: 2px solid yellow;
         display: flex;
     }
 
@@ -106,9 +102,4 @@
         align-items: center;
         border-radius: 10px;
     }
-
-    .login-container, .sign-container{
-        outline: 1px solid rebeccapurple;
-    }
-    
 </style>

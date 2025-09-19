@@ -63,7 +63,6 @@
 <style>
 
     .arrow-nav{
-        outline: 2px solid purple;
         background-color: rgb(100, 100, 100);
         display: flex;
         justify-content: space-between;
@@ -73,7 +72,6 @@
     }
 /* form */
     .filter{
-        outline: 2px solid burlywood;
         margin: 1rem;
         padding: 1.5rem;
         background-color: #D9D9D9;
@@ -86,13 +84,11 @@
     }
 
     .fields{
-        outline: 2px solid darkcyan;
         display: flex;
         justify-content: space-evenly;
     }
 
     .field{
-        outline: 2px solid orange;
         display: flex;
         flex-direction: column;
         width: 30%;
@@ -117,24 +113,20 @@
     }
 /* bottom */
     .list-vacancies{
-        outline: 2px solid red;
         margin: 1rem 5rem;
     }
     .list-desc{
-        outline: 2px solid darkred;
         display: flex;
         justify-content: space-between;
         margin: 4rem 1rem 2rem 1rem;
     }
     .see-more{
-        outline: 2px solid royalblue;
         padding: 0.5rem 1.5rem;
         border: 2px solid rgb(40, 40, 40);
         border-radius: 15px;
     }
 
     .vacancies-data{
-        outline: 2px solid firebrick;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;

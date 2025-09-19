@@ -16,7 +16,6 @@
 </div>
 <style>
     .search-vacancies{
-        outline: 2px solid purple;
         background-color: #d9d9d9;
         border-radius: 30px;
         width: 100%;
@@ -27,10 +26,8 @@
     
     .list-vacancies{
         margin: 3rem 5rem;
-        outline: 2px solid yellowgreen;
     }
     .vacancies-data{
-        outline: 2px solid lightslategray;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;

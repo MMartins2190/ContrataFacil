@@ -16,14 +16,12 @@
 
 <style>
     .big-text{
-        outline: 1px solid red;
         margin: 3.5rem 3.5rem 0 3.5rem;
         font-size: 6ch;
         font-weight: 600;
     }
 
     .description{
-        outline: 1px solid navy;
         margin: 4rem 2rem 0 3rem;
         font-size: 2ch;
     }

@@ -83,7 +83,6 @@
     .field-item{ 
         display: flex;
         flex-direction: column;
-        outline: 2px solid green;
     }
 
     input[required], #acting-field{
@@ -96,6 +95,5 @@
         height: 2.5rem;
         display: flex;
         justify-content: center;
-        outline: 2px solid yellow;
     }
 </style>
