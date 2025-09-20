@@ -2,7 +2,7 @@
     import Header from "$lib/components/header.svelte";
 </script>
 
-<title>Início</title>
+<title>ContrataFácil</title>
 
 <Header />
 <div class="body">

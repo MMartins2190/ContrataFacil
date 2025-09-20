@@ -1,5 +1,9 @@
 <script>
     import Header from "$lib/components/header.svelte";
+
+    let { data } = $props();
+
+    console.log(data);
 </script>
 
 <title>Adicionar Vaga</title>
@@ -18,18 +22,33 @@
         <form method="post">
             <div class="field">
                 <label for="vacancy-name">Vaga:</label>
-                <input id="vacancy-name" type="text">
+                <input name="titulo" id="vacancy-name" type="text">
             </div>
             <div class="field">
                 <label for="salary">Salário:</label>
-                <input type="number" min="0" placeholder="0.00" id="salary">
+                <input name="salario" type="number" min="0" placeholder="0.00" id="salary">
             </div>
             <div class="field">
                 <label for="vacancy-description">Descrição da vaga:</label>
-                <textarea name="vacancy-description" id="vacancy-description" cols="60" rows="100"></textarea>
+                <textarea name="descricao" id="vacancy-description" cols="60" rows="100"></textarea>
+            </div>
+            <div class="field">
+                <label for="requisites">Requisitos:</label>
+                <textarea name="descricao" id="requisites" cols="60" rows="100"></textarea>
+            </div>
+            <div>
+                <label for="boosted">Impulsionada</label>
+                <input type="checkbox" name="impulsionada" id="boosted">
             </div>
             <div class="submit">
-                <input type="submit" class="sr-blue-btn" value="Enviar">
+                {#if isNaN(data.id)}
+                    <p>ID não encontrado</p>
+                {:else if data.id !== 0}
+                    <input formaction="?/update" type="submit" class="sr-blue-btn" style:background-color=green value="Salvar">
+                {:else}
+                    <input formaction="?/create" type="submit" class="sr-blue-btn" value="Enviar">
+                {/if}
+                <input formaction="?/delete" type="submit" value="Detonar" style:background-color=red>
             </div>
         </form>
     </div>
@@ -84,7 +103,7 @@
     }
 
     textarea{
-        height: 30ch;
+        height: 20ch;
         border: 1px solid black;
         border-radius: 10px;
         margin-top: 0.5ch;

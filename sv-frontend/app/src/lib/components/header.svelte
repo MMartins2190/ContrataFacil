@@ -15,10 +15,14 @@
 </header>
 
 <style>
-     header{
+    header{
+        position: sticky;
+        top: 0%;
+        z-index: 100;
         display: flex;
         width: auto;
         height: 10vh;
+        background-color: white;
         padding: 0 3rem;
         align-items: center;
     }
@@ -29,7 +33,6 @@
 
 
     nav{
-        outline: 1px solid red;
         margin-left: auto;
         display: flex;
         align-items: center;

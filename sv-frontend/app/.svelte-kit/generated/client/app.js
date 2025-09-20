@@ -20,7 +20,7 @@ export const server_loads = [];
 export const dictionary = {
 		"/": [2],
 		"/add-curriculum": [3],
-		"/add-opening": [4],
+		"/add-opening": [~4],
 		"/curriculums": [5],
 		"/enterprise": [6],
 		"/homepage": [7],
