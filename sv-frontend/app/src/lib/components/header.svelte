@@ -9,7 +9,7 @@
         <a href="/enterprise" class={["nav-item", "nav-link"]}>Para Empresas</a>
         <a href="/about" class={["nav-item", "nav-link"]}>Sobre</a>
         <div class="user">
-                    <button class="pr-blue-btn nav-item">Entrar</button>
+            <button class="pr-blue-btn nav-item">Entrar</button>
         </div>
     </nav>
 </header>
@@ -22,7 +22,7 @@
         display: flex;
         width: auto;
         height: 10vh;
-        background-color: white;
+        background-color: #F6F7F9;
         padding: 0 3rem;
         align-items: center;
     }

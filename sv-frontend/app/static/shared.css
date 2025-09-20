@@ -3,12 +3,16 @@
 
 :root{
     --blue-70: hsl(223, 30%, 45%);
-    --m-blue-90: hsl(219, 42%, 52%);
+    --m-blue-90: rgb(81, 117, 184);
     --m-blue-100: hsl(226, 84%, 62%);
     --blue-80: hsl(220, 40%, 50%);
     --m-gray-100: rgb(217, 217, 217);
     --gray-90: rgb(180, 180, 180);
     --m-gray-80: rgb(152, 152, 152);
+}
+
+html{
+    background-color: #F6F7F9;
 }
 
 *{
