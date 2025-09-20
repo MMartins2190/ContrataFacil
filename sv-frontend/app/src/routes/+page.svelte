@@ -9,7 +9,7 @@
     <main>
         <h1>Encontre talentos com facilidade</h1>
         <p>Uma plataforma inteligente de currículo com foco em filtragem e categorização para facilitar contratações.</p>
-        <button class="pr-blue-btn round-10">Começar Agora</button>
+        <a href="/homepage" class="pr-blue-btn">Começar Agora</a>
         <br>
         <button class="outline-btn round-10">Entrar com Linkedin</button>
     </main>

@@ -2,8 +2,7 @@
     import Header from "$lib/components/header.svelte";
 
     let { data } = $props();
-
-    console.log(data);
+    let { name = "", salary = "", description = "", requisites = "", boosted = false } = data;
 </script>
 
 <title>Adicionar Vaga</title>
@@ -22,28 +21,30 @@
         <form method="post">
             <div class="field">
                 <label for="vacancy-name">Vaga:</label>
-                <input name="titulo" id="vacancy-name" type="text">
+                <input name="titulo" id="vacancy-name" type="text" value={name}>
             </div>
             <div class="field">
                 <label for="salary">Salário:</label>
-                <input name="salario" type="number" min="0" placeholder="0.00" id="salary">
+                <input name="salario" type="number" min="0" placeholder="0.00" id="salary" value={salary}>
             </div>
             <div class="field">
                 <label for="vacancy-description">Descrição da vaga:</label>
-                <textarea name="descricao" id="vacancy-description" cols="60" rows="100"></textarea>
+                <textarea name="descricao" id="vacancy-description" cols="60" rows="100">{description}</textarea>
             </div>
             <div class="field">
                 <label for="requisites">Requisitos:</label>
-                <textarea name="descricao" id="requisites" cols="60" rows="100"></textarea>
+                <textarea name="descricao" id="requisites" cols="60" rows="100">{requisites}</textarea>
             </div>
             <div>
                 <label for="boosted">Impulsionada</label>
-                <input type="checkbox" name="impulsionada" id="boosted">
+                {#if boosted}
+                    <input type="checkbox" name="impulsionada" id="boosted" checked>
+                {:else}
+                    <input type="checkbox" name="impulsionada" id="boosted">
+                {/if}
             </div>
             <div class="submit">
-                {#if isNaN(data.id)}
-                    <p>ID não encontrado</p>
-                {:else if data.id !== 0}
+                {#if data.id !== 0}
                     <input formaction="?/update" type="submit" class="sr-blue-btn" style:background-color=green value="Salvar">
                 {:else}
                     <input formaction="?/create" type="submit" class="sr-blue-btn" value="Enviar">
