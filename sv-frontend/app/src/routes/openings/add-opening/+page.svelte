@@ -44,7 +44,7 @@
                 {/if}
             </div>
             <div class="submit">
-                {#if data.id !== 0}
+                {#if name !== ""}
                     <input formaction="?/update" type="submit" class="sr-blue-btn" style:background-color=green value="Salvar">
                 {:else}
                     <input formaction="?/create" type="submit" class="sr-blue-btn" value="Enviar">

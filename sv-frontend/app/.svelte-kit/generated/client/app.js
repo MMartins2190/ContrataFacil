@@ -12,22 +12,26 @@ export const nodes = [
 	() => import('./nodes/8'),
 	() => import('./nodes/9'),
 	() => import('./nodes/10'),
-	() => import('./nodes/11')
+	() => import('./nodes/11'),
+	() => import('./nodes/12'),
+	() => import('./nodes/13')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/": [2],
-		"/add-curriculum": [3],
-		"/add-opening": [~4],
-		"/curriculums": [5],
-		"/enterprise": [6],
-		"/homepage": [7],
-		"/login": [8],
-		"/openings": [9],
-		"/signin": [10],
-		"/signin/openings": [11]
+		"/add-curriculum": [~3],
+		"/curriculums": [4],
+		"/enterprise": [5],
+		"/homepage": [6],
+		"/login": [7],
+		"/openings": [8],
+		"/openings/add-opening": [~9],
+		"/openings/[vagaId]": [10],
+		"/signin": [11],
+		"/signin/openings": [12],
+		"/view-curriculum": [13]
 	};
 
 export const hooks = {

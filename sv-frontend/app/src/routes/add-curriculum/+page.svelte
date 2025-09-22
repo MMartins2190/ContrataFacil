@@ -1,6 +1,9 @@
 <script>
     import Loading from '$lib/components/loading.svelte';
     import Header from "$lib/components/header.svelte";
+
+    let { data } = $props();
+    let { struct = "", text = "", reviewsidk = "", user = ""} = data;
 </script>
 
 <!-- <Loading /> -->
