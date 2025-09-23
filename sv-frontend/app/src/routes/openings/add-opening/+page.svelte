@@ -2,7 +2,7 @@
     import Header from "$lib/components/header.svelte";
 
     let { data } = $props();
-    let { name = "", salary = "", description = "", requisites = "", boosted = false } = data;
+    let { title = "", salary = "", description = "", requisites = "", boosted = false } = data;
 </script>
 
 <title>Adicionar Vaga</title>
@@ -21,7 +21,7 @@
         <form method="post">
             <div class="field">
                 <label for="vacancy-name">Vaga:</label>
-                <input name="titulo" id="vacancy-name" type="text" value={name}>
+                <input name="titulo" id="vacancy-name" type="text" value={title}>
             </div>
             <div class="field">
                 <label for="salary">Salário:</label>
