@@ -1,6 +1,6 @@
 <script>
     let {
-        id = "não há",
+        id = "0",
         title = "Vaga00",
         salary = "0000,00",
         requisites = "Nenhum Requisito foi posto para essa vaga",

@@ -1,4 +1,4 @@
-export async function load({url}){
+export async function load({url, fetch}){
     const id = url.searchParams.get("id");
     if (!isNaN(id) && id !== "0"){
         const fetchData = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);

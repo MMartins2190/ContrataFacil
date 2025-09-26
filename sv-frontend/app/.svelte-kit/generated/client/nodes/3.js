@@ -1,3 +1,3 @@
-import * as universal from "../../../../src/routes/add-curriculum/+page.js";
+import * as universal from "../../../../src/routes/curriculum-form/+page.js";
 export { universal };
-export { default as component } from "../../../../src/routes/add-curriculum/+page.svelte";
+export { default as component } from "../../../../src/routes/curriculum-form/+page.svelte";

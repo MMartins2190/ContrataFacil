@@ -1,5 +1,5 @@
 <script>
-    import Opening from "$lib/components/opening.svelte";
+    import Opening from "$lib/components/opening-item.svelte";
     import Header from "$lib/components/header.svelte";
 
     let { data } = $props();

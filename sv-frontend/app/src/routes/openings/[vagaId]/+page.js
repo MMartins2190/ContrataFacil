@@ -1,10 +1,12 @@
-export async function load({url}){
-    const id = url.searchParams.get("id");
-    if (!isNaN(id) && id !== "0"){
-        const fetchData = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+export async function load({url, fetch}){
+    const pathnameArray = url.pathname.split("/");
+    const pathnameId = pathnameArray[2];
+
+    if (!isNaN(pathnameId) && pathnameId !== "0"){
+        const fetchData = await fetch(`https://jsonplaceholder.typicode.com/posts/${pathnameId}`);
         const dataJSON = await fetchData.json();
 
-        console.log("id", id, "\ndata", dataJSON);
+        console.log(dataJSON);
 
         return {
             title: dataJSON.title,
@@ -15,6 +17,6 @@ export async function load({url}){
         }
     }
     else {
-        console.log(`${id} não é um número`);
+        console.log("n");
     }
 }

@@ -2,7 +2,7 @@
  -> Implementar limite de vagas exibidas
 -->
 <script>
-    import Opening from '$lib/components/opening.svelte';
+    import Opening from '$lib/components/opening-item.svelte';
     let { data } = $props();
     console.log(data);
     import Header from '$lib/components/header.svelte';

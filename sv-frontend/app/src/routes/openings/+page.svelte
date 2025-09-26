@@ -1,6 +1,6 @@
 <script>
     import Header from "$lib/components/header.svelte";
-    import Opening from "$lib/components/opening.svelte";
+    import Opening from "$lib/components/opening-item.svelte";
     
     let { data } = $props();
 </script>
@@ -13,7 +13,7 @@
     <input class="search-vacancies" id="search-input" name="query" type="search" placeholder="Procure por uma vaga   %lupa%">
     <div class="vacancies-data" id="vacancies-data">
         {#each data.posts as post}
-            <Opening name={post.title} requisites={post.body}/>
+            <Opening id={post.id} title={post.title} requisites={post.body}/>
         {/each}
     </div>
 </div>
