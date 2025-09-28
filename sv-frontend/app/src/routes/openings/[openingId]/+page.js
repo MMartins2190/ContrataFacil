@@ -10,10 +10,10 @@ export async function load({url, fetch}){
 
         return {
             title: dataJSON.title,
-            salary: dataJSON.userId,
+            salary: 1212,
             description: dataJSON.body,
             requisites: dataJSON.body,
-            boosted: false,
+            boosted: true,
         }
     }
     else {

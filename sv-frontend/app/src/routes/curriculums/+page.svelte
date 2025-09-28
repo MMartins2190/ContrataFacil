@@ -2,6 +2,7 @@
     import CurriculumItem from '$lib/components/curriculum-item.svelte';
     import Header from "$lib/components/header.svelte";
 
+    //User data and curriculum data
     let { data } = $props();
 </script>
 
@@ -10,13 +11,12 @@
 <Header />
 
 <main>
-    <h1
-    style:margin="2rem 0 0 4rem"
-    style:font-weight=600>Currículos:</h1>
+    <h1>Currículos:</h1>
     <div class="curriculums">
         <ul class="curriculums-list">
             {#each data.users as user}
                 <CurriculumItem
+                id={user.id}
                 personName={user.name}
                 cpf={user.zipcode}
                 phoneNumber={user.phone}
@@ -27,11 +27,13 @@
 </main>
 
 <style>
-    main{
-       min-height: 100vh; 
-    }
-
-    ul{
-        margin-top: 5rem;
+    h1 {
+        display: inline-block;
+        font-size: 3rem;
+        margin: 2rem 0 4rem 5rem;
+        background: rgb(81, 117, 184);
+        color: white;
+        padding: 1rem;
+        border-radius: 30px;
     }
 </style>
