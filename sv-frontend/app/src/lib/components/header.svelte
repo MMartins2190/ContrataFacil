@@ -6,7 +6,7 @@
     <nav>
         <a href="/openings" class={["nav-item", "nav-link"]}>Vagas</a>
         <a href="/curriculums" class={["nav-item", "nav-link"]}>Currículos</a>
-        <a href="/enterprise" class={["nav-item", "nav-link"]}>Para Empresas</a>
+        <a href="/enterprise-for" class={["nav-item", "nav-link"]}>Para Empresas</a>
         <a href="/about" class={["nav-item", "nav-link"]}>Sobre</a>
         <div class="user">
             <button class="pr-blue-btn nav-item">Entrar</button>
