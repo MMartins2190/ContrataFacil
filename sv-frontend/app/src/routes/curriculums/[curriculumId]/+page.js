@@ -12,7 +12,7 @@ export async function load({url, fetch}){
             structure: dataJSON.name,
             text: dataJSON.body,
             review: dataJSON.title,
-            user: {},
+            // user: {},
         }
     }
     else {

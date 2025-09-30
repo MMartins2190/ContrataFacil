@@ -3,7 +3,7 @@
 
     let { data } = $props();
     let {
-        user = {},
+        user = {name: "Sérgio Freitas"},
         structure = "",
         text = "",
         reviewsidk = "",
@@ -11,46 +11,114 @@
 
 </script>
 
-<title>username</title>
+<title>{user.name}</title>
 
 <Header />
-
-<div class="body">
-  <div class="curriculum-display">
-    {text}
-  </div>
-  <aside>
-    <div class="userData">
-      {user}
-    </div>
-    <p class="structure">
-      {structure}
-    </p>
-    <div class="reviewsidk">
-      {reviewsidk}
-    </div>
-  </aside>
+<div class="page-container">
+    <main class="main-content">
+        <div class="content-wrapper">
+            
+        </div>
+    </main>
+    
+    <aside class="sidebar">
+        <div class="sidebar-content">
+            <h2>{user.name}</h2>
+            <ul class="sidebar-list">
+                <li class="sidebar-item">AvaliaçõesSla</li>
+            </ul>
+        </div>
+    </aside>
 </div>
 
 <style>
-  .body {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-areas: "c d";
-  }
+    .page-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        min-height: 100vh;
+        gap: 0;
+    }
 
-  .curriculum-display {
-    grid-area: c;
-  }
+    .main-content {
+        background-color: #DDDDFF;
+        padding: 2rem;
+        overflow-y: auto;
+    }
 
-  aside {
-    background-color: rgb(81, 117, 184);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 0;
-    justify-content: center;
-    align-content: space-between;
-  }
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
+    .sidebar {
+        background-color: #5865C7;
+        padding: 2rem;
+        overflow-y: auto;
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h2 {
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+
+    .sidebar-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-item {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar-item:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: translateX(-4px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsive design */
+    @media (max-width: 1024px) {
+        .page-container {
+            grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+            order: -1;
+            min-height: auto;
+            position: relative;
+        }
+
+        .sidebar-content {
+            position: static;
+        }
+
+        .main-content {
+            padding: 1.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .main-content {
+            padding: 1rem;
+        }
+
+        .sidebar {
+            padding: 1.5rem;
+        }
+
+        .sidebar h2 {
+            font-size: 1.25rem;
+        }
+    }
 </style>
