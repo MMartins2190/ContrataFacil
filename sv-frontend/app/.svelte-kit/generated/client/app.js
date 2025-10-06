@@ -14,24 +14,26 @@ export const nodes = [
 	() => import('./nodes/10'),
 	() => import('./nodes/11'),
 	() => import('./nodes/12'),
-	() => import('./nodes/13')
+	() => import('./nodes/13'),
+	() => import('./nodes/14')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/": [2],
-		"/curriculum-form": [~3],
-		"/curriculums": [4],
-		"/curriculums/[curriculumId]": [5],
-		"/enterprise-for": [6],
-		"/homepage": [7],
-		"/login": [8],
-		"/opening-form": [~9],
-		"/openings": [10],
-		"/openings/[openingId]": [11],
-		"/signin": [12],
-		"/signin/openings": [13]
+		"/about": [3],
+		"/curriculum-form": [~4],
+		"/curriculums": [5],
+		"/curriculums/[curriculumId]": [6],
+		"/enterprise-for": [7],
+		"/homepage": [8],
+		"/login": [9],
+		"/opening-form": [~10],
+		"/openings": [11],
+		"/openings/[openingId]": [12],
+		"/signin": [13],
+		"/signin/openings": [14]
 	};
 
 export const hooks = {

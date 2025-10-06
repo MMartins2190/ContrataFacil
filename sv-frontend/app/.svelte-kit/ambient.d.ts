@@ -40,11 +40,7 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const DriverData: string;
 	export const EDITOR: string;
-	export const EFC_5908_1262719628: string;
 	export const EFC_5908_1592913036: string;
-	export const EFC_5908_2283032206: string;
-	export const EFC_5908_2775293581: string;
-	export const EFC_5908_3789132940: string;
 	export const GIT_ASKPASS: string;
 	export const GOPATH: string;
 	export const HOME: string;
@@ -163,11 +159,7 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_5908_1262719628: string;
 		EFC_5908_1592913036: string;
-		EFC_5908_2283032206: string;
-		EFC_5908_2775293581: string;
-		EFC_5908_3789132940: string;
 		GIT_ASKPASS: string;
 		GOPATH: string;
 		HOME: string;
