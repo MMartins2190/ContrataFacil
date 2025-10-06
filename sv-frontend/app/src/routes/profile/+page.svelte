@@ -14,6 +14,8 @@
 
 <title>Meu Perfil</title>
 
+<Header />
+
 <div class="page-container">
     <div class="profile-card">
         <!-- Top Portion: Profile Picture and Name -->
