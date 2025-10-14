@@ -11,7 +11,7 @@ export async function load({url, fetch}){
 
         return {
             profilePicture: dataJSON.title,
-            name: "XPTechO Industries",
+            name: "Faraday Oersted",
             password: dataJSON.body,
             email: "ligma",
             cpf: "000.000.000-00-X",
