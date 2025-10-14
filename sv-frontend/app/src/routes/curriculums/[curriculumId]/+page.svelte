@@ -4,6 +4,7 @@
     let { data } = $props();
     let {
         user = {name: "Sérgio Freitas"},
+        candidacy = {status: "Em andamento"},
         structure = "",
         text = "",
         reviewsidk = "",
@@ -24,9 +25,22 @@
     <aside class="sidebar">
         <div class="sidebar-content">
             <h2>{user.name}</h2>
-            <ul class="sidebar-list">
-                <li class="sidebar-item">AvaliaçõesSla</li>
-            </ul>
+            <p class="sidebar-item">AvaliaçõesSla</p>
+            <form method="post" class="candidatura">
+                <p style:color=white>Em Andamento</p>
+                <button 
+                type="submit"
+                formaction="?/approve" 
+                style:background="rgb(100, 200, 100)" 
+                class="sidebar-item"
+                >Aprovado</button>
+                <button
+                type="submit" 
+                formaction="?/reject" 
+                style:background="rgb(200, 100, 100)" 
+                class="sidebar-item"
+                >Desaprovado</button>
+            </form>
         </div>
     </aside>
 </div>
@@ -62,12 +76,6 @@
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
         font-weight: 600;
-    }
-
-    .sidebar-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
     }
 
     .sidebar-item {

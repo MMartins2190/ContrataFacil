@@ -1,4 +1,5 @@
 <script>
+    import CurriculumItem from "$lib/components/curriculum-item.svelte";
     import Header from "$lib/components/header.svelte";
 
     let { data } = $props();
@@ -9,6 +10,15 @@
         description = "Não há descrição",
         requisites = "Nenhum Requisito foi posto para essa vaga",
         boosted = false,
+        curriculum = {
+          id: 0,
+          personName: "Somari Basil",
+          cpf: "000.000.000-00",
+          phoneNumber: "99 9999-9999",
+        },
+        candidacy = {
+          status: "Em andamento",
+        }
     } = data;
 
 </script>
@@ -24,7 +34,19 @@
 
   <main>
     <div class="apply-section">
+      {#if !curriculum}
       <button class="pr-blue-btn apply-button">Enviar Currículo</button>
+      {:else}
+      <div style:width=80% class="curriculum-status">
+        <div style:display=flex>
+          <span>Mudar currículo</span>
+          <span style:margin="0 0 0 auto">{candidacy.status}</span>
+        </div>
+        <ul>
+          <CurriculumItem {...curriculum}/>
+        </ul>
+      </div>
+      {/if}
       <div class="end-section">
         {#if boosted}
         <i style:margin-right=1rem>Impulsionada</i>
@@ -77,6 +99,14 @@
     padding: 1rem 2rem;
     border-radius: 30px;
     font-weight: 500;
+    cursor: pointer;
+  }
+
+  .curriculum-status {
+    background-color: #5175b8;
+    color: white;
+    padding: 1rem;
+    border-radius: 20px;
     cursor: pointer;
   }
 
