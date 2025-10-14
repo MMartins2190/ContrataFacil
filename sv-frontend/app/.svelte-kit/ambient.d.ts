@@ -90,6 +90,8 @@ declare module '$env/static/private' {
 	export const PT8HOME: string;
 	export const PUBLIC: string;
 	export const PYDEVD_DISABLE_FILE_VALIDATION: string;
+	export const PYTHONSTARTUP: string;
+	export const PYTHON_BASIC_REPL: string;
 	export const SESSIONNAME: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
@@ -207,6 +209,8 @@ declare module '$env/dynamic/private' {
 		PT8HOME: string;
 		PUBLIC: string;
 		PYDEVD_DISABLE_FILE_VALIDATION: string;
+		PYTHONSTARTUP: string;
+		PYTHON_BASIC_REPL: string;
 		SESSIONNAME: string;
 		SystemDrive: string;
 		SystemRoot: string;
