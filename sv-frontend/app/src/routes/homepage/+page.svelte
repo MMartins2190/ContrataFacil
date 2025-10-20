@@ -99,6 +99,8 @@
         border: 1px solid black;
         background-color: #D9D9D9;
         border-radius: 10px;
+        margin: .5ch 0 0 0;
+        padding: 0 0 0 1rem;
     }
 
     .submit-area{

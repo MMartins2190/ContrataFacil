@@ -52,12 +52,13 @@
         padding: .75rem;
         margin: 1rem 0;
         border-radius: 100vw;
+        text-align: center;
     }
 
     .outline-btn{
         background-color: white;
         color: rgb(80, 100, 150);
-        padding: 1rem;
+        padding: .75rem;
         border: 2px solid rgb(80, 100, 150);
         border-radius: 100vw;
     }
