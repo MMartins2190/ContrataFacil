@@ -1,6 +1,3 @@
-<!-- 
- -> Implementar limite de vagas exibidas
--->
 <script>
     import Opening from '$lib/components/opening-item.svelte';
     let { data } = $props();
