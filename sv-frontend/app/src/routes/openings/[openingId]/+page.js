@@ -10,13 +10,13 @@ export async function load({url, fetch}){
 
         return {
             title: openingsJSON.titulo,
-            salary: openingsJSON.salario,
+            // salary: openingsJSON.salario,
             description: openingsJSON.descricao,
             requisites: openingsJSON.requisitos,
-            boosted: true,
+            boosted: openingsJSON.impulsionado,
         }
     }
     else {
-        console.log("n");
+        console.warn("Houve uma falha ao carregar este conteúdo");
     }
 }
