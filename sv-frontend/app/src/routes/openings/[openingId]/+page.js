@@ -3,16 +3,16 @@ export async function load({url, fetch}){
     const pathnameId = pathnameArray[2];
 
     if (!isNaN(pathnameId) && pathnameId !== "0"){
-        const fetchData = await fetch(`https://jsonplaceholder.typicode.com/posts/${pathnameId}`);
-        const dataJSON = await fetchData.json();
+        const fetchData = await fetch(`http://127.0.0.1:8000/vagas/${pathnameId}`);
+        const openingsJSON = await fetchData.json();
 
-        console.log(dataJSON);
+        console.log(openingsJSON);
 
         return {
-            title: dataJSON.title,
-            salary: 1212,
-            description: dataJSON.body,
-            requisites: dataJSON.body,
+            title: openingsJSON.titulo,
+            salary: openingsJSON.salario,
+            description: openingsJSON.descricao,
+            requisites: openingsJSON.requisitos,
             boosted: true,
         }
     }

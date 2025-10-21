@@ -12,8 +12,8 @@
 <div class="list-vacancies">
     <input class="search-vacancies" id="search-input" name="query" type="search" placeholder="Procure por uma vaga   %lupa%">
     <div class="vacancies-data" id="vacancies-data">
-        {#each data.posts as post}
-            <Opening id={post.id} title={post.title} requisites={post.body}/>
+        {#each data.openings as opening}
+            <Opening id={opening.id} title={opening.titulo} requisites={opening.descricao}/>
         {/each}
     </div>
 </div>

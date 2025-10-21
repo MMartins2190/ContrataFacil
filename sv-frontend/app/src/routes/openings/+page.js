@@ -1,10 +1,10 @@
 export async function load({ fetch }){
-    const posts = async () => {
-        const fetchPosts = await fetch("http://127.0.0.1:8000/vagas/"); //CORS
-        return await fetchPosts.json();
+    const openings = async () => {
+        const fetchOpenings = await fetch("http://127.0.0.1:8000/vagas/"); //CORS
+        return await fetchOpenings.json();
     }
 
     return {
-        posts: await posts(),
+       openings: await openings(),
     }
 }
