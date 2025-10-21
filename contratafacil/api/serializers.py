@@ -6,14 +6,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Usuario
         fields = '__all__'
-        extra_kwargs = {
-            'fotoPerfil': {'help_text': 'Foto de perfil do usuário'},
-            'nome': {'help_text': 'Nome do usuário'},
-            'senha': {'help_text': 'Senha do usuário'},
-            'email': {'help_text': 'E-mail do usuário'},
-            'cpf': {'help_text': 'CPF do usuário'},
-        }
-
+        
 
 class CompetenciaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,17 +20,17 @@ class CandidatoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Candidato
         fields = '__all__'
-        extra_kwargs = {
-            'planopago': {'help_text': 'Se o candidato possui plano pago'},
-            'perfil_linkedin': {'help_text': 'Perfil do Linkedin do candidato'},
-            'usuario': {'help_text': 'ID do usuário associado'},
-        }
 
 
+# 🔄 Agora trabalha com imagem
 class CurriculoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Curriculo
         fields = '__all__'
+        extra_kwargs = {
+            'imagem': {'help_text': 'Imagem do currículo (formato JPG, PNG etc.)'},
+            'usuario': {'help_text': 'Usuário dono do currículo'},
+        }
 
 
 class VagaSerializer(serializers.ModelSerializer):

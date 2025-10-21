@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.parsers import MultiPartParser, FormParser
 from contratafacil import models
 from contratafacil.api import serializers
 from drf_yasg.utils import swagger_auto_schema
@@ -43,9 +44,11 @@ class CandidatoViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+# 🔄 Agora aceita upload de imagem
 class CurriculoViewSet(viewsets.ModelViewSet):
     queryset = models.Curriculo.objects.all()
     serializer_class = serializers.CurriculoSerializer
+    parser_classes = [MultiPartParser, FormParser]  # permite upload de imagem
 
 
 class VagaViewSet(viewsets.ModelViewSet):

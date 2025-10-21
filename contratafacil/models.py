@@ -20,14 +20,12 @@ class Competencia(models.Model):
         return f"{self.nome} ({self.nivel})"
 
 
-class Candidato(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
-    planopago = models.BooleanField()
-    competencias = models.ManyToManyField(Competencia, blank=True)  # melhor do que JSON
-    perfil_linkedin = models.URLField()
+class Curriculo(models.Model):
+    imagem = models.ImageField(upload_to="curriculos/", null=True, blank=True)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="curriculos")
 
     def __str__(self):
-        return f"Candidato: {self.usuario.nome}" if self.usuario else "Candidato sem usuário"
+        return f"Currículo de {self.usuario.nome}"
 
 
 class Curriculo(models.Model):
