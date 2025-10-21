@@ -18,7 +18,7 @@
         style:margin-bottom=3rem
         >Adicionar Vaga:</h1>
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="field">
                 <label for="vacancy-name">Vaga:</label>
                 <input name="titulo" id="vacancy-name" type="text" value={title}>

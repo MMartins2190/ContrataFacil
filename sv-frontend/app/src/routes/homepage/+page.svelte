@@ -1,8 +1,7 @@
 <script>
     import Opening from '$lib/components/opening-item.svelte';
-    let { data } = $props();
-    console.log(data);
     import Header from '$lib/components/header.svelte';
+    let { data } = $props();
 </script>
 
 <title>Home</title>
@@ -47,10 +46,12 @@
     </div>
     
     <div class="vacancies-data" id="vacancies-data">
-        {#each data.posts as post}
+        {#each data.openings as opening}
         <Opening
-        title={post.title}
-        requisites={post.body}
+        title={opening.titulo}
+        salary={opening.salary}
+        description={opening.descricao}
+        requisites={opening.requisitos}
         />
         {/each}
     </div>
