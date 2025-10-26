@@ -1,8 +1,13 @@
 <script>
+    import { enhance } from "$app/forms";
+    import { page } from "$app/state";
     import Header from "$lib/components/header.svelte";
 
+    let id = page.url.searchParams.get("id");
     let { data } = $props();
     let { title = "", salary = "", description = "", requisites = "", boosted = false } = data;
+    console.log(data);
+
 </script>
 
 <title>Adicionar Vaga</title>
@@ -18,10 +23,10 @@
         style:margin-bottom=3rem
         >Adicionar Vaga:</h1>
 
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" use:enhance>
             <div class="field">
                 <label for="vacancy-name">Vaga:</label>
-                <input name="titulo" id="vacancy-name" type="text" value={title}>
+                <input name="titulo" id="vacancy-name" type="text" value={title} required>
             </div>
             <div class="field">
                 <label for="salary">Salário:</label>
@@ -33,7 +38,7 @@
             </div>
             <div class="field">
                 <label for="requisites">Requisitos:</label>
-                <textarea name="descricao" id="requisites" cols="60" rows="100">{requisites}</textarea>
+                <textarea name="requisitos" id="requisites" cols="60" rows="100">{requisites}</textarea>
             </div>
             <div>
                 <label for="boosted">Impulsionada</label>
@@ -45,11 +50,12 @@
             </div>
             <div class="submit">
                 {#if title !== ""}
-                    <input formaction="?/update" type="submit" class="sr-blue-btn" style:background-color=green value="Salvar">
+                    <input formaction="?/update&id={id}" type="submit" class="sr-blue-btn" style:background-color=green value="Salvar">
+                    <input formaction="?/delete&id={id}" type="submit" value="Detonar" style:background-color=red>
                 {:else}
                     <input formaction="?/create" type="submit" class="sr-blue-btn" value="Enviar">
                 {/if}
-                <input formaction="?/delete" type="submit" value="Detonar" style:background-color=red>
+                <input type="submit" formaction="?/redirect" value="Shart">
             </div>
         </form>
     </div>

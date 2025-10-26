@@ -3,7 +3,7 @@ export async function load({url, fetch}){
     const pathnameId = pathnameArray[2];
 
     if (!isNaN(pathnameId) && pathnameId !== "0"){
-        const fetchData = await fetch(`http://127.0.0.1:8000/vagas/${pathnameId}`);
+        const fetchData = await fetch(`http://127.0.0.1:8000/vagas/${pathnameId}/`);
         const openingsJSON = await fetchData.json();
 
         console.log(openingsJSON);

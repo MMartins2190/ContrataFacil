@@ -3,6 +3,7 @@
         id = "0",
         title = "Vaga00",
         salary = "0000,00",
+        description = "Não há descrição",
         requisites = "Nenhum Requisito foi posto para essa vaga",
     } = $props();
 
@@ -10,7 +11,7 @@
 </script>
 
 <div class="vacancy-item">
-    <a href="/openings/{id}" aria-label="Ver detalhes da vaga: {title}" class="vacancy-link">
+    <a href="/openings/{id}/" aria-label="Ver detalhes da vaga: {title}" class="vacancy-link">
         <div class="vacancy-header">
             <h3 class="vacancy-title">{title}</h3>
             <div class="salary-badge">{formattedSalary}</div>
@@ -18,8 +19,8 @@
         
         <div class="vacancy-content">
             <div class="requisites-section">
-                <h4 class="section-title">Requisitos</h4>
-                <p class="requisites-text">{requisites}</p>
+                <h4 class="section-title">Descrição</h4>
+                <p class="requisites-text">{description}</p>
             </div>
         </div>
     </a>

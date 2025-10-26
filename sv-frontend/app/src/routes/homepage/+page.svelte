@@ -48,9 +48,9 @@
     <div class="vacancies-data" id="vacancies-data">
         {#each data.openings as opening}
         <Opening
+        id={opening.id}
         title={opening.titulo}
         salary={opening.salary}
-        description={opening.descricao}
         requisites={opening.requisitos}
         />
         {/each}
