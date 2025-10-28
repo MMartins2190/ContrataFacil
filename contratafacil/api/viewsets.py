@@ -27,11 +27,6 @@ class CompetenciaViewSet(viewsets.ModelViewSet):
     queryset = models.Competencia.objects.all()
     serializer_class = serializers.CompetenciaSerializer
 
-
-class CandidatoViewSet(viewsets.ModelViewSet):
-    queryset = models.Candidato.objects.all()
-    serializer_class = serializers.CandidatoSerializer
-
     @swagger_auto_schema(
         operation_description="Lista candidaturas de um candidato",
         responses={200: serializers.CandidaturaSerializer(many=True)}

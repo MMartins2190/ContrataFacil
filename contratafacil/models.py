@@ -22,7 +22,9 @@ class Competencia(models.Model):
 
 
 class Curriculo(models.Model):
-    curriculos = models.ImageField(upload_to='curriculos/', validators=[FileExtensionValidator(['png', 'jpg', 'jpeg'])])
+    ALLOWED_EXTENSIONS = ['pdf']
+
+    curriculos = models.FileField(upload_to='curriculos/', validators=[FileExtensionValidator(ALLOWED_EXTENSIONS)], null=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="curriculos")
 
     def __str__(self):
@@ -45,7 +47,7 @@ class Candidatura(models.Model):
         APROVADO = "APROVADO", "Aprovado"
         REJEITADO = "REJEITADO", "Rejeitado"
 
-    candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, related_name="candidaturas")
+    candidato = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="candidaturas")
     vaga = models.ForeignKey(Vaga, on_delete=models.CASCADE, related_name="candidaturas")
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.EM_ANALISE)
     data_candidatura = models.DateTimeField(auto_now_add=True)

@@ -13,15 +13,6 @@ class CompetenciaSerializer(serializers.ModelSerializer):
         model = models.Competencia
         fields = '__all__'
 
-
-class CandidatoSerializer(serializers.ModelSerializer):
-    competencias = CompetenciaSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = models.Candidato
-        fields = '__all__'
-
-
 # 🔄 Agora trabalha com imagem
 class CurriculoSerializer(serializers.ModelSerializer):
     class Meta:

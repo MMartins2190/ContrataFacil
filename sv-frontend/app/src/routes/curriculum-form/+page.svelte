@@ -11,12 +11,12 @@
 <Header />
 
 <main>
-    <form action="?/" method="post">
+    <form method="post">
         <div class="image-input">
             <label for="image">Selecionar arquivo: </label>
             <input id="image" type="file" value="Imagem" accept="image/*">
         </div>
-        <button type="submit">Enviar</button>
+        <input formaction="?/create" type="submit" value="Enviar">
     </form>
 </main>
 

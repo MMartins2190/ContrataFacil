@@ -26,7 +26,6 @@ schema_view = get_schema_view(
 router = routers.DefaultRouter()
 router.register(r'usuarios', viewsets.UsuarioViewSet, basename='usuarios')
 router.register(r'competencias', viewsets.CompetenciaViewSet, basename='competencias')
-router.register(r'candidatos', viewsets.CandidatoViewSet, basename='candidatos')
 router.register(r'curriculos', viewsets.CurriculoViewSet, basename='curriculos')
 router.register(r'vagas', viewsets.VagaViewSet, basename='vagas')
 router.register(r'candidaturas', viewsets.CandidaturaViewSet, basename='candidaturas')
