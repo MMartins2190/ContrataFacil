@@ -1,16 +1,14 @@
 export async function load({url}){
     const id = url.searchParams.get("id");
-    if (!isNaN(id) && id !== "0"){
-        const fetchData = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-        const dataJSON = await fetchData.json();
+    if (!isNaN(id) && Number(id) !== 0){
+        const fetchData = await fetch(`http://127.0.0.1/posts/${id}/`);
+        const curriculo = await fetchData.json();
 
-        console.log("id", id, "\ndata", dataJSON);
+        console.log("id", id, "\ndata", curriculo);
 
         return {
-            struct: dataJSON.title,
-            text: dataJSON.userId,
-            reviewsidk: dataJSON.body,
-            user: dataJSON.body,
+            curriculums: curriculo.curriculos,
+            user: curriculo.usuario
         }
     }
     else {
