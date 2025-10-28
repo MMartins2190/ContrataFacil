@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 
 
 class Usuario(models.Model):
@@ -21,17 +22,7 @@ class Competencia(models.Model):
 
 
 class Curriculo(models.Model):
-    imagem = models.ImageField(upload_to="curriculos/", null=True, blank=True)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="curriculos")
-
-    def __str__(self):
-        return f"Currículo de {self.usuario.nome}"
-
-
-class Curriculo(models.Model):
-    estrutura = models.CharField(max_length=100)
-    texto = models.TextField()
-    avaliacoesla = models.TextField(blank=True, null=True)
+    curriculos = models.ImageField(upload_to='curriculos/', validators=[FileExtensionValidator(['png', 'jpg', 'jpeg'])])
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="curriculos")
 
     def __str__(self):

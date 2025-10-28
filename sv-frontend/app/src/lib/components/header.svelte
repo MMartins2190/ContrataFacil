@@ -1,45 +1,38 @@
 <script>
-    //External data and auth
-    let user = {
-        isAuthenticated: false,
-        name: "Jo`so",
-        pfp: "facePic",
-        // ...
-    };
 </script>
 
 <header>
-    <h1>ContrataFácil</h1>
+    <a href="/"><h1>ContrataFácil</h1></a>
     <nav>
-        <a href="#top" class="nav-item">Vagas</a>
-        <a href="#top" class="nav-item">Currículos</a>
-        <a href="#top" class="nav-item">Para Empresas</a>
-        <a href="#top" class="nav-item">Sobre</a>
+        <a href="/openings" class={["nav-item", "nav-link"]}>Vagas</a>
+        <a href="/curriculums" class={["nav-item", "nav-link"]}>Currículos</a>
+        <a href="/enterprise-for" class={["nav-item", "nav-link"]}>Para Empresas</a>
+        <a href="/about" class={["nav-item", "nav-link"]}>Sobre</a>
         <div class="user">
-            {#if user.isAuthenticated}
-                <a href="/userprofile">
-                    <p style="display: inline;">{user.name || "Nome"}</p>
-                    <i>{user.pfp || "I"}</i>
-                </a>
-                {:else}
-                    <button class="pr-blue-btn nav-item">Entrar</button>
-            {/if}
+            <button class="pr-blue-btn nav-item">Entrar</button>
         </div>
     </nav>
 </header>
 
 <style>
-     header{
-        outline: 2px solid blue;
+    header{
+        position: sticky;
+        top: 0%;
+        z-index: 100;
         display: flex;
         width: auto;
         height: 10vh;
+        background-color: #F6F7F9;
         padding: 0 3rem;
         align-items: center;
     }
 
+    .nav-link:hover{
+        color: rgb(81, 117, 184);
+    }
+
+
     nav{
-        outline: 1px solid red;
         margin-left: auto;
         display: flex;
         align-items: center;
@@ -54,4 +47,8 @@
         padding: 0.2rem 0.75rem;
         border-radius: 3px;
     }
+
+    /* .currentPage{
+        border-bottom: 2px solid rgb(81, 117, 184);
+    } */
 </style>

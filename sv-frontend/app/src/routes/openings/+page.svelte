@@ -1,22 +1,26 @@
 <script>
-    import Opening from "$lib/components/opening.svelte";
+    import Header from "$lib/components/header.svelte";
+    import Opening from "$lib/components/opening-item.svelte";
     
     let { data } = $props();
+
 </script>
 
 <title>Vagas</title>
 
+<Header/>
+
 <div class="list-vacancies">
     <input class="search-vacancies" id="search-input" name="query" type="search" placeholder="Procure por uma vaga   %lupa%">
+    <a href="/opening-form">Criar nova vaga</a>
     <div class="vacancies-data" id="vacancies-data">
-        {#each data.users as user}
-        <Opening />
+        {#each data.openings as opening}
+            <Opening id={opening.id} title={opening.titulo} description={opening.descricao}/>
         {/each}
     </div>
 </div>
 <style>
     .search-vacancies{
-        outline: 2px solid purple;
         background-color: #d9d9d9;
         border-radius: 30px;
         width: 100%;
@@ -27,10 +31,8 @@
     
     .list-vacancies{
         margin: 3rem 5rem;
-        outline: 2px solid yellowgreen;
     }
     .vacancies-data{
-        outline: 2px solid lightslategray;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;

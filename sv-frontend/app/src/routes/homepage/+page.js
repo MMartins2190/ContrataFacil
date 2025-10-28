@@ -1,10 +1,11 @@
 export async function load({ fetch }){
-    const users = async () => {
-        const fetchUsers = await fetch("https://jsonplaceholder.typicode.com/users/");
-        return await fetchUsers.json();
+    const openings = async () => {
+        const fetchOpenings = await fetch("http://127.0.0.1:8000/vagas/");
+        const openingsJSON = await fetchOpenings.json();
+        return openingsJSON.slice(0, 6);
     }
 
     return {
-        users: await users(),
+        openings: await openings(),
     }
 }

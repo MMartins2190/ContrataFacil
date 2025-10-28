@@ -2,19 +2,18 @@
     import Header from "$lib/components/header.svelte";
 </script>
 
-<title>Início</title>
+<title>ContrataFácil</title>
 
 <Header />
 <div class="body">
     <main>
         <h1>Encontre talentos com facilidade</h1>
         <p>Uma plataforma inteligente de currículo com foco em filtragem e categorização para facilitar contratações.</p>
-        <button class="pr-blue-btn round-10">Começar Agora</button>
-        <br>
-        <button class="outline-btn round-10">Entrar com Linkedin</button>
+        <a href="/homepage" class="pr-blue-btn get-started">Começar Agora</a>
+        <button class="outline-btn">Entrar com Linkedin</button>
     </main>
     <div class="bottom">
-        <h3 style="outline: 2px solid orange;"><strong>Como Funciona</strong> em 3 passos simples</h3>
+        <h3><strong>Como Funciona</strong> em 3 passos simples</h3>
         <div class="steps">
             <div class="step">
                 <div class="circle"></div>
@@ -34,50 +33,46 @@
 
 <style>
     .body{
-        outline: 2px solid purple;
         height: 90vh;
         padding: 3rem;
     }
 
     main{
-        outline: 2px solid green;
         height: 60vh;
         width: 20rem;
+        display: flex;
+        flex-direction: column;
     }
 
     p{
         margin: 1.5ch 0;
     }
 
-    button{
-        padding: 0.5rem ;
-        border-radius: 5px;
-        margin-bottom: .4rem;
+    .get-started{
+        padding: .75rem;
+        margin: 1rem 0;
+        border-radius: 100vw;
+        text-align: center;
     }
 
     .outline-btn{
         background-color: white;
         color: rgb(80, 100, 150);
+        padding: .75rem;
         border: 2px solid rgb(80, 100, 150);
+        border-radius: 100vw;
     }
     .outline-btn:hover{
         color: rgb(120, 120, 200);
         border: 2px solid rgb(120, 120, 200);
     }
 
-    .bottom{
-        outline: green;
-        margin: auto 0 0 0;
-    }
-
     .steps{
-        outline: 2px solid red;
         margin: 2rem 4rem 0 0;
         display: flex;
         justify-content: space-evenly;
     }
     .step{
-        outline: 2px solid brown;
         display: inline;
     }
 

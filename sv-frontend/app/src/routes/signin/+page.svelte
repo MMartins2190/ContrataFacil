@@ -1,5 +1,9 @@
 <title>Cadastro</title>
 
+<header>
+    <h1 style:font-weight=600>ContrataFácil</h1>
+</header>
+
 <div class="all">
     <h1 
     style:font-weight=600
@@ -79,7 +83,6 @@
     .field-item{ 
         display: flex;
         flex-direction: column;
-        outline: 2px solid green;
     }
 
     input[required], #acting-field{
@@ -92,6 +95,5 @@
         height: 2.5rem;
         display: flex;
         justify-content: center;
-        outline: 2px solid yellow;
     }
 </style>
