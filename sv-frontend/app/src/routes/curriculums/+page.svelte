@@ -14,12 +14,12 @@
     <h1>Currículos:</h1>
     <div class="curriculums">
         <ul class="curriculums-list">
-            {#each data.users as user}
+            {#each data.curriculums as curriculum}
                 <CurriculumItem
-                id={user.id}
-                personName={user.name}
-                cpf={user.zipcode}
-                phoneNumber={user.phone}
+                id={curriculum.id}
+                personName={curriculum.usuario.nome}
+                cpf={curriculum.usuario.cpf}
+                phoneNumber={curriculum.usuario.telefone}
                 />
             {/each}
         </ul>

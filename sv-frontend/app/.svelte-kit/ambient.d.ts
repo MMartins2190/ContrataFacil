@@ -29,9 +29,7 @@ declare module '$env/static/private' {
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
 	export const BUNDLED_DEBUGPY_PATH: string;
-	export const ChocolateyInstall: string;
-	export const ChocolateyLastPathUpdate: string;
-	export const ChocolateyToolsLocation: string;
+	export const CHROME_CRASHPAD_PIPE_NAME: string;
 	export const COLOR: string;
 	export const COLORTERM: string;
 	export const CommonProgramFiles: string;
@@ -40,11 +38,6 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const DriverData: string;
 	export const EDITOR: string;
-	export const EFC_7464_1262719628: string;
-	export const EFC_7464_1592913036: string;
-	export const EFC_7464_2283032206: string;
-	export const EFC_7464_2775293581: string;
-	export const EFC_7464_3789132940: string;
 	export const FPS_BROWSER_APP_PROFILE_STRING: string;
 	export const FPS_BROWSER_USER_PROFILE_STRING: string;
 	export const GIT_ASKPASS: string;
@@ -52,7 +45,9 @@ declare module '$env/static/private' {
 	export const HOME: string;
 	export const HOMEDRIVE: string;
 	export const HOMEPATH: string;
+	export const IGCCSVC_DB: string;
 	export const INIT_CWD: string;
+	export const JAVA_HOME: string;
 	export const LANG: string;
 	export const LOCALAPPDATA: string;
 	export const LOGONSERVER: string;
@@ -80,21 +75,21 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const NUMBER_OF_PROCESSORS: string;
 	export const OneDrive: string;
-	export const OneDriveConsumer: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const OS: string;
 	export const Path: string;
 	export const PATHEXT: string;
 	export const PROCESSOR_ARCHITECTURE: string;
-	export const PROCESSOR_ARCHITEW6432: string;
 	export const PROCESSOR_IDENTIFIER: string;
 	export const PROCESSOR_LEVEL: string;
 	export const PROCESSOR_REVISION: string;
+	export const PRODUCT_CONF: string;
 	export const ProgramData: string;
 	export const ProgramFiles: string;
 	export const ProgramW6432: string;
 	export const PROMPT: string;
 	export const PSModulePath: string;
+	export const PT8HOME: string;
 	export const PUBLIC: string;
 	export const PYDEVD_DISABLE_FILE_VALIDATION: string;
 	export const PYTHONSTARTUP: string;
@@ -106,11 +101,11 @@ declare module '$env/static/private' {
 	export const TERM_PROGRAM: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const TMP: string;
+	export const UATDATA: string;
 	export const USERDOMAIN: string;
 	export const USERDOMAIN_ROAMINGPROFILE: string;
 	export const USERNAME: string;
 	export const USERPROFILE: string;
-	export const VBOX_HWVIRTEX_IGNORE_SVM_IN_USE: string;
 	export const VBOX_MSI_INSTALL_PATH: string;
 	export const VSCODE_DEBUGPY_ADAPTER_ENDPOINTS: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
@@ -120,6 +115,7 @@ declare module '$env/static/private' {
 	export const VSCODE_INJECTION: string;
 	export const VSCODE_PYTHON_AUTOACTIVATE_GUARD: string;
 	export const windir: string;
+	export const ZES_ENABLE_SYSMAN: string;
 }
 
 /**
@@ -154,9 +150,7 @@ declare module '$env/dynamic/private' {
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
 		BUNDLED_DEBUGPY_PATH: string;
-		ChocolateyInstall: string;
-		ChocolateyLastPathUpdate: string;
-		ChocolateyToolsLocation: string;
+		CHROME_CRASHPAD_PIPE_NAME: string;
 		COLOR: string;
 		COLORTERM: string;
 		CommonProgramFiles: string;
@@ -165,11 +159,6 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_7464_1262719628: string;
-		EFC_7464_1592913036: string;
-		EFC_7464_2283032206: string;
-		EFC_7464_2775293581: string;
-		EFC_7464_3789132940: string;
 		FPS_BROWSER_APP_PROFILE_STRING: string;
 		FPS_BROWSER_USER_PROFILE_STRING: string;
 		GIT_ASKPASS: string;
@@ -177,7 +166,9 @@ declare module '$env/dynamic/private' {
 		HOME: string;
 		HOMEDRIVE: string;
 		HOMEPATH: string;
+		IGCCSVC_DB: string;
 		INIT_CWD: string;
+		JAVA_HOME: string;
 		LANG: string;
 		LOCALAPPDATA: string;
 		LOGONSERVER: string;
@@ -205,21 +196,21 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		NUMBER_OF_PROCESSORS: string;
 		OneDrive: string;
-		OneDriveConsumer: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		OS: string;
 		Path: string;
 		PATHEXT: string;
 		PROCESSOR_ARCHITECTURE: string;
-		PROCESSOR_ARCHITEW6432: string;
 		PROCESSOR_IDENTIFIER: string;
 		PROCESSOR_LEVEL: string;
 		PROCESSOR_REVISION: string;
+		PRODUCT_CONF: string;
 		ProgramData: string;
 		ProgramFiles: string;
 		ProgramW6432: string;
 		PROMPT: string;
 		PSModulePath: string;
+		PT8HOME: string;
 		PUBLIC: string;
 		PYDEVD_DISABLE_FILE_VALIDATION: string;
 		PYTHONSTARTUP: string;
@@ -231,11 +222,11 @@ declare module '$env/dynamic/private' {
 		TERM_PROGRAM: string;
 		TERM_PROGRAM_VERSION: string;
 		TMP: string;
+		UATDATA: string;
 		USERDOMAIN: string;
 		USERDOMAIN_ROAMINGPROFILE: string;
 		USERNAME: string;
 		USERPROFILE: string;
-		VBOX_HWVIRTEX_IGNORE_SVM_IN_USE: string;
 		VBOX_MSI_INSTALL_PATH: string;
 		VSCODE_DEBUGPY_ADAPTER_ENDPOINTS: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
@@ -245,6 +236,7 @@ declare module '$env/dynamic/private' {
 		VSCODE_INJECTION: string;
 		VSCODE_PYTHON_AUTOACTIVATE_GUARD: string;
 		windir: string;
+		ZES_ENABLE_SYSMAN: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
