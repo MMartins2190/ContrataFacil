@@ -25,11 +25,11 @@ schema_view = get_schema_view(
 # 🔹 Definição das rotas
 router = routers.DefaultRouter()
 router.register(r'usuarios', viewsets.UsuarioViewSet, basename='usuarios')
-router.register(r'competencias', viewsets.CompetenciaViewSet, basename='competencias')
 router.register(r'curriculos', viewsets.CurriculoViewSet, basename='curriculos')
 router.register(r'vagas', viewsets.VagaViewSet, basename='vagas')
 router.register(r'candidaturas', viewsets.CandidaturaViewSet, basename='candidaturas')
 router.register(r'empresas', viewsets.EmpresaViewSet, basename='empresas')
+router.register(r'login', viewsets.LoginViewset, basename='login')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

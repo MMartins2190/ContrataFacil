@@ -5,13 +5,8 @@ from contratafacil import models
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Usuario
-        fields = '__all__'
-        
-
-class CompetenciaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Competencia
-        fields = '__all__'
+        fields = ["foto_perfil", "username", "senha", "email",
+                  "cpf", "plano_pago", "tipo_de_usuario"]
 
 # 🔄 Agora trabalha com imagem
 class CurriculoSerializer(serializers.ModelSerializer):
@@ -40,3 +35,8 @@ class EmpresaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Empresa
         fields = '__all__'
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=100, default=None)
+    senha = serializers.CharField(write_only=True)
+    email = serializers.EmailField(default=None)

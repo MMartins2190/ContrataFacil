@@ -1,3 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import Usuario
 
-# Register your models here.
+# Transforma em comentário em erro de resolução.
+admin.site.register(Usuario, UserAdmin)

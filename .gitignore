@@ -191,13 +191,13 @@ cython_debug/
 # *.sage.py
 
 # # Environments
-# .env
+.env
 .venv
-# env/
-# venv/
-# ENV/
-# env.bak/
-# venv.bak/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # # Spyder project settings
 # .spyderproject

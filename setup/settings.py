@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+from datetime import timedelta
 import os
 from pathlib import Path
+from django.utils.encoding import force_bytes
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
+# Preferivelmente alterada
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-)38tx&*ody4*6p+2&q=n0$70!#x8manx&(7pbflr3h@u@p)9)9'
 
@@ -28,6 +31,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Aviso: Em caso de erro "cannot resolve...":
+# Apagar isso, 
+# mudar classe Usuario, para herdar de Model,
+# Mudar admin.py para em bramco.
+# Depois de um Migrate funcionar, repor
+AUTH_USER_MODEL = "contratafacil.usuario"
 
 # Application definition
 
@@ -40,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'rest_framework_simplejwt',
     'contratafacil',
     'drf_yasg',
 ]
@@ -55,7 +65,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True # mude para o deploy
 
 ROOT_URLCONF = 'setup.urls'
 
@@ -106,6 +116,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    "backends.CustomBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -131,3 +145,18 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    # Configurações padrão
+    "SIGNING_KEY": force_bytes(SECRET_KEY),
+    "ALGORITHM": "HS256",
+    "AUTH_HEADER_TYPES": 'Bearer'
+}

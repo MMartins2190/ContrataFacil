@@ -1,25 +1,27 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from django.contrib.auth.models import AbstractUser
 
 
-class Usuario(models.Model):
-    fotoPerfil = models.ImageField(upload_to="ftPerfil/", null=True, blank=True)
-    nome = models.CharField(max_length=100)
-    senha = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
+class Usuario(AbstractUser):
+    TIPOS = [
+        {"candidato", "Candidato"},
+        {"empresa", "Empresa"}
+        ]
+
+    foto_perfil = models.ImageField(upload_to="ftPerfil/", null=True, blank=True)
+    username = models.CharField(max_length=100, unique=True, null=True)
+    senha = models.CharField(max_length=500, null=True)
+    email = models.EmailField(unique=True, null=True)
     cpf = models.CharField(max_length=11, unique=True)
+    plano_pago = models.BooleanField(default=False)
+    tipo_de_usuario = models.CharField(choices=TIPOS, null=True)
+
+    # Redefinição para não reclamar
+    password = None
 
     def __str__(self):
-        return self.nome
-
-
-class Competencia(models.Model):
-    nome = models.CharField(max_length=120)
-    nivel = models.CharField(max_length=50)
-
-    def __str__(self):
-        return f"{self.nome} ({self.nivel})"
-
+        return self.username
 
 class Curriculo(models.Model):
     ALLOWED_EXTENSIONS = ['pdf']
@@ -28,14 +30,14 @@ class Curriculo(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="curriculos")
 
     def __str__(self):
-        return f"Currículo de {self.usuario.nome}"
+        return f"Currículo de {self.usuario.username}"
 
 
 class Vaga(models.Model):
     titulo = models.CharField(max_length=255)
-    descricao = models.TextField()
-    requisitos = models.TextField()  # pode ser JSON no futuro
-    impulsionado = models.BooleanField(default=False)
+    descricao = models.TextField(null=True, blank=True)
+    requisitos = models.TextField(null=True, blank=True)  # pode ser JSON no futuro
+    impulsionada = models.BooleanField(default=False)
 
     def __str__(self):
         return self.titulo
@@ -53,7 +55,7 @@ class Candidatura(models.Model):
     data_candidatura = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.candidato.usuario.nome} -> {self.vaga.titulo} ({self.status})"
+        return f"{self.candidato.usuario.username} -> {self.vaga.titulo} ({self.status})"
 
 
 class Empresa(models.Model):
