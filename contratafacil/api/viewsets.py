@@ -31,10 +31,8 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         if serializador.is_valid():
             senha_hash = make_password(serializador.validated_data["password"])
             serializador.validated_data["password"] = senha_hash
-            usuario = models.Usuario.objects.select_for_update().get(id=pk)
-            # usuario.
-            usuario.save(force_update=True)
-            return Response(serializador.validated_data, status.HTTP_201_CREATED)
+            serializador.save()
+            return Response(serializador.data, status.HTTP_200_OK)
         return Response(serializador.errors, status.HTTP_400_BAD_REQUEST)
 
 
