@@ -9,7 +9,7 @@
         <a href="/enterprise-for" class={["nav-item", "nav-link"]}>Para Empresas</a>
         <a href="/about" class={["nav-item", "nav-link"]}>Sobre</a>
         <div class="user">
-            <button class="pr-blue-btn nav-item">Entrar</button>
+            <a href="/login" class="pr-blue-btn nav-item login-btn">Entrar</a>
         </div>
     </nav>
 </header>
@@ -42,7 +42,7 @@
         margin: 0 1.5vw 0 0;
     }
 
-    button{
+    .login-btn{
         margin-left: 0.5vw;
         padding: 0.2rem 0.75rem;
         border-radius: 3px;
