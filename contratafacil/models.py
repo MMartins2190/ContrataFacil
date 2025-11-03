@@ -10,15 +10,12 @@ class Usuario(AbstractUser):
         ]
 
     foto_perfil = models.ImageField(upload_to="ftPerfil/", null=True, blank=True)
-    username = models.CharField(max_length=100, unique=True, null=True)
-    senha = models.CharField(max_length=500, null=True)
+    username = models.CharField("Nome", max_length=100, unique=True, null=True)
+    password = models.CharField("Senha", max_length=500, null=True)
     email = models.EmailField(unique=True, null=True)
     cpf = models.CharField(max_length=11, unique=True)
     plano_pago = models.BooleanField(default=False)
     tipo_de_usuario = models.CharField(choices=TIPOS, null=True)
-
-    # Redefinição para não reclamar
-    password = None
 
     def __str__(self):
         return self.username
