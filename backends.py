@@ -4,6 +4,7 @@ from contratafacil.models import Usuario
 from django.contrib.auth.hashers import check_password
 
 class CustomBackend(BaseBackend):
+    # TODO: Implementar rate limiting e quaisquer outras medidas de segurança
     def authenticate(self, request, username=None, email=None, senha=None):
         try:
             user = Usuario._default_manager.get(Q(username=username) | Q(email=email))

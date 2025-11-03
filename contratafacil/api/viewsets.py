@@ -81,17 +81,17 @@ class LoginViewset(viewsets.ViewSet):
             senha = serializador.validated_data["senha"]
             email = serializador.validated_data["email"]
            
-            user = authenticate(username=username, senha=senha, email=email)
-            if user is not None:
-                refresh_token = RefreshToken.for_user(user)
+            usuario = authenticate(username=username, senha=senha, email=email)
+            if usuario is not None:
+                refresh_token = RefreshToken.for_user(usuario)
                 access_token = refresh_token.access_token
                 body = {
                     'access': str(access_token),
                     'refresh': str(refresh_token),
                     'user': {
-                        'userId': user.id,
-                        'username': user.username,
-                        'email': user.email,
+                        'userId': usuario.id,
+                        'username': usuario.username,
+                        'email': usuario.email,
                     }
                 }
                 # Criando o obj Response e guardando tokens em cookies
