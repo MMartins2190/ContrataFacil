@@ -5,7 +5,7 @@ from contratafacil import models
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Usuario
-        fields = ["foto_perfil", "username", "senha", "email",
+        fields = ["foto_perfil", "username", "password", "email",
                   "cpf", "plano_pago", "tipo_de_usuario"]
 
 # 🔄 Agora trabalha com imagem

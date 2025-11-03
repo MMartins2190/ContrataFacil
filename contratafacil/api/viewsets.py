@@ -1,6 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from contratafacil import models
 from rest_framework_simplejwt.tokens import RefreshToken
 from contratafacil.api import serializers
@@ -14,12 +15,13 @@ from django.contrib.auth import authenticate
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
     serializer_class = serializers.UsuarioSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request):
         serializador = serializers.UsuarioSerializer(data=request.data)
         if serializador.is_valid():
-            senha_hash = make_password(serializador.validated_data["senha"])
-            serializador.validated_data["senha"] = senha_hash
+            senha_hash = make_password(serializador.validated_data["password"])
+            serializador.validated_data["password"] = senha_hash
             models.Usuario.objects.create(**serializador.validated_data)
             return Response(serializador.validated_data, status.HTTP_201_CREATED)
         return Response(serializador.errors, status.HTTP_400_BAD_REQUEST)
@@ -27,10 +29,11 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     def update(self, request, pk=None):
         serializador = serializers.UsuarioSerializer(data=request.data)
         if serializador.is_valid():
-            senha_hash = make_password(serializador.validated_data["senha"])
-            serializador.validated_data["senha"] = senha_hash
+            senha_hash = make_password(serializador.validated_data["password"])
+            serializador.validated_data["password"] = senha_hash
             usuario = models.Usuario.objects.select_for_update().get(id=pk)
-            usuario.save()
+            # usuario.
+            usuario.save(force_update=True)
             return Response(serializador.validated_data, status.HTTP_201_CREATED)
         return Response(serializador.errors, status.HTTP_400_BAD_REQUEST)
 
@@ -51,23 +54,28 @@ class CurriculoViewSet(viewsets.ModelViewSet):
     queryset = models.Curriculo.objects.all()
     serializer_class = serializers.CurriculoSerializer
     parser_classes = [MultiPartParser, FormParser]  # permite upload de imagem
+    permission_classes = [AllowAny]
 
 
 class VagaViewSet(viewsets.ModelViewSet):
     queryset = models.Vaga.objects.all()
     serializer_class = serializers.VagaSerializer
+    permission_classes = [AllowAny]
 
 
 class CandidaturaViewSet(viewsets.ModelViewSet):
     queryset = models.Candidatura.objects.all()
     serializer_class = serializers.CandidaturaSerializer
+    permission_classes = [AllowAny]
 
 
 class EmpresaViewSet(viewsets.ModelViewSet):
     queryset = models.Empresa.objects.all()
     serializer_class = serializers.EmpresaSerializer
+    permission_classes = [AllowAny]
 
 class LoginViewset(viewsets.ViewSet):
+    permission_classes = [AllowAny]
     def create(self, request):
         serializador = serializers.LoginSerializer(data=request.data)
         if serializador.is_valid():
