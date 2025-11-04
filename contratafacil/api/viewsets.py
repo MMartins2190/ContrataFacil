@@ -3,13 +3,12 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from contratafacil import models
-from rest_framework_simplejwt.tokens import RefreshToken
 from contratafacil.api import serializers
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout 
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
@@ -58,7 +57,7 @@ class CurriculoViewSet(viewsets.ModelViewSet):
 class VagaViewSet(viewsets.ModelViewSet):
     queryset = models.Vaga.objects.all()
     serializer_class = serializers.VagaSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
 
 class CandidaturaViewSet(viewsets.ModelViewSet):
@@ -83,21 +82,15 @@ class LoginViewset(viewsets.ViewSet):
            
             usuario = authenticate(username=username, senha=senha, email=email)
             if usuario is not None:
-                refresh_token = RefreshToken.for_user(usuario)
-                access_token = refresh_token.access_token
-                body = {
-                    'access_token': str(access_token),
-                    'refresh_token': str(refresh_token),
-                    'user': {
-                        'userId': usuario.id,
-                        'username': usuario.username,
-                        'email': usuario.email,
-                    }
-                }
-                # Criando o obj Response e guardando tokens em cookies
-                response = Response(body, status.HTTP_200_OK)
-                response.set_cookie("access_token", access_token)
-                response.set_cookie("refresh_token", refresh_token)
+                # backend = CustomBackend
+                print(login(request, usuario))
+                response = Response("Autenticado.", status.HTTP_200_OK)
                 return response
-            return Response(f"Falha na autenticação, verifique suas credenciais", status=status.HTTP_401_UNAUTHORIZED) 
+            return Response(f"Falha na autenticação, verifique suas credenciais", status=status.HTTP_400_BAD_REQUEST) 
         return Response(serializador.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class LogoutViewset(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+    def create(self, request):
+        logout(request)
+        return Response("Saiu", status.HTTP_200_OK)

@@ -135,7 +135,8 @@ media
 # .env
 .venv
 # env/
-# venv/
+.venv/
+venv/
 # ENV/
 # env.bak/
 # venv.bak/
@@ -266,7 +267,7 @@ media
 # # End of https://www.toptal.com/developers/gitignore/api/python,django
 
 # ## SvelteKit-generated gitignore file, an appendix:
-# # node_modules
+# node_modules
 
 # # Output
 # # .output

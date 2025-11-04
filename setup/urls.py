@@ -30,6 +30,7 @@ router.register(r'vagas', viewsets.VagaViewSet, basename='vagas')
 router.register(r'candidaturas', viewsets.CandidaturaViewSet, basename='candidaturas')
 router.register(r'empresas', viewsets.EmpresaViewSet, basename='empresas')
 router.register(r'login', viewsets.LoginViewset, basename='login')
+router.register(r'logout', viewsets.LogoutViewset, basename='logout')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
