@@ -1,4 +1,5 @@
 <script>
+    import { enhance } from "$app/forms";
 </script>
 
 <title>Login</title>
@@ -11,17 +12,17 @@
     <div class="mid-column">
         <h1 style:font-weight=600 style:justify-self=center>Entrar no ContrataFácil</h1>
         
-            <form method="POST" class="login-container">
+            <form method="POST" class="login-container" use:enhance>
                 <div class="field">
-                    <label for="user">Nome de usuário ou e-mail</label><br>
-                    <input type="text" id="user">
+                    <label for="username">Nome de usuário ou e-mail</label><br>
+                    <input type="text" id="username" name="username">
                 </div>
                 <div class="field">
                     <div class="password-labels">
                         <label for="password-input">Senha:</label>
                         <a href="./forgor" style:margin-left=auto>Esqueceu a senha?</a><br>
                     </div>
-                    <input type="password" id="password-input">
+                    <input type="password" id="password-input" name="senha">
                 </div>
                 <div 
                 style:place-items=center 

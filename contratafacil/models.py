@@ -1,15 +1,28 @@
+import os, uuid
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
+from django.utils.deconstruct import deconstructible
 
+# @deconstructible 
+# class RenomearImagem(object):
+#     def __init__(self, subdir='ftPerfil/'): 
+#         self.subdir = subdir
 
+#     def __call__(self, instance, filename):
+#         extensao = filename.split('.')[-1] 
+#         novo_nome = f"{uuid.uuid4()}.{extensao}" 
+#         return os.path.join(self.subdir, novo_nome)
+
+# EXTENSOES_IMG_PERMITIDAS = ['png', 'jpeg', 'jpg', 'gif', 'jfif', 'webp', 'avif', 'svg']
 class Usuario(AbstractUser):
     TIPOS = [
         {"candidato", "Candidato"},
         {"empresa", "Empresa"}
         ]
 
-    foto_perfil = models.ImageField(upload_to="ftPerfil/", null=True, blank=True)
+    foto_perfil = models.ImageField(upload_to="ftPerfil/", null=True, blank=True) # Não implementado!
     username = models.CharField("Nome", max_length=100, unique=True, null=True)
     password = models.CharField("Senha", max_length=500, null=True)
     email = models.EmailField(unique=True, null=True)
@@ -19,11 +32,21 @@ class Usuario(AbstractUser):
 
     def __str__(self):
         return self.username
+    
+    # def clean(self):
+    #     if self.foto_perfil:
+    #         imgExtencao = self.foto_perfil.name.split('.')[-1].lower()
+    #         if imgExtencao not in EXTENSOES_IMG_PERMITIDAS: 
+    #             raise ValidationError(f"Extensão {imgExtencao} não permitida. As extensões permitidas são: {', '.join(EXTENSOES_IMG_PERMITIDAS)}.")
+    
+    # def save(self, *args, **kwargs):
+    #     self.clean()
+    #     super().save(*args, **kwargs)
 
 class Curriculo(models.Model):
-    ALLOWED_EXTENSIONS = ['pdf']
+    EXTENSOES_PERMITIDAS = ['pdf']
 
-    curriculos = models.FileField(upload_to='curriculos/', validators=[FileExtensionValidator(ALLOWED_EXTENSIONS)], null=True)
+    curriculos = models.FileField(upload_to='curriculos/', validators=[FileExtensionValidator(EXTENSOES_PERMITIDAS)], null=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="curriculos")
 
     def __str__(self):

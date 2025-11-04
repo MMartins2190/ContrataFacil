@@ -31,10 +31,8 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         if serializador.is_valid():
             senha_hash = make_password(serializador.validated_data["password"])
             serializador.validated_data["password"] = senha_hash
-            usuario = models.Usuario.objects.select_for_update().get(id=pk)
-            # usuario.
-            usuario.save(force_update=True)
-            return Response(serializador.validated_data, status.HTTP_201_CREATED)
+            serializador.save()
+            return Response(serializador.data, status.HTTP_200_OK)
         return Response(serializador.errors, status.HTTP_400_BAD_REQUEST)
 
 
@@ -83,17 +81,17 @@ class LoginViewset(viewsets.ViewSet):
             senha = serializador.validated_data["senha"]
             email = serializador.validated_data["email"]
            
-            user = authenticate(username=username, senha=senha, email=email)
-            if user is not None:
-                refresh_token = RefreshToken.for_user(user)
+            usuario = authenticate(username=username, senha=senha, email=email)
+            if usuario is not None:
+                refresh_token = RefreshToken.for_user(usuario)
                 access_token = refresh_token.access_token
                 body = {
-                    'access': str(access_token),
-                    'refresh': str(refresh_token),
+                    'access_token': str(access_token),
+                    'refresh_token': str(refresh_token),
                     'user': {
-                        'userId': user.id,
-                        'username': user.username,
-                        'email': user.email,
+                        'userId': usuario.id,
+                        'username': usuario.username,
+                        'email': usuario.email,
                     }
                 }
                 # Criando o obj Response e guardando tokens em cookies

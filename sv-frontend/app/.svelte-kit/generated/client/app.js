@@ -33,7 +33,7 @@ export const dictionary = {
 		"/enterprise-intro": [9],
 		"/enterprise-intro/[enterpriseId]": [10],
 		"/homepage": [11],
-		"/login": [12],
+		"/login": [~12],
 		"/opening-form": [~13],
 		"/openings": [14,[],[2]],
 		"/openings/[openingId]": [15,[],[2]],

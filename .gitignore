@@ -1,5 +1,7 @@
-<<<<<<< HEAD
-# Django
+# # Created by https://www.toptal.com/developers/gitignore/api/python,django
+# # Edit at https://www.toptal.com/developers/gitignore?templates=python,django
+
+### Django ###
 *.log
 *.pot
 *.pyc
@@ -7,68 +9,7 @@ __pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-media/
-
-# Static files (se o collectstatic gera essa pasta)
-staticfiles/
-
-# Ambiente virtual
-.venv/
-venv/
-ENV/
-env/
-env.bak/
-venv.bak/
-
-# Configurações e variáveis de ambiente
-.env
-*.env
-*.log
-
-# Distribuição / build
-build/
-dist/
-*.egg-info/
-.eggs/
-
-# Cache / testes
-htmlcov/
-.tox/
-.nox/
-.coverage
-.cache
-pytest_cache/
-
-# IDEs / editores
-.vscode/
-.idea/
-.spyderproject
-.spyproject
-.ropeproject
-
-# Sistema
-.DS_Store
-Thumbs.db
-
-# Outras ferramentas
-.mypy_cache/
-.pyre/
-.pytype/
-.ruff_cache/
-cython_debug/
-=======
-# # Created by https://www.toptal.com/developers/gitignore/api/python,django
-# # Edit at https://www.toptal.com/developers/gitignore?templates=python,django
-
-# ### Django ###
-# *.log
-# *.pot
-# *.pyc
-# __pycache__/
-# local_settings.py
-# db.sqlite3
-# db.sqlite3-journal
-# media
+media
 
 # # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # # in your Git repository. Update and uncomment the following line accordingly.
@@ -191,13 +132,13 @@ cython_debug/
 # *.sage.py
 
 # # Environments
-.env
+# .env
 .venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+# env/
+# venv/
+# ENV/
+# env.bak/
+# venv.bak/
 
 # # Spyder project settings
 # .spyderproject
@@ -348,4 +289,3 @@ venv.bak/
 # # # Vite
 # # vite.config.js.timestamp-*
 # # vite.config.ts.timestamp-*
->>>>>>> 6c897369b777a41cc7806c5a7b5d267a36032007
