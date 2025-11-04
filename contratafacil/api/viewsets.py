@@ -86,8 +86,8 @@ class LoginViewset(viewsets.ViewSet):
                 refresh_token = RefreshToken.for_user(usuario)
                 access_token = refresh_token.access_token
                 body = {
-                    'access': str(access_token),
-                    'refresh': str(refresh_token),
+                    'access_token': str(access_token),
+                    'refresh_token': str(refresh_token),
                     'user': {
                         'userId': usuario.id,
                         'username': usuario.username,
