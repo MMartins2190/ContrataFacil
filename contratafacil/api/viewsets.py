@@ -84,22 +84,6 @@ class LoginViewSet(viewsets.ViewSet):
            
             usuario = authenticate(username=username, senha=senha, email=email)
             if usuario is not None:
-                # backend = CustomBackend
-                print(login(request, usuario))
-                response = Response("Autenticado.", status.HTTP_200_OK)
-                return response
+                return Response("Autenticado", status.HTTP_200_OK)
             return Response(f"Falha na autenticação, verifique suas credenciais", status=status.HTTP_400_BAD_REQUEST) 
         return Response(serializador.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-class LogoutViewSet(viewsets.ViewSet):
-    permission_classes = [AllowAny]
-    def create(self, request):
-        logout(request)
-        return Response("Saiu", status.HTTP_200_OK)
-
-# Pegar um token contra Cross-Site Request Forgery 🤗
-class CSRFView(APIView):
-    permission_classes = [AllowAny]
-    def get(self, request):
-        token = get_token(request)
-        return Response(token, status.HTTP_200_OK)

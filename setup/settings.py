@@ -65,6 +65,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True # mude para o deploy
+CORS_ALLOW_CREDENTIALS = True # Necessário para cookies, não estamos usando
 
 ROOT_URLCONF = 'setup.urls'
 
