@@ -1,7 +1,9 @@
 from rest_framework import viewsets, status
+from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from django.middleware.csrf import get_token
 from contratafacil import models
 from contratafacil.api import serializers
 from drf_yasg.utils import swagger_auto_schema
@@ -71,7 +73,7 @@ class EmpresaViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.EmpresaSerializer
     permission_classes = [AllowAny]
 
-class LoginViewset(viewsets.ViewSet):
+class LoginViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
     def create(self, request):
         serializador = serializers.LoginSerializer(data=request.data)
@@ -89,8 +91,15 @@ class LoginViewset(viewsets.ViewSet):
             return Response(f"Falha na autenticação, verifique suas credenciais", status=status.HTTP_400_BAD_REQUEST) 
         return Response(serializador.errors, status=status.HTTP_400_BAD_REQUEST)
     
-class LogoutViewset(viewsets.ViewSet):
+class LogoutViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
     def create(self, request):
         logout(request)
         return Response("Saiu", status.HTTP_200_OK)
+
+# Pegar um token contra Cross-Site Request Forgery 🤗
+class CSRFView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        token = get_token(request)
+        return Response(token, status.HTTP_200_OK)
