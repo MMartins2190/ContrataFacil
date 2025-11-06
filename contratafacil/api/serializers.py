@@ -1,12 +1,24 @@
 from rest_framework import serializers
 from contratafacil import models
+from django.contrib.auth.hashers import make_password
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
     class Meta:
         model = models.Usuario
         fields = ["foto_perfil", "username", "password", "email",
-                  "cpf", "plano_pago", "tipo_de_usuario"]
+                  "cpf", "telephone"]
+        read_only_fields = ["id"]
+        
+        def create(self, validated_data):
+            validated_data["password"] = make_password(validated_data["password"])
+            return super().create(validated_data)
+        
+        def update(self, instance, validated_data):
+            if 'password' in validated_data:
+                validated_data['password'] = make_password(validated_data['password'])
+            return super().update(instance, validated_data)
 
 # 🔄 Agora trabalha com imagem
 class CurriculoSerializer(serializers.ModelSerializer):
@@ -38,5 +50,5 @@ class EmpresaSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=100, default=None)
-    senha = serializers.CharField(write_only=True)
+    password = serializers.CharField(write_only=True)
     email = serializers.EmailField(default=None)

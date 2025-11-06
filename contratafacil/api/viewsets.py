@@ -18,25 +18,6 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.UsuarioSerializer
     permission_classes = [AllowAny]
 
-    def create(self, request):
-        serializador = serializers.UsuarioSerializer(data=request.data)
-        if serializador.is_valid():
-            senha_hash = make_password(serializador.validated_data["password"])
-            serializador.validated_data["password"] = senha_hash
-            models.Usuario.objects.create(**serializador.validated_data)
-            return Response(serializador.validated_data, status.HTTP_201_CREATED)
-        return Response(serializador.errors, status.HTTP_400_BAD_REQUEST)
-    
-    def update(self, request, pk=None):
-        serializador = serializers.UsuarioSerializer(data=request.data)
-        if serializador.is_valid():
-            senha_hash = make_password(serializador.validated_data["password"])
-            serializador.validated_data["password"] = senha_hash
-            serializador.save()
-            return Response(serializador.data, status.HTTP_200_OK)
-        return Response(serializador.errors, status.HTTP_400_BAD_REQUEST)
-
-
     @swagger_auto_schema(
         operation_description="Lista os currículos de um usuário",
         responses={200: serializers.CurriculoSerializer(many=True)}
@@ -59,7 +40,7 @@ class CurriculoViewSet(viewsets.ModelViewSet):
 class VagaViewSet(viewsets.ModelViewSet):
     queryset = models.Vaga.objects.all()
     serializer_class = serializers.VagaSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 
 class CandidaturaViewSet(viewsets.ModelViewSet):
@@ -79,10 +60,10 @@ class LoginViewSet(viewsets.ViewSet):
         serializador = serializers.LoginSerializer(data=request.data)
         if serializador.is_valid():
             username = serializador.validated_data["username"]
-            senha = serializador.validated_data["senha"]
+            password = serializador.validated_data["password"]
             email = serializador.validated_data["email"]
            
-            usuario = authenticate(username=username, senha=senha, email=email)
+            usuario = authenticate(username=username, password=password, email=email)
             if usuario is not None:
                 return Response("Autenticado", status.HTTP_200_OK)
             return Response(f"Falha na autenticação, verifique suas credenciais", status=status.HTTP_400_BAD_REQUEST) 

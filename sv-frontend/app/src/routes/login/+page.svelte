@@ -1,16 +1,15 @@
 <script>
     import { enhance } from "$app/forms";
+    import Header from "$lib/components/header.svelte";
 </script>
 
 <title>Login</title>
 
-<header>
-    <h1 style:font-weight=600>ContrataFácil</h1>
-</header>
+<Header />
 <main>
     <div class="start-column"></div>
     <div class="mid-column">
-        <h1 style:font-weight=600 style:justify-self=center>Entrar no ContrataFácil</h1>
+        <h1>Entrar no ContrataFácil</h1>
         
             <form method="POST" class="login-container" use:enhance>
                 <div class="field">
@@ -33,12 +32,12 @@
         
         <div class="sign-container">
             <h3 class="no-account">Não possui uma conta?</h3>
-            <button class="sr-blue-btn"
+            <a href="/signin" class="sr-blue-btn"
             style:padding="0.5rem 3rem"
             style:border-radius="20px"
             style:margin-top="auto"
             style:border="1px solid black"
-            >Criar uma conta</button>
+            >Criar uma conta</a>
         </div>
         <div class="empty-space"></div>
     </div>
@@ -46,9 +45,9 @@
 </main>
 
 <style>
-    header{
-        padding: 1rem;
-        height: 10vh;
+    h1 {
+        font-weight: 600;
+        justify-self: center;
     }
 
     main{
@@ -58,7 +57,6 @@
     }
     
     .mid-column{
-        background-color: rgba(0, 100, 0, 0.2);
         display: grid;
         grid-template-rows: 1fr 6fr 4fr 1fr;
         gap: 1rem;
@@ -72,7 +70,7 @@
         border-radius: 10px;
     }
 
-    label, input, button{
+    label, input, a{
         font: inherit;
     }
 
@@ -83,6 +81,7 @@
     input[type="text"], input[type="password"]{
         width: 100%;
         height: 5ch;
+        padding: 1ch;
         border-radius: 10px;
         margin-top: 0.5ch;
         border: 1px solid black;

@@ -1,54 +1,47 @@
+<!--
+    - Botão ver senha
+    - Refazer models para incluir esses campos
+    - Implementar botão de selecionar área de atuação
+-->
+
+<script>
+    import { enhance } from "$app/forms";
+    import Header from "$lib/components/header.svelte";
+</script>
+
 <title>Cadastro</title>
 
-<header>
-    <h1 style:font-weight=600>ContrataFácil</h1>
-</header>
-
 <div class="all">
-    <h1 
-    style:font-weight=600
-    style:margin-bottom=1rem
-    >Cadastrar</h1>
-        <form method="post">
+    <h1>Cadastrar</h1>
+        <form method="post" use:enhance>
                 <div class="field-item">
                     <label for="nameid">Nome Completo:</label>
-                    <input type="text" id="nameid" required>
+                    <input type="text" id="nameid" name="username" required>
                 </div>
                 <div class="field-item">
                     <label for="emailid">E-mail:</label>
-                    <input type="email" id="emailid" required>
+                    <input type="email" id="emailid" name="email" required>
                 </div>
                 <div class="field-item">
                     <label for="passwordid">Senha:</label>
-                    <input type="password" id="passwordid" required>
+                    <input type="password" id="passwordid" name="password" required>
                 </div>
-                <div class="field-item">
-                    <label for="password-again">Confirmar Senha</label>
-                    <input type="password" id="password-again" required>
-                </div>
-                <div class="field-item">
+                <!-- <div class="field-item">
                     <label for="acting-field">Área de Atuação</label>
                     <div class="acting-field-input">
                         <div style:position=relative>
                             <input type="text" id="acting-field">
-                            <button id="select-acting-field" class="pr-blue-btn" type="button"
-                            style:height=3ch
-                            style:position=absolute
-                            style:right=0
-                            style:background-color=darkslateblue
-                            style:color=white
-                            style:border-radius="0 20px 20px 0"
-                            >^</button>
+                            <button id="select-acting-field" class="pr-blue-btn select-btn" type="button">Sel</button>
                         </div>
                     </div>
+                </div> -->
+                <div class="field-item">
+                    <label for="cpfid">CPF:</label>
+                    <input type="text" id="cpfid" name="cpf" required>
                 </div>
                 <div class="field-item">
-                    <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" required>
-                </div>
-                <div class="field-item">
-                    <label for="telephone">Telefone:</label>
-                    <input type="text" id="telephone" required>
+                    <label for="telephoneid">Telefone:</label>
+                    <input type="text" id="telephoneid" name="telephone" required>
                 </div>
                 <div class="submit">
                     <input class="sr-blue-btn" type="submit" value="Criar"
@@ -68,7 +61,14 @@
         align-items: center;
     }
 
+    h1 {
+        font-weight: 600;
+        margin: 0 0 1rem 0;
+    }
+
     form{
+        align-self: center;
+        justify-self: center;
         height: 75%;
         display: flex;
         flex-direction: column;
@@ -85,11 +85,17 @@
         flex-direction: column;
     }
 
-    input[required], #acting-field{
+    input[required] {
         height: 3ch;
         border-radius: 10px;
         border: 1px solid black;
     }
+
+    /* .select-btn {
+        position: absolute;
+        background-color: blue;
+        border-radius: 0 100vw 100vw 0;
+    } */
 
     .submit{
         height: 2.5rem;

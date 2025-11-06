@@ -38,7 +38,7 @@ export const dictionary = {
 		"/openings": [14,[],[2]],
 		"/openings/[openingId]": [15,[],[2]],
 		"/profile": [16],
-		"/signin": [17]
+		"/signin": [~17]
 	};
 
 export const hooks = {
