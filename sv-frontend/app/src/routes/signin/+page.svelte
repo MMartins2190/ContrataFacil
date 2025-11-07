@@ -1,11 +1,10 @@
 <!--
-    - Botão ver senha
     - Refazer models para incluir esses campos
     - Implementar botão de selecionar área de atuação
 -->
 
 <script>
-    import { enhance } from "$app/forms";
+    import { redirect } from "@sveltejs/kit";
     import Header from "$lib/components/header.svelte";
 
     const urlString = "http://127.0.0.1:8000/usuarios/";
@@ -27,13 +26,19 @@
     async function registerUser(event) {
         event.preventDefault();
         const data = new FormData(event.currentTarget, event.submitter);
-        const resp = fetch(urlString, {
+        const resp = await fetch(urlString, {
             method: "POST",
             body: data,
         })
         .then(res=>res.json())
-        .then(res=>console.log(res))
+        .then(res=>{
+            console.log(res);
+            return "OK";
+        })
         .catch(err=>console.warn(err));
+        if (resp === "OK") {
+            location.href = "/";
+        }
     }
 </script>
 
