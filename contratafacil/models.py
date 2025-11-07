@@ -22,7 +22,7 @@ class Usuario(AbstractUser):
         {"empresa", "Empresa"}
         ]
 
-    foto_perfil = models.ImageField(upload_to=RenomearImagem("ftPerfil/"), null=True, blank=True) # Não implementado!
+    foto_perfil = models.ImageField(upload_to=RenomearImagem("ftPerfil/"), null=True, blank=True)
     username = models.CharField("Nome", max_length=100, unique=True, null=True)
     password = models.CharField("Senha", max_length=500, null=True)
     email = models.EmailField(unique=True, null=True)
