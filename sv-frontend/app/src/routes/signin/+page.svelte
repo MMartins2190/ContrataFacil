@@ -37,7 +37,7 @@
         })
         .catch(err=>console.warn(err));
         if (resp === "OK") {
-            location.href = "/";
+            location.href = "/homepage";
         }
     }
 </script>

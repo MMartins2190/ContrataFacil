@@ -13,6 +13,6 @@ export const actions = {
         .then(res => "OK");
 
         if (loginAttempt === "OK") {
-            redirect(303, "/");
+            redirect(303, "/homepage");
         }
 }}
