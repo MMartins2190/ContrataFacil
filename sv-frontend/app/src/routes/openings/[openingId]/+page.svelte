@@ -1,5 +1,5 @@
 <script>
-    import CurriculumItem from "$lib/components/curriculum-item.svelte";
+    import CurriculumItem from "$lib/components/enterprise-curriculum.svelte";
     import Header from "$lib/components/header.svelte";
 
     let { data } = $props();

@@ -27,6 +27,9 @@
     { label: 'Sobre', href: '/about' }
   ];
 </script>
+
+<title>Home</title>
+
 <div class="page">
   <Header />
   

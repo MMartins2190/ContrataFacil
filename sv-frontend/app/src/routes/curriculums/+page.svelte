@@ -1,5 +1,6 @@
 <script>
-    import CurriculumItem from '$lib/components/curriculum-item.svelte';
+    import EnterpriseCurriculumItem from '$lib/components/enterprise-curriculum.svelte';
+    import CandidateCurriculumItem from '$lib/components/candidate-curriculum.svelte';
     import Header from "$lib/components/header.svelte";
 
     let { data } = $props();
@@ -10,22 +11,23 @@
 <Header />
 
 <main>
-    <h1>Currículos:</h1>
-    <div class="curriculums">
-        <ul class="curriculums-list">
+    <h1>Meus Currículos:</h1>
+    {#if data.curriculums.length === 0}
+        <h2>Insira um currículo!</h2>
+    {:else}
+        <div class="curriculums-candidate">
             {#each data.curriculums as curriculum}
-                <CurriculumItem
-                id={curriculum.id}
-                personName={curriculum.usuario.nome}
-                cpf={curriculum.usuario.cpf}
-                phoneNumber={curriculum.usuario.telefone}
-                />
+                <CandidateCurriculumItem curriculumFile={curriculum.curriculo}/>
             {/each}
-        </ul>
-    </div>
+        </div>
+    {/if}
 </main>
 
 <style>
+    main {
+        min-height: 90vh;
+    }
+
     h1 {
         display: inline-block;
         font-size: 3rem;
@@ -34,5 +36,18 @@
         color: white;
         padding: 1rem;
         border-radius: 30px;
+    }
+
+    h2 {
+        font-size: 5ch;
+        /* proper styling */
+    }
+
+    .curriculums-candidate {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(auto, 200px);
+        gap: 1rem;
+        margin: 2rem;
     }
 </style>
