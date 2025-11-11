@@ -10,7 +10,7 @@
     '/images/carousel-3.jpg'
   ];
   
-  let currentSlide = 0;
+  let currentSlide = $state(0);
   
   function nextSlide() {
     currentSlide = (currentSlide + 1) % carouselImages.length;
@@ -21,10 +21,10 @@
   }
   
   const navLinks = [
-    { label: 'Vagas', href: '/vagas' },
-    { label: 'Currículos', href: '/curriculos' },
-    { label: 'Empresas', href: '/empresas' },
-    { label: 'Sobre', href: '/sobre' }
+    { label: 'Vagas', href: '/openings' },
+    { label: 'Currículos', href: '/curriculums' },
+    { label: 'Empresas', href: '/enterprise-for' },
+    { label: 'Sobre', href: '/about' }
   ];
 </script>
 <div class="page">
@@ -32,7 +32,7 @@
   
   <!-- Carousel Section -->
   <section class="carousel">
-    <button class="carousel-button prev" on:click={prevSlide} aria-label="Previous slide">
+    <button class="carousel-button prev" onclick={prevSlide} aria-label="Previous slide">
       ‹
     </button>
     
@@ -41,7 +41,7 @@
       <p class="carousel-caption">Carrossel de imagens genéricas sobre trabalho</p>
     </div>
     
-    <button class="carousel-button next" on:click={nextSlide} aria-label="Next slide">
+    <button class="carousel-button next" onclick={nextSlide} aria-label="Next slide">
       ›
     </button>
   </section>
@@ -50,9 +50,14 @@
   <section class="featured-openings">
     <h2>Vagas em destaque</h2>
     
-    <div class="openings-grid">
-      {#each data.featuredOpenings as opening (opening.id)}
-        <Opening {opening} />
+    <div class="openings-display">
+      {#each data.openings as opening}
+        <Opening 
+          id={opening.id}
+          titulo={opening.titulo}
+          salario={opening.salario}
+          requisitos={opening.requisitos} 
+          />
       {/each}
     </div>
   </section>
@@ -70,7 +75,6 @@
 <style>
   .page {
     min-height: 100vh;
-    background-color: #f5f5f5;
   }
   
   /* Carousel Styles */
@@ -138,46 +142,22 @@
     right: 20px;
   }
   
-  /* Featured Openings Section */
-  .featured-openings {
-    padding: 2rem 1rem;
-    background: white;
-  }
-  
   .featured-openings h2 {
     text-align: center;
     font-size: 1.8rem;
-    margin-bottom: 2rem;
+    margin: 2rem 0 1rem 0;
     font-weight: bold;
   }
   
-  .openings-grid {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(280px, 1fr);
-    gap: 1rem;
+  .openings-display {
+    height: 300px;
+    background: linear-gradient(#3d5a85, #4a6fa5);
+    display: flex;
+    flex-direction: column;
     overflow-x: auto;
-    padding: 1rem 0;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .openings-grid::-webkit-scrollbar {
-    height: 8px;
-  }
-  
-  .openings-grid::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-  }
-  
-  .openings-grid::-webkit-scrollbar-thumb {
-    background: #4a6fa5;
-    border-radius: 4px;
-  }
-  
-  .openings-grid::-webkit-scrollbar-thumb:hover {
-    background: #3d5a85;
+    flex-shrink: none;
+    flex-wrap: wrap;
+    scrollbar-width: none;
   }
   
   /* Bottom Navigation */
@@ -214,11 +194,7 @@
       height: 400px;
     }
     
-    .featured-openings {
-      padding: 3rem 2rem;
-    }
-    
-    .openings-grid {
+    .openings-display {
       grid-auto-columns: minmax(320px, 1fr);
     }
     
@@ -228,7 +204,7 @@
   }
   
   @media (max-width: 767px) {
-    .openings-grid {
+    .openings-display {
       grid-auto-columns: minmax(240px, 1fr);
     }
     

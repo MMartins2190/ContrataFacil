@@ -2,7 +2,6 @@
     import CurriculumItem from '$lib/components/curriculum-item.svelte';
     import Header from "$lib/components/header.svelte";
 
-    //User data and curriculum data
     let { data } = $props();
 </script>
 

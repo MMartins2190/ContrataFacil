@@ -1,26 +1,26 @@
 <script>
     let {
         id = "0",
-        title = "Vaga00",
-        salary = "0000,00",
-        description = "Não há descrição",
-        requisites = "Nenhum Requisito foi posto para essa vaga",
+        titulo = "Vaga00",
+        salario = "0000,00",
+        descricao = "Não há descrição",
+        requisitos = "Nenhum Requisito foi posto para essa vaga",
     } = $props();
 
-    const formattedSalary = `R$ ${salary}`;
+    const formattedSalary = `R$ ${salario}`;
 </script>
 
 <div class="vacancy-item">
-    <a href="/openings/{id}/" aria-label="Ver detalhes da vaga: {title}" class="vacancy-link">
+    <a href="/openings/{id}/" aria-label="Ver detalhes da vaga: {titulo}" class="vacancy-link">
         <div class="vacancy-header">
-            <h3 class="vacancy-title">{title}</h3>
+            <h3 class="vacancy-title">{titulo}</h3>
             <div class="salary-badge">{formattedSalary}</div>
         </div>
         
         <div class="vacancy-content">
             <div class="requisites-section">
-                <h4 class="section-title">Descrição</h4>
-                <p class="requisites-text">{description}</p>
+                <h4 class="section-title">Requisitos</h4>
+                <p class="requisites-text">{requisitos}</p>
             </div>
         </div>
     </a>
@@ -37,10 +37,10 @@
         position: relative;
         display: flex;
         flex-direction: column;
+        height: 300px;
         background: white;
         border: 2px solid #e1e7f5;
         border-radius: 20px;
-        height: 300px;
         margin: 1rem;
         overflow: hidden;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

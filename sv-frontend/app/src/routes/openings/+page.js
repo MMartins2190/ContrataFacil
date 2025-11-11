@@ -2,7 +2,7 @@ const apiUrl = "http://127.0.0.1:8000/vagas/";
 
 export async function load({ fetch }){
     const openings = async () => {
-            const fetchOpenings = await fetch(apiUrl, requestObj);
+            const fetchOpenings = await fetch(apiUrl);
             return await fetchOpenings.json();
     }
 
