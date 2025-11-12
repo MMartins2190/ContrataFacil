@@ -16,7 +16,7 @@ class RenomearImagem(object):
         return os.path.join(self.subdir, novo_nome)
 
 @deconstructible 
-class RenomearArquivoTexto(object):
+class RenomearDoc(object):
     def __init__(self, subdir='curriculos/'): 
         self.subdir = subdir
 
@@ -39,7 +39,6 @@ class Usuario(AbstractUser):
     cpf = models.CharField(max_length=11, unique=True)
     telephone = models.CharField(max_length=15, null=True, blank=True)
     ##### Temporariamente removidos para testes.
-    # plano_pago = models.BooleanField(default=False)
     # tipo_de_usuario = models.CharField(choices=TIPOS, null=True)
 
     def __str__(self):
@@ -55,12 +54,13 @@ class Usuario(AbstractUser):
         self.clean()
         super().save(*args, **kwargs)
 
+
+EXTENSOES_DOC_PERMITIDAS = ['pdf']
 class Curriculo(models.Model):
-    EXTENSOES_TEXTO_PERMITIDAS = ['pdf']
 
     curriculo = models.FileField(
-        upload_to=RenomearArquivoTexto('curriculos/'),
-        validators=[FileExtensionValidator(EXTENSOES_TEXTO_PERMITIDAS)],
+        upload_to=RenomearDoc('curriculos/'),
+        validators=[FileExtensionValidator(EXTENSOES_DOC_PERMITIDAS)],
         null=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="curriculos")
 
@@ -69,14 +69,22 @@ class Curriculo(models.Model):
     
     def clean(self):
         if self.curriculo:
-            arqExtencao = self.foto_perfil.name.split('.')[-1].lower()
-            if arqExtencao not in EXTENSOES_IMG_PERMITIDAS: 
+            arqExtencao = self.curriculo.name.split('.')[-1].lower()
+            if arqExtencao not in EXTENSOES_DOC_PERMITIDAS: 
                 raise ValidationError(f"Extensão {arqExtencao} não permitida. As extensões permitidas são: {', '.join(EXTENSOES_IMG_PERMITIDAS)}.")
     
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
 
+# WIP
+# class Candidato(models.Model):
+#     AREAS = []
+
+#     plano_pago = models.BooleanField(default=False)
+#     area_de_atuacao = models.CharField(choices=AREAS, null=True, blank=True)
+#     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+#     curriculos = models.ManyToManyField(Curriculo, related_name="Currículos")
 
 class Vaga(models.Model):
     titulo = models.CharField(max_length=255)
