@@ -24,12 +24,6 @@
             </div>
         </div>
     </a>
-   
-    <div class="overlay">
-        <button class="submit-cv-btn" type="button">
-            Enviar Currículo
-        </button>
-    </div>
 </div>
 
 <style>
@@ -51,10 +45,6 @@
         border-color: #5175b8;
         box-shadow: 0 12px 24px rgba(81, 117, 184, 0.2);
         transform: translateY(-4px);
-    }
-
-    .vacancy-item:hover .overlay {
-        display: flex;
     }
 
     .vacancy-link {
@@ -119,20 +109,6 @@
         overflow: hidden;
     }
 
-    .overlay {
-        display: none;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        justify-content: center;
-        align-items: center;
-        height: 25%;
-        width: 100%;
-        background: rgba(81, 117, 184, 0.5);
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        animation: slideUp 0.3s ease-out;
-    }
-
     @keyframes slideUp {
         from {
             transform: translateY(100%);
@@ -142,28 +118,6 @@
             transform: translateY(0);
             opacity: 1;
         }
-    }
-
-    .submit-cv-btn {
-        cursor: pointer;
-        background: white;
-        color: #5175b8;
-        padding: 0.75rem 1.5rem;
-        border-radius: 25px;
-        font-weight: 600;
-        transition: all 0.2s ease;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .submit-cv-btn:hover {
-        background: #5175b8;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(81, 117, 184, 0.4);
-    }
-
-    .submit-cv-btn:active {
-        transform: translateY(0);
     }
 
     /* Responsive adjustments */
@@ -180,10 +134,6 @@
 
         .vacancy-title {
             font-size: 1.25rem;
-        }
-
-        .overlay {
-            height: 30%;
         }
     }
 </style>

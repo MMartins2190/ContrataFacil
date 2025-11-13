@@ -1,31 +1,31 @@
-const apiUrl = "http://127.0.0.1:8000/vagas/";
-const accessToken = "pee";
-const requestObj = {
-    headers: {
-        Authorization: `Bearer ${accessToken}`,
-    },
-    method: "GET"
-};
+const openingsUrl = "http://127.0.0.1:8000/vagas/";
+const curriculumsUrl = "http://127.0.0.1:8000/curriculos/";
+const candidaciesUrl = "http://127.0.0.1:8000/candidaturas/";
 
 export async function load({url, fetch}){
     const pathnameArray = url.pathname.split("/");
     const pathnameId = pathnameArray[2];
 
-    if (!isNaN(pathnameId) && pathnameId !== "0"){
-        const fetchData = await fetch(`${apiUrl}${pathnameId}/`, requestObj);
-        const openingsJSON = await fetchData.json();
-
-        console.log(openingsJSON);
-
+    if (!isNaN(pathnameId) && Number(pathnameId) !== 0){
+        async function openings() {
+            const fetchData = await fetch(`${openingsUrl}${pathnameId}/`);
+            const openingsJSON = await fetchData.json();
+    
+            console.log(openingsJSON);
+    
+            return {
+                title: openingsJSON.titulo,
+                // salary: openingsJSON.salario,
+                description: openingsJSON.descricao,
+                requisites: openingsJSON.requisitos,
+                boosted: openingsJSON.impulsionada,
+            }
+        }
         return {
-            title: openingsJSON.titulo,
-            // salary: openingsJSON.salario,
-            description: openingsJSON.descricao,
-            requisites: openingsJSON.requisitos,
-            boosted: openingsJSON.impulsionado,
+            openings: openings(), 
         }
     }
     else {
-        console.warn("Houve uma falha ao carregar este conteúdo");
+        console.warn("O identificador desse recurso não é um número válido");
     }
 }

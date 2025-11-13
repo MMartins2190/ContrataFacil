@@ -1,5 +1,5 @@
 <script>
-    import CurriculumItem from "$lib/components/enterprise-curriculum.svelte";
+    import CandidateCurriculumItem from "$lib/components/candidate-curriculum.svelte";
     import Header from "$lib/components/header.svelte";
 
     let { data } = $props();
@@ -43,7 +43,7 @@
           <span style:margin="0 0 0 auto">{candidacy.status}</span>
         </div>
         <ul>
-          <CurriculumItem {...curriculum}/>
+          <CandidateCurriculumItem {...curriculum}/>
         </ul>
       </div>
       {/if}

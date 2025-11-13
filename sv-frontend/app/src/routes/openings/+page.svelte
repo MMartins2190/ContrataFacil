@@ -13,48 +13,54 @@
 
 <title>Vagas</title>
 
-<Header/>
-
-<h1>Vagas</h1>
-
-<div class="list-vacancies">
-    <form onsubmit={searchOpenings} method="get">
-        <div class="search-field">
-            <label for="search-opening">Escolha uma vaga</label>
-            <input id="search-opening" type="text" name="searchOpening" placeholder="Digite uma vaga...">
-        </div>
-        <div class="search-field">
-            <label for="search-local">Defina um local</label>
-            <input id="search-local" type="text" name="searchLocal" placeholder="Digite um local...">
-        </div>
-        <div class="search-field">
-            <label for="search-salary">Escolha o salário</label>
-            <input id="search-salary" type="number" name="searchSalary" placeholder="Digite um salário...">
-        </div>
-        <div class="search-field">
-            <input class="pr-blue-btn" type="submit" value="Buscar">
-        </div>
-    </form>
-    <a href="/opening-form">Criar nova vaga</a>
-    {#if openingList.length === 0}
-        <h2>Não há nenhuma vaga disponível ¯\_(ツ)_/¯</h2>
-        {:else}
-        <div class="vacancies-data" id="vacancies-data">
-            {#each openingList as opening}
-                <Opening
-                    id={opening.id}
-                    titulo={opening.titulo}
-                    salario={opening.salario}
-                    requisitos={opening.requisitos}
-                />
-            {/each}
-        </div>
-    {/if}
+<div class="page">
+    <Header/>
+    
+    <h1>Vagas</h1>
+    
+    <div class="list-vacancies">
+        <form onsubmit={searchOpenings} method="get">
+            <div class="search-field">
+                <label for="search-opening">Escolha uma vaga</label>
+                <input id="search-opening" type="text" name="searchOpening" placeholder="Digite uma vaga...">
+            </div>
+            <div class="search-field">
+                <label for="search-local">Defina um local</label>
+                <input id="search-local" type="text" name="searchLocal" placeholder="Digite um local...">
+            </div>
+            <div class="search-field">
+                <label for="search-salary">Escolha o salário</label>
+                <input id="search-salary" type="number" name="searchSalary" placeholder="Digite um salário...">
+            </div>
+            <div class="search-field">
+                <input class="pr-blue-btn" type="submit" value="Buscar">
+            </div>
+        </form>
+        <a href="/opening-form">Criar nova vaga</a>
+        {#if openingList.length === 0}
+            <h2>Não há nenhuma vaga disponível ¯\_(ツ)_/¯</h2>
+            {:else}
+            <div class="vacancies-data" id="vacancies-data">
+                {#each openingList as opening}
+                    <Opening
+                        id={opening.id}
+                        titulo={opening.titulo}
+                        salario={opening.salario}
+                        requisitos={opening.requisitos}
+                    />
+                {/each}
+            </div>
+        {/if}
+    </div>
 </div>
 <style>
+    .page {
+        min-height: 90vh;
+    }
+
     h1 {
         font-weight: 700;
-        place-self: center;
+        text-align: center;
         margin: 2rem 0 0 0;
     }
 
@@ -65,7 +71,7 @@
     form{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        place-self: center;
+        align-self: center;
         font: inherit;
         background: rgb(217, 217, 217);
         border-radius: 20px;
@@ -79,7 +85,9 @@
         place-self: center;
     }
     
-    .list-vacancies{
+    .list-vacancies {
+        display: flex;
+        flex-direction: column;
         margin: 3rem 5rem;
     }
     .vacancies-data{
