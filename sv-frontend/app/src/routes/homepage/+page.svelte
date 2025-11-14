@@ -23,7 +23,7 @@
   const navLinks = [
     { label: 'Vagas', href: '/openings' },
     { label: 'Currículos', href: '/curriculums' },
-    { label: 'Empresas', href: '/enterprise-for' },
+    { label: 'Empresas', href: '/enterprise-intro' },
     { label: 'Sobre', href: '/about' }
   ];
 </script>

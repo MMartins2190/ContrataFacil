@@ -1,31 +1,56 @@
-const apiUrl = "http://127.0.0.1:8000/vagas/";
-const accessToken = "pee";
-const requestObj = {
-    headers: {
-        Authorization: `Bearer ${accessToken}`,
-    },
-    method: "GET"
-};
+const openingsUrl = "http://127.0.0.1:8000/vagas/";
+const curriculumsUrl = "http://127.0.0.1:8000/curriculos/";
+const candidaciesUrl = "http://127.0.0.1:8000/candidaturas/";
 
 export async function load({url, fetch}){
     const pathnameArray = url.pathname.split("/");
     const pathnameId = pathnameArray[2];
 
-    if (!isNaN(pathnameId) && pathnameId !== "0"){
-        const fetchData = await fetch(`${apiUrl}${pathnameId}/`, requestObj);
-        const openingsJSON = await fetchData.json();
+    if (!isNaN(pathnameId) && Number(pathnameId) > 0){
+        async function currentOpening() {
+            const fetchData = await fetch(`${openingsUrl}${pathnameId}/`);
+            const openingJSON = await fetchData.json();
+    
+            console.log(openingJSON);
+    
+            return {
+                title: openingJSON.titulo,
+                // salary: openingJSON.salario,
+                description: openingJSON.descricao,
+                requisites: openingJSON.requisitos,
+                boosted: openingJSON.impulsionada,
+            }
+        }
 
-        console.log(openingsJSON);
+        async function openings() {
+            const fetchData = await fetch(openingsUrl);
+            const openingsJSON = await fetchData.json();
+
+            return openingsJSON;
+        }
+
+        async function curriculums() {
+            const fetchData = await fetch(curriculumsUrl);
+            const curriculumsJSON = await fetchData.json();
+
+            return curriculumsJSON;
+        }
+
+        async function candidacies() {
+            const fetchData = await fetch(candidaciesUrl);
+            const candidaciesJSON = await fetchData.json();
+
+            return candidaciesJSON;
+        }
 
         return {
-            title: openingsJSON.titulo,
-            // salary: openingsJSON.salario,
-            description: openingsJSON.descricao,
-            requisites: openingsJSON.requisitos,
-            boosted: openingsJSON.impulsionado,
+            currentOpening: await currentOpening(),
+            openings: await openings(),
+            curriculums: await curriculums(),
+            candidacies: await candidacies(), 
         }
     }
     else {
-        console.warn("Houve uma falha ao carregar este conteúdo");
+        console.warn("O identificador desse recurso não é um número válido");
     }
 }
