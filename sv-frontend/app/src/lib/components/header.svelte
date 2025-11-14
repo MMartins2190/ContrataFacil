@@ -8,9 +8,7 @@
         <a href="/curriculums" class={["nav-item", "nav-link"]}>Currículos</a>
         <a href="/enterprise-intro" class={["nav-item", "nav-link"]}>Para Empresas</a>
         <a href="/about" class={["nav-item", "nav-link"]}>Sobre</a>
-        <div class="user">
-            <a href="/login" class="pr-blue-btn nav-item login-btn">Entrar</a>
-        </div>
+        <a href="/login" class="nav-item nav-link">Perfil</a>
     </nav>
 </header>
 
@@ -41,14 +39,4 @@
     .nav-item{
         margin: 0 1.5vw 0 0;
     }
-
-    .login-btn{
-        margin-left: 0.5vw;
-        padding: 0.2rem 0.75rem;
-        border-radius: 3px;
-    }
-
-    /* .currentPage{
-        border-bottom: 2px solid rgb(81, 117, 184);
-    } */
 </style>

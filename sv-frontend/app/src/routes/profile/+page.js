@@ -1,32 +1,45 @@
-const apiUrl = "http://127.0.0.1:8000/usuarios/";
-const accessToken = "pee";
-const requestObj = {
-    headers: {
-        Authorization: `Bearer ${accessToken}`,
-    },
-    method: "GET"
-};
+const usersUrl = "http://127.0.0.1:8000/usuarios/";
+const openingsUrl = "http://127.0.0.1:8000/vagas/";
+const candidaciesUrl = "http://127.0.0.1:8000/candidaturas/";
 
 export async function load({url, fetch}){
-    const pathnameArray = url.pathname.split("/");
-    // const pathnameId = pathnameArray[2];
-    const pathnameId = 1;
+    const pathnameId = 1; // Definido por cookie;
 
-    if (!isNaN(pathnameId) && pathnameId !== "0"){
-        const fetchData = await fetch(`${apiUrl}${pathnameId}/`, requestObj);
-        const dataJSON = await fetchData.json();
+    if (!isNaN(Number(pathnameId)) && Number(pathnameId) > 0) {
+        async function usuario() {
+            const fetchData = await fetch(`${usersUrl}${pathnameId}/`);
+            const userJSON = await fetchData.json();
+    
+            return {
+                profilePicture: userJSON.foto_perfil,
+                username: userJSON.username,
+                email: userJSON.email,
+                cpf: userJSON.cpf,
+                telephone: userJSON.telephone,
+            }
+        }
 
-        console.log(dataJSON);
+        async function openings() {
+            const fetchData = await fetch(openingsUrl);
+            const openingsJSON = await fetchData.json();
+
+            return openingsJSON;
+        }
+
+        async function candidacies() {
+            const fetchData = await fetch(candidaciesUrl);
+            const candidaciesJSON = await fetchData.json();
+
+            return candidaciesJSON;
+        }
 
         return {
-            profilePicture: dataJSON.title,
-            name: "Faraday Oersted",
-            password: dataJSON.body,
-            email: "ligma",
-            cpf: "000.000.000-00-X",
-        }
+            user: await usuario(),
+            openings: await openings(),
+            candidacies: await candidacies(),
+        };
     }
     else {
-        console.log("n");
+        console.log("Identificador inválido");
     }
 }

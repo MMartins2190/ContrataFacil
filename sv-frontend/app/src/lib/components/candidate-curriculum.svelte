@@ -2,10 +2,16 @@
   let {
     id = 0,
     curriculo = null,
+    defaultAction = true,
   } = $props();
+
+  function noDefault(e) {
+    e.preventDefault();
+  }
+
 </script>
 
-<a href="/curriculums/{id}" class="curriculo-card">
+<a href="/curriculums/{id}" class="curriculo-card" onclick={defaultAction ? "" : noDefault}>
   <div class="card-content">
     <div class="file-icon">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

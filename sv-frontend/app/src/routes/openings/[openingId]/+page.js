@@ -6,23 +6,48 @@ export async function load({url, fetch}){
     const pathnameArray = url.pathname.split("/");
     const pathnameId = pathnameArray[2];
 
-    if (!isNaN(pathnameId) && Number(pathnameId) !== 0){
-        async function openings() {
+    if (!isNaN(pathnameId) && Number(pathnameId) > 0){
+        async function currentOpening() {
             const fetchData = await fetch(`${openingsUrl}${pathnameId}/`);
-            const openingsJSON = await fetchData.json();
+            const openingJSON = await fetchData.json();
     
-            console.log(openingsJSON);
+            console.log(openingJSON);
     
             return {
-                title: openingsJSON.titulo,
-                // salary: openingsJSON.salario,
-                description: openingsJSON.descricao,
-                requisites: openingsJSON.requisitos,
-                boosted: openingsJSON.impulsionada,
+                title: openingJSON.titulo,
+                // salary: openingJSON.salario,
+                description: openingJSON.descricao,
+                requisites: openingJSON.requisitos,
+                boosted: openingJSON.impulsionada,
             }
         }
+
+        async function openings() {
+            const fetchData = await fetch(openingsUrl);
+            const openingsJSON = await fetchData.json();
+
+            return openingsJSON;
+        }
+
+        async function curriculums() {
+            const fetchData = await fetch(curriculumsUrl);
+            const curriculumsJSON = await fetchData.json();
+
+            return curriculumsJSON;
+        }
+
+        async function candidacies() {
+            const fetchData = await fetch(candidaciesUrl);
+            const candidaciesJSON = await fetchData.json();
+
+            return candidaciesJSON;
+        }
+
         return {
-            openings: openings(), 
+            currentOpening: await currentOpening(),
+            openings: await openings(),
+            curriculums: await curriculums(),
+            candidacies: await candidacies(), 
         }
     }
     else {

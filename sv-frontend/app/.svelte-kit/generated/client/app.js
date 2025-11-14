@@ -26,7 +26,7 @@ export const dictionary = {
 		"/": [3],
 		"/about": [4],
 		"/curriculums": [5],
-		"/curriculums/[curriculumId]": [~6],
+		"/curriculums/[curriculumId]": [6],
 		"/enterprise-form": [~7],
 		"/enterprise-intro": [8],
 		"/enterprise-intro/[enterpriseId]": [9],
