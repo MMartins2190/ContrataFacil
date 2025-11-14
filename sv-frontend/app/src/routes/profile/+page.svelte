@@ -27,21 +27,23 @@
     <!-- Profile Section -->
     <section class="profile-section">
       <div class="profile-info">
-        <div class="profile-picture">
-          <div class="avatar-circle">
-            {#if profilePicture}
-              <img src={profilePicture} alt="Foto de perfil" />
-            {:else}
-              <span class="avatar-placeholder">{username.charAt(0).toUpperCase()}</span>
-            {/if}
-          </div>
-          
-          <button class="edit-button" onclick={handleEdit} aria-label="Editar perfil">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M18.5 2.50001C18.8978 2.10219 19.4374 1.87869 20 1.87869C20.5626 1.87869 21.1022 2.10219 21.5 2.50001C21.8978 2.89784 22.1213 3.4374 22.1213 4.00001C22.1213 4.56262 21.8978 5.10219 21.5 5.50001L12 15L8 16L9 12L18.5 2.50001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+        <div class="left-section">
+            <div class="profile-picture">
+              <div class="avatar-circle">
+                {#if profilePicture}
+                  <img src={profilePicture} alt="Foto de perfil" />
+                {:else}
+                  <span class="avatar-placeholder">{username.charAt(0).toUpperCase()}</span>
+                {/if}
+              </div>
+              
+              <button class="edit-button" onclick={handleEdit} aria-label="Editar perfil">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M18.5 2.50001C18.8978 2.10219 19.4374 1.87869 20 1.87869C20.5626 1.87869 21.1022 2.10219 21.5 2.50001C21.8978 2.89784 22.1213 3.4374 22.1213 4.00001C22.1213 4.56262 21.8978 5.10219 21.5 5.50001L12 15L8 16L9 12L18.5 2.50001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
         </div>
         
         <div class="user-details">
@@ -68,7 +70,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="area-tag">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -112,15 +114,13 @@
       <div class="job-listings">
         {#each data.openings as opening}
           <div class="job-card">
-            <div class="job-card-content">
               <Opening
                 id={opening.id}
                 titulo={opening.titulo}
                 salario={opening.salario}
                 requisitos={opening.requisitos}
+                propStatus="Atenção!"
               />
-            </div>
-            <div class="job-status">Em andamento</div>
           </div>
         {/each}
       </div>
@@ -129,6 +129,9 @@
 </div>
 
 <style>
+   /****************
+        page
+   *****************/
   .page {
     min-height: 100vh;
     background-color: #f5f5f5;
@@ -303,25 +306,9 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
-  
+
   .job-card {
-    border: 2px solid #5b7bb4;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  
-  .job-card-content {
-    background: white;
-    padding: 1.5rem;
-    min-height: 200px;
-  }
-  
-  .job-status {
-    background: #c4c4c4;
-    padding: 0.75rem;
-    text-align: center;
-    font-size: 0.95rem;
-    color: #333;
+    position: relative;
   }
   
   @media (max-width: 1024px) {

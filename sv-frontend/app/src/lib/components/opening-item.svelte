@@ -1,3 +1,5 @@
+<!-- Deve ter tamanho mais maleável!-->
+
 <script>
     let {
         id = "0",
@@ -5,9 +7,11 @@
         salario = "0000,00",
         descricao = "Não há descrição",
         requisitos = "Nenhum Requisito foi posto para essa vaga",
+        propStatus = null,
     } = $props();
 
     const formattedSalary = `R$ ${salario}`;
+    let status = $state(propStatus);
 </script>
 
 <div class="vacancy-item">
@@ -23,10 +27,24 @@
                 <p class="requisites-text">{requisitos}</p>
             </div>
         </div>
+        <!-- {#if status}
+            <div class="vancancy-status">{status}</div>
+        {/if} -->
     </a>
 </div>
 
 <style>
+    .ongoing {
+     background: rgb(255, 155, 0);
+   }
+   .approved {
+    background: rgb(100, 200, 100)
+   }
+   .refused {
+    background: rgb(200, 50, 50);
+   }
+
+
     .vacancy-item {
         position: relative;
         display: flex;
@@ -35,26 +53,36 @@
         background: white;
         border: 2px solid #e1e7f5;
         border-radius: 20px;
-        margin: 1rem;
         overflow: hidden;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 4px 6px rgba(81, 117, 184, 0.1);
     }
-
+    
     .vacancy-item:hover {
         border-color: #5175b8;
         box-shadow: 0 12px 24px rgba(81, 117, 184, 0.2);
         transform: translateY(-4px);
     }
-
+    
     .vacancy-link {
         display: flex;
         flex-direction: column;
-        height: 100%;
         padding: 1.5rem;
         text-decoration: none;
         color: inherit;
     }
+    
+    /* .vancancy-status {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: #c4c4c4;
+        padding: 0.75rem;
+        text-align: center;
+        font-size: 0.95rem;
+        color: #333;
+        border-radius: 0 0 20px 20px;
+    } */
 
     .vacancy-header {
         display: flex;
