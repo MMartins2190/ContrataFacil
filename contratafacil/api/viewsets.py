@@ -1,17 +1,15 @@
+from datetime import timedelta
 from rest_framework import viewsets, status
-from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from django.middleware.csrf import get_token
 from contratafacil import models
 from contratafacil.api import serializers
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth import authenticate, login, logout 
-
+from django.contrib.auth import authenticate 
+from rest_framework.authtoken.models import Token
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
@@ -65,6 +63,16 @@ class LoginViewSet(viewsets.ViewSet):
            
             usuario = authenticate(username=username, password=password, email=email)
             if usuario is not None:
-                return Response("Autenticado", status.HTTP_200_OK)
+                token, _ = Token.objects.get_or_create(user=usuario)
+                response = Response("Autenticado", status.HTTP_200_OK)
+                response.set_cookie("Token",
+                                    token.key,
+                                    path="/",
+                                    samesite="Lax",
+                                    httponly=True,
+                                    secure=False, # Mudar em deployment
+                                    max_age= timedelta(days=2),
+                                    )
+                return response;
             return Response(f"Falha na autenticação, verifique suas credenciais", status=status.HTTP_400_BAD_REQUEST) 
         return Response(serializador.errors, status=status.HTTP_400_BAD_REQUEST)

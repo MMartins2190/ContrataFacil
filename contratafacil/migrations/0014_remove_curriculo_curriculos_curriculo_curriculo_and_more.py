@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='curriculo',
             name='curriculo',
-            field=models.FileField(null=True, upload_to=contratafacil.models.RenomearArquivoTexto('curriculos/'), validators=[django.core.validators.FileExtensionValidator(['pdf'])]),
+            field=models.FileField(null=True, upload_to=contratafacil.models.RenomearDoc('curriculos/'), validators=[django.core.validators.FileExtensionValidator(['pdf'])]),
         ),
         migrations.AddField(
             model_name='empresa',

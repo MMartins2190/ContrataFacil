@@ -65,7 +65,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True # mude para o deploy
-CORS_ALLOW_CREDENTIALS = True # Necessário para cookies, não estamos usando
+CORS_ALLOW_CREDENTIALS = True # Necessário para cookies
 
 ROOT_URLCONF = 'setup.urls'
 
@@ -148,6 +148,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'contratafacil.auth.backend.CookieTokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
