@@ -8,8 +8,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Usuario
         fields = ["foto_perfil", "username", "password", "email",
-                  "cpf", "telephone"]
-        read_only_fields = ["id"]
+                  "cpf", "telefone", "empresa"]
         
         def create(self, validated_data):
             validated_data["password"] = make_password(validated_data["password"])
@@ -20,13 +19,18 @@ class UsuarioSerializer(serializers.ModelSerializer):
                 validated_data['password'] = make_password(validated_data['password'])
             return super().update(instance, validated_data)
 
+class CandidatoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Candidato
+        fields = "__all__"
+
 # 🔄 Agora trabalha com imagem
 class CurriculoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Curriculo
         fields = '__all__'
         extra_kwargs = {
-            'imagem': {'help_text': 'Imagem do currículo (formato JPG, PNG etc.)'},
+            'curriculo': {'help_text': 'Arquivo de documento contendo currículo (PDF)'},
             'usuario': {'help_text': 'Usuário dono do currículo'},
         }
 
@@ -47,8 +51,3 @@ class EmpresaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Empresa
         fields = '__all__'
-
-class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=100, default=None)
-    password = serializers.CharField(write_only=True)
-    email = serializers.EmailField(default=None)

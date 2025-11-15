@@ -25,21 +25,25 @@ class RenomearDoc(object):
         novo_nome = f"{uuid.uuid4()}.{extensao}" 
         return os.path.join(self.subdir, novo_nome)
 
+class Empresa(models.Model):
+    cnpj = models.CharField(max_length=14, unique=True)
+    nome = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    descricao = models.TextField()
+    plano_pago = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.nome
+    
 EXTENSOES_IMG_PERMITIDAS = ['png', 'jpeg', 'jpg', 'gif', 'jfif', 'webp', 'avif', 'svg']
 class Usuario(AbstractUser):
-    TIPOS = [
-        {"candidato", "Candidato"},
-        {"empresa", "Empresa"}
-    ]
-
     foto_perfil = models.ImageField(upload_to=RenomearImagem("ftPerfil/"), null=True, blank=True)
     username = models.CharField("Nome", max_length=100, unique=True, null=True)
     password = models.CharField("Senha", max_length=500, null=True)
     email = models.EmailField(unique=True, null=True)
     cpf = models.CharField(max_length=11, unique=True)
-    telephone = models.CharField(max_length=15, null=True, blank=True)
-    ##### Temporariamente removidos para testes.
-    # tipo_de_usuario = models.CharField(choices=TIPOS, null=True)
+    telefone = models.CharField(max_length=15, null=True, blank=True)
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.username
@@ -54,6 +58,12 @@ class Usuario(AbstractUser):
         self.clean()
         super().save(*args, **kwargs)
 
+class Candidato(models.Model):
+    AREAS = []
+
+    plano_pago = models.BooleanField(default=False)
+    # area_de_atuacao = models.CharField(choices=AREAS, null=True, blank=True)
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
 
 EXTENSOES_DOC_PERMITIDAS = ['pdf']
 class Curriculo(models.Model):
@@ -62,7 +72,7 @@ class Curriculo(models.Model):
         upload_to=RenomearDoc('curriculos/'),
         validators=[FileExtensionValidator(EXTENSOES_DOC_PERMITIDAS)],
         null=True)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="curriculos")
+    candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, related_name="Currículos")
 
     def __str__(self):
         return f"Currículo de {self.usuario.username}"
@@ -77,20 +87,13 @@ class Curriculo(models.Model):
         self.clean()
         super().save(*args, **kwargs)
 
-# WIP
-# class Candidato(models.Model):
-#     AREAS = []
-
-#     plano_pago = models.BooleanField(default=False)
-#     area_de_atuacao = models.CharField(choices=AREAS, null=True, blank=True)
-#     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-#     curriculos = models.ManyToManyField(Curriculo, related_name="Currículos")
 
 class Vaga(models.Model):
     titulo = models.CharField(max_length=255)
     descricao = models.TextField(null=True, blank=True)
     requisitos = models.TextField(null=True, blank=True)  # pode ser JSON no futuro
     impulsionada = models.BooleanField(default=False)
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.titulo
@@ -102,22 +105,10 @@ class Candidatura(models.Model):
         APROVADO = "APROVADO", "Aprovado"
         REJEITADO = "REJEITADO", "Rejeitado"
 
-    candidato = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="candidaturas")
+    candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, related_name="candidaturas")
     vaga = models.ForeignKey(Vaga, on_delete=models.CASCADE, related_name="candidaturas")
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.EM_ANALISE)
     data_candidatura = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.candidato.usuario.username} -> {self.vaga.titulo} ({self.status})"
-
-
-class Empresa(models.Model):
-    cnpj = models.CharField(max_length=14, unique=True)
-    nome = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
-    descricao = models.TextField()
-    plano_pago = models.BooleanField(default=False)
-    
-
-    def __str__(self):
-        return self.nome

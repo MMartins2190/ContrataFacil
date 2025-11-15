@@ -10,9 +10,6 @@ export const actions = {
             method: "POST",
             body: formData,
         })
-        .then(res => "OK");
+        .then(res => console.log(res));
 
-        if (loginAttempt === "OK") {
-            redirect(303, "/homepage");
-        }
 }}

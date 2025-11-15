@@ -3,6 +3,8 @@ from rest_framework import viewsets, status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from contratafacil import models
 from contratafacil.api import serializers
 from drf_yasg.utils import swagger_auto_schema
@@ -10,6 +12,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth import authenticate 
 from rest_framework.authtoken.models import Token
+from django.conf import settings
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
@@ -34,6 +37,10 @@ class CurriculoViewSet(viewsets.ModelViewSet):
     parser_classes = [MultiPartParser, FormParser]  # permite upload de imagem
     permission_classes = [AllowAny]
 
+class CandidatoViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.CandidatoSerializer
+    queryset = models.Curriculo.objects.all()
+    permission_classes = [AllowAny]
 
 class VagaViewSet(viewsets.ModelViewSet):
     queryset = models.Vaga.objects.all()
@@ -52,27 +59,38 @@ class EmpresaViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.EmpresaSerializer
     permission_classes = [AllowAny]
 
-class LoginViewSet(viewsets.ViewSet):
+class LoginView(APIView):
     permission_classes = [AllowAny]
-    def create(self, request):
-        serializador = serializers.LoginSerializer(data=request.data)
-        if serializador.is_valid():
-            username = serializador.validated_data["username"]
-            password = serializador.validated_data["password"]
-            email = serializador.validated_data["email"]
-           
-            usuario = authenticate(username=username, password=password, email=email)
-            if usuario is not None:
-                token, _ = Token.objects.get_or_create(user=usuario)
-                response = Response("Autenticado", status.HTTP_200_OK)
-                response.set_cookie("Token",
-                                    token.key,
-                                    path="/",
-                                    samesite="Lax",
-                                    httponly=True,
-                                    secure=False, # Mudar em deployment
-                                    max_age= timedelta(days=2),
-                                    )
-                return response;
-            return Response(f"Falha na autenticação, verifique suas credenciais", status=status.HTTP_400_BAD_REQUEST) 
-        return Response(serializador.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        user = authenticate(request, username=username, password=password)
+        if not user:
+            return Response({"detail": "Invalid credentials"}, status=400)
+
+        token, _ = Token.objects.get_or_create(user=user)
+
+        # Create response and set cookie
+        response = Response({"detail": "ok", "user_id": user.id})
+        # cookie options — adjust to your needs:
+        response.set_cookie("auth_token",
+                            token.key,
+                            path="/",
+                            samesite="Lax",
+                            httponly=True,
+                            secure=False,
+                            max_age= timedelta(days=2)
+                            )
+        return response
+    
+@api_view(["POST"])
+def logout_view(request):
+    resp = Response({"detail": "logged out"}, status=status.HTTP_200_OK)
+    resp.delete_cookie("auth_token", path="/")
+    # Optionally revoke/delete token if desired:
+    token_key = request.COOKIES.get("auth_token")
+    if token_key:
+        from rest_framework.authtoken.models import Token
+        Token.objects.filter(key=token_key).delete()
+    return resp
