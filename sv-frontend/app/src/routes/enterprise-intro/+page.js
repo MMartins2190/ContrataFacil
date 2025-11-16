@@ -1,8 +1,6 @@
-import { redirect } from "@sveltejs/kit"
+import { goto } from "$app/navigation";
 
-export async function load({ fetch }) {
-    fetch("http://127.0.0.1/usuarios/")
-    .then(usuarios => {
-        return "Screw";
-    })
-}
+const usuariosUrl = "http://127.0.0.1:8000/usuarios"; 
+
+// Lógica de olhar obj de usuário e olhar atributo empresa
+// goto /enterprise-intro/${id_empresa}

@@ -13,8 +13,8 @@
 
 <title>Vagas</title>
 
+<Header/>
 <div class="page">
-    <Header/>
     
     <h1>Vagas</h1>
     

@@ -4,31 +4,34 @@
 
 <title>Para Empresas</title>
 
-<Header />
-
-<div class="main">
-    <h1 class="big-text">Revolucione seu RH com a plataforma de Recrutamento e Seleção da ContrataFácil</h1>
+<div class="page">
+    <Header />
+    <h1 class="title">Revolucione seu RH com a plataforma de Recrutamento e Seleção da ContrataFácil</h1>
     <p class="description">
         Automatize processos, encontre talentos ideais e reduza o tempo de contratação em até 78% com nossa plataforma de Inteligência Comportamental.
     </p>
     <div class="btn-space">
-        <button class="pr-gray-btn" style:border-radius=30px>Testar Gratuitamente</button>
+        <a href="/enterprise-form" class="pr-gray-btn">Cadastrar Empresa</a>
     </div>
 </div>
 
 <style>
-    .big-text{
+    .page {
+        min-height: 100vh;
+    }
+
+    .title {
         margin: 3.5rem 3.5rem 0 3.5rem;
         font-size: 6ch;
         font-weight: 600;
     }
 
-    .description{
+    .description {
         margin: 4rem 3rem 0 3rem;
-        font-size: 4ch;
+        font-size: 3ch;
     }
 
-    .btn-space{
+    .btn-space {
         position: fixed;
         bottom: 10%;
         width: 100%;
@@ -36,12 +39,8 @@
         justify-content: center;
     }
 
-    button{
+    a {
         padding: 1rem 5rem;
         font-size: 2ch;
     }
-
-
-    /*Funni 🤓*/
-
 </style>
