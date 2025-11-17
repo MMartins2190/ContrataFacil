@@ -3,6 +3,8 @@
     import { page } from "$app/state";
     import Header from "$lib/components/header.svelte";
 
+    const plano_pago = true;
+
     let id = page.url.searchParams.get("id");
     let { data } = $props();
     let { title = "", salary = "", description = "", requisites = "", boosted = false } = data;
@@ -26,36 +28,37 @@
         <form method="post" enctype="multipart/form-data" use:enhance>
             <div class="field">
                 <label for="vacancy-name">Vaga:</label>
-                <input name="titulo" id="vacancy-name" type="text" value={title} required>
+                <input class="form-input" name="titulo" id="vacancy-name" type="text" value={title} required>
             </div>
             <div class="field">
                 <label for="salary">Salário:</label>
-                <input name="salario" type="number" min="0" placeholder="0.00" id="salary" value={salary}>
+                <input class="form-input" name="salario" type="number" min="0" placeholder="0.00" id="salary" value={salary}>
             </div>
             <div class="field">
                 <label for="vacancy-description">Descrição da vaga:</label>
-                <textarea name="descricao" id="vacancy-description" cols="60" rows="100">{description}</textarea>
+                <textarea class="form-input" name="descricao" id="vacancy-description" cols="60" rows="100">{description}</textarea>
             </div>
             <div class="field">
                 <label for="requisites">Requisitos:</label>
-                <textarea name="requisitos" id="requisites" cols="60" rows="100">{requisites}</textarea>
+                <textarea class="form-input" name="requisitos" id="requisites" cols="60" rows="100">{requisites}</textarea>
             </div>
             <div>
-                <label for="boosted">Impulsionada</label>
-                {#if boosted}
-                    <input type="checkbox" name="impulsionada" id="boosted" checked>
-                {:else}
-                    <input type="checkbox" name="impulsionada" id="boosted">
+                {#if plano_pago}
+                    <label for="boosted">Impulsionar</label>
+                    {#if boosted}
+                        <input type="checkbox" name="impulsionada" id="boosted" checked>
+                    {:else}
+                        <input type="checkbox" name="impulsionada" id="boosted">
+                    {/if}
                 {/if}
             </div>
             <div class="submit">
                 {#if title !== ""}
-                    <input formaction="?/update&id={id}" type="submit" class="sr-blue-btn" style:background-color=green value="Salvar">
-                    <input formaction="?/delete&id={id}" type="submit" value="Detonar" style:background-color=red>
+                    <input formaction="?/update&id={id}" type="submit" class="pr-blue-btn" value="Salvar">
+                    <input formaction="?/delete&id={id}" type="submit" value="Detonar" class="pr-blue-btn">
                 {:else}
-                    <input formaction="?/create" type="submit" class="sr-blue-btn" value="Enviar">
+                    <input formaction="?/create" type="submit" class="pr-blue-btn" value="Enviar">
                 {/if}
-                <input type="submit" formaction="?/redirect" value="Shart">
             </div>
         </form>
     </div>
@@ -64,16 +67,15 @@
 </div>
 
 <style>
-    .main{
+    .main {
         width: 100vw;
         height: 100vh;
         display: grid;
         grid-template-columns: 30% 1fr 30%;
     }
 
-    .container{
-        background-color: #d9d9d9;
-        border-radius: 20px;
+    .container {
+        background: linear-gradient(to bottom, #d9d9d9, #f5f5f5);
         margin: 0.5rem 0;
         padding: 1rem;
         display: flex;
@@ -81,38 +83,36 @@
         align-items: center;
         border: 1px solid black;
     }
-
-    form{
+    
+    form {
         height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
     }
-
-    .field{
+    
+    .field {
         display: flex;
         flex-direction: column;
         width: 80%;
     }
-
-    input[type="text"], input[type="number"]{
-        height: 3ch;
-        border-radius: 10px;
-        border: 1px solid black;
-        margin-top: 0.5ch;
+    
+    textarea {
+        height: 10ch;
     }
 
-    input[type="submit"]{
+    input[type="submit"] {
         padding: 1rem 2rem;
         border-radius: 10px;
         border: 1px solid black;
     }
 
-    textarea{
-        height: 20ch;
-        border: 1px solid black;
-        border-radius: 10px;
-        margin-top: 0.5ch;
+    input[type="submit"][value="Salvar"] {
+        background: linear-gradient(rgb(50, 100, 50), rgb(100, 150, 100));
+    }
+
+    input[type="submit"][value="Detonar"] {
+        background: linear-gradient(rgb(100, 50, 50), rgb(150, 80, 80));
     }
 </style>

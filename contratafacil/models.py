@@ -90,10 +90,11 @@ class Curriculo(models.Model):
 
 class Vaga(models.Model):
     titulo = models.CharField(max_length=255)
+    salario = models.DecimalField("Salário", max_digits=10, decimal_places=2, blank=True, null=True)
     descricao = models.TextField(null=True, blank=True)
     requisitos = models.TextField(null=True, blank=True)  # pode ser JSON no futuro
     impulsionada = models.BooleanField(default=False)
-    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.titulo

@@ -1,7 +1,3 @@
-import { redirect } from "@sveltejs/kit";
-
-redirect(303, "/");
-
 const apiUrl = "http://127.0.0.1:8000/vagas/";
 
 export async function load({ fetch }){

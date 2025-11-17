@@ -140,6 +140,7 @@
         </div>
         
         <button type="submit" class="submit-button">Cadastrar</button>
+        <span>Já tem uma conta? <a href="/login" style:color="#5b7bb4">Faça o login</a></span>
       </form>
     </div>
   </main>

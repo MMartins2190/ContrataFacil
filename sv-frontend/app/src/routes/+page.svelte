@@ -1,5 +1,15 @@
 <script>
   import Header from '$lib/components/header.svelte';
+  import Opening from '$lib/components/opening-item.svelte';
+
+  let { data } = $props();
+
+  const navLinks = [
+    { label: 'Vagas', href: '/openings' },
+    { label: 'Currículos', href: '/curriculums' },
+    { label: 'Empresas', href: '/enterprise-intro' },
+    { label: 'Sobre', href: '/about' }
+  ];
 </script>
 
 <title>ContrataFácil</title>
@@ -17,7 +27,7 @@
         </p>
         
         <div class="cta-buttons">
-          <a href="/homepage" class="btn-primary">Começar agora</a>
+          <a href="/login" class="btn-primary">Começar agora</a>
           <a href="/login?linkedin=true" class="btn-secondary">Entrar com Linkedin</a>
         </div>
       </div>
@@ -65,6 +75,32 @@
       </div>
     </section>
   </main>
+
+  <section class="featured-openings">
+    <h2>Vagas em destaque</h2>
+    
+    <div class="openings-display">
+      {#each data.openings as opening}
+      <div class="opening-wrapper">
+        <Opening 
+          id={opening.id}
+          titulo={opening.titulo}
+          salario={opening.salario}
+          requisitos={opening.requisitos} 
+          />
+      </div>
+      {/each}
+    </div>
+  </section>
+  
+  <!-- Navigation Links -->
+  <nav class="bottom-nav">
+    {#each navLinks as link}
+      <a href={link.href} class="nav-link">
+        {link.label}
+      </a>
+    {/each}
+  </nav>
 </div>
 
 <style>
@@ -213,6 +249,59 @@
     line-height: 1.6;
     color: #666;
     margin: 0;
+  }
+
+  /** Previously on homepage **/
+  .featured-openings h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem 0;
+    font-weight: bold;
+  }
+
+  .opening-wrapper {
+    width: 600px;
+    height: 300px;
+    margin: 1rem;
+  }
+  
+  .openings-display {
+    height: 300px;
+    background: linear-gradient(#3d5a85, #4a6fa5);
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    flex-shrink: none;
+    flex-wrap: wrap;
+    scrollbar-width: none;
+  }
+  
+  /* Bottom Navigation */
+  .bottom-nav {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background: #4a6fa5;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: transform 0.2s, background 0.2s;
+  }
+  
+  .nav-link:hover {
+    transform: translateY(-2px);
+    background: #3d5a85;
   }
   
   /* Responsive Design */

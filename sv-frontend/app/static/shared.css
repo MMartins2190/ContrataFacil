@@ -30,18 +30,27 @@ a{
 
 /* buttons */
 
-.pr-blue-btn{
-    background-color: var(--m-blue-90);
+.pr-blue-btn {
+    padding: 0.875rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: white;
-}
-.pr-blue-btn:hover{
-    background-color: var(--blue-70);
-    color: var(--m-gray-100);
-}
-.pr-blue-btn:active{
-    background-color: var(--m-blue-100);
-    color: white;
-}
+    background: #5b7bb4;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    min-width: 200px;
+  }
+  
+  .pr-blue-btn:hover {
+    background: #4a6fa5;
+    transform: translateY(-2px);
+  }
+  
+  .pr-blue-btn:active {
+    transform: translateY(0);
+  }
 
 .sr-blue-btn{
     background-color: var(--m-blue-100);
@@ -80,4 +89,20 @@ a{
 .sr-gray-btn:active{
     background-color: var(--gray-100);
     color: white;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+  
+.form-input:focus {
+    outline: none;
+    border-color: #5b7bb4;
+    box-shadow: 0 0 0 3px rgba(91, 123, 180, 0.1);
 }

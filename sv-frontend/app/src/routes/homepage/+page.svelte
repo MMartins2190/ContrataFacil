@@ -3,23 +3,7 @@
     import Opening from "$lib/components/opening-item.svelte";
 
     let { data } = $props();
-
-    const carouselImages = [
-    '/images/carousel-1.jpg',
-    '/images/carousel-2.jpg',
-    '/images/carousel-3.jpg'
-  ];
-  
-  let currentSlide = $state(0);
-  
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % carouselImages.length;
-  }
-  
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + carouselImages.length) % carouselImages.length;
-  }
-  
+    
   const navLinks = [
     { label: 'Vagas', href: '/openings' },
     { label: 'Currículos', href: '/curriculums' },
@@ -32,22 +16,6 @@
 
 <div class="page">
   <Header />
-  
-  <!-- Carousel Section -->
-  <section class="carousel">
-    <button class="carousel-button prev" onclick={prevSlide} aria-label="Previous slide">
-      ‹
-    </button>
-    
-    <div class="carousel-content">
-      <img src={carouselImages[currentSlide]} alt="Imagem sobre trabalho" />
-      <p class="carousel-caption">Carrossel de imagens genéricas sobre trabalho</p>
-    </div>
-    
-    <button class="carousel-button next" onclick={nextSlide} aria-label="Next slide">
-      ›
-    </button>
-  </section>
   
   <!-- Featured Openings Section -->
   <section class="featured-openings">
@@ -78,71 +46,6 @@
 <style>
   .page {
     min-height: 100vh;
-  }
-  
-  /* Carousel Styles */
-  .carousel {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    background-color: #9e9e9e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  
-  .carousel-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  
-  .carousel-content img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .carousel-caption {
-    position: absolute;
-    color: white;
-    font-size: 1.2rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  
-  .carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    transition: background 0.2s;
-  }
-  
-  .carousel-button:hover {
-    background: rgba(255, 255, 255, 1);
-  }
-  
-  .carousel-button.prev {
-    left: 20px;
-  }
-  
-  .carousel-button.next {
-    right: 20px;
   }
   
   .featured-openings h2 {
@@ -193,9 +96,6 @@
   
   /* Responsive Design */
   @media (min-width: 768px) {
-    .carousel {
-      height: 400px;
-    }
     
     .openings-display {
       grid-auto-columns: minmax(320px, 1fr);

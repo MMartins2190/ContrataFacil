@@ -5,37 +5,38 @@ const openingsURL = "http://127.0.0.1:8000/vagas/";
 export const actions = {
     create: async ({request, fetch}) => {
         const data = await request.formData();
-
-        fetch(openingsURL, {
+        const postData = await fetch(openingsURL, {
             method: "POST",
             body: data,
-        })
-        .then(response => console.log(response))
-        .catch(e => console.error(e))
+        });
+
+        if (postData.ok) {
+            redirect(303, "/openings");
+        } else {
+            console.log(postData);
+            console.log(data);
+        }
+
     },
     update: async ({request, fetch, url}) => {
-        console.log(url, "\n", request);
         const openingId = url.searchParams.get("id");
         const data = await request.formData();
-
-        fetch(`${openingsURL}${openingId}/`, {
+        const putData = await fetch(`${openingsURL}${openingId}/`, {
             method: "PUT",
             body: data,
-        })
-        .then(response => console.log(response))
-        .catch(e => console.error(e))
+        });
+
+        if (putData.ok) redirect(303, "/openings")
+        else console.error(putData);
     },
     delete: async ({request, fetch, url}) => {
         const openingId = url.searchParams.get("id");
         const data = await request.formData();
-
-        fetch(`${openingsURL}${openingId}/`, {
+        const putData = await fetch(`${openingsURL}${openingId}/`, {
             method: "DELETE",
-        })
-        .then(response => console.log(response))
-        .catch(e => console.error(e))
+        });
+
+        if (putData.ok) redirect(303, "/openings")
+        else console.error(putData);
     },
-    redirect: () => {
-        redirect(303, "/openings");
-    }
 }
