@@ -17,7 +17,7 @@
     console.log('Edit profile');
   }
 
-  console.log(data)
+  console.log(data);
 </script>
 
 <div class="page">

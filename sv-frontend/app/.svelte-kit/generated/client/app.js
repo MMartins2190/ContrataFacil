@@ -37,7 +37,7 @@ export const dictionary = {
 		"/openings": [13,[],[2]],
 		"/openings/[openingId]": [14,[],[2]],
 		"/plans": [15],
-		"/profile": [16],
+		"/profile": [~16],
 		"/signin": [17]
 	};
 

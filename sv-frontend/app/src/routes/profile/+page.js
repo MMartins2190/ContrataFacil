@@ -2,7 +2,7 @@ const usersUrl = "http://127.0.0.1:8000/usuarios/";
 const openingsUrl = "http://127.0.0.1:8000/vagas/";
 const candidaciesUrl = "http://127.0.0.1:8000/candidaturas/";
 
-export async function load({url, fetch}){
+export async function load({fetch}){
     const pathnameId = 1; // Definido por cookie;
 
     if (!isNaN(Number(pathnameId)) && Number(pathnameId) > 0) {

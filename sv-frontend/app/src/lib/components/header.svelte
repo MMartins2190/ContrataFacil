@@ -8,7 +8,7 @@
         <a href="/curriculums" class={["nav-item", "nav-link"]}>Currículos</a>
         <a href="/enterprise-intro" class={["nav-item", "nav-link"]}>Para Empresas</a>
         <a href="/about" class={["nav-item", "nav-link"]}>Sobre</a>
-        <a href="/login" class="nav-item nav-link">Perfil</a>
+        <a href="/profile" class="nav-item nav-link">Perfil</a>
     </nav>
 </header>
 

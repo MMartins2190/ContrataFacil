@@ -13,7 +13,7 @@ export const actions = {
             console.log("Deu certo!");
             const responseBody = await loginAttempt.json();
             console.log(responseBody);
-            cookies.set("triste", JSON.stringify(responseBody.user), {
+            cookies.set("userId", JSON.stringify(responseBody.user.id), {
                 path: '/',
                 sameSite: 'lax',
                 httpOnly: true,
