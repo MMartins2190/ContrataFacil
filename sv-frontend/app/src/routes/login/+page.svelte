@@ -1,26 +1,5 @@
 <script>
-    import { goto } from "$app/navigation";
     import Header from "$lib/components/header.svelte";
-
-    const apiUrl = "http://127.0.0.1:8000/login/";
-
-    async function login(e) {
-      e.preventDefault()
-      const form = new FormData(e.target);
-      const res = await fetch(apiUrl, {
-            method: "POST",
-            body: form,
-            credentials: "include",
-      });
-
-      if (res.ok) {
-        // cookie was set (browser stores HttpOnly cookie). You cannot read it in JS.
-        goto('/homepage'); // redirect to protected page; SSR hooks will detect cookie
-      } else {
-        const json = await res.json();
-        console.error(res);
-      }
-    }
 </script>
 
 <title>Login</title>

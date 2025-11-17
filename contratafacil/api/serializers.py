@@ -4,20 +4,24 @@ from django.contrib.auth.hashers import make_password
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
+    # write_only=True oculta o password da resposta, mas ainda
+    # salva no banco certo.
+    password = serializers.CharField(write_only=False)
+    def create(self, validated_data):
+        print("Serializers Create")
+        validated_data["password"] = make_password(validated_data["password"])
+        return super().create(validated_data)
+        
+    def update(self, instance, validated_data):
+        if 'password' in validated_data:
+            validated_data['password'] = make_password(validated_data['password'])
+            return super().update(instance, validated_data)
     class Meta:
         model = models.Usuario
         fields = ["foto_perfil", "username", "password", "email",
                   "cpf", "telefone", "empresa"]
+        print("Meta")
         
-        def create(self, validated_data):
-            validated_data["password"] = make_password(validated_data["password"])
-            return super().create(validated_data)
-        
-        def update(self, instance, validated_data):
-            if 'password' in validated_data:
-                validated_data['password'] = make_password(validated_data['password'])
-            return super().update(instance, validated_data)
 
 class CandidatoSerializer(serializers.ModelSerializer):
     class Meta:
