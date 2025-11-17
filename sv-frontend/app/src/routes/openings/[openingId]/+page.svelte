@@ -1,13 +1,15 @@
 <script>
   import Header from '$lib/components/Header.svelte';
-    import CandidateCurriculum from '$lib/components/candidate-curriculum.svelte';
   import CandidateCurriculumItem from '$lib/components/candidate-curriculum.svelte';
   import OpeningItem from '$lib/components/opening-item.svelte';
   
   let { data } = $props();
   const {
-    title, description, requisites, boosted,
+    id, title, salary, description, requisites, boosted,
   } = data.currentOpening;
+  const openingsList = data.openings;
+
+  const empresa = false;
 
   let showModal = $state(false);
   let selectedCurriculum = $state(null);
@@ -48,14 +50,23 @@
     </div>
     
     <div class="info-bar">
-      {#if !selectedCurriculum}
-        <button class="send-button" onclick={openModal}>Enviar Currículo</button>
+      {#if empresa}
+        <a href="/opening-form?id={id}" class="send-button">Editar Vaga</a>
       {:else}
-        <CandidateCurriculumItem
-        id={curriculum.id}
-        curriculo={curriculum.curriculo}/>
+        {#if !selectedCurriculum}
+          <button class="send-button" onclick={openModal}>Enviar Currículo</button>
+          {:else}
+            <CandidateCurriculumItem
+            id={curriculum.id}
+            curriculo={curriculum.curriculo}/>
+        {/if}
       {/if}
-      <span class="salary">R$ {"0000,00"}</span>
+      <div>
+        {#if boosted}
+          <span class="boosted">Impulsionada!</span>
+        {/if}
+        <span class="salary">R$ {salary}</span>
+      </div>
     </div>
     
     <section class="description-section">
@@ -109,16 +120,19 @@
       </div>
       
       <div class="job-listings">
-        {#if data.openings < 1}
+        {#if openingsList < 1}
           <p>Não há outras vagas</p>
           {:else}
-          {#each data.openings as opening}
+          {#each openingsList as opening}
+          <div class="opening-wrapper">
             <OpeningItem 
             id={opening.id}
             titulo={opening.titulo}
+            salario={opening.salario}
             descricao={opening.descricao}
             requisitos={opening.requisitos}
             />
+          </div>
           {/each}
         {/if}
       </div>
@@ -136,7 +150,7 @@
         
         <div class="curriculum-list">
           {#if data.curriculums < 1}
-            <p>Você não tem nenhum currículo... Que tal <a href="/curriculums">Criar um?</a></p>
+            <p>Você não tem nenhum currículo... Que tal <a href="/curriculums" style:color=#5b7bb4>Criar um?</a></p>
           {:else}
             {#each data.curriculums as curriculum}
               <CandidateCurriculumItem defaultAction={false}/>
@@ -225,7 +239,7 @@
     transform: translateY(-2px);
   }
   
-  .salary {
+  .salary, .boosted {
     font-size: 1.5rem;
     font-weight: 600;
     color: #5b7bb4;
@@ -310,6 +324,10 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .opening-wrapper {
+    height: 300px;
   }
   
   /* Modal */

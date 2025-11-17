@@ -1,5 +1,4 @@
-const curriculumsUrl = "http://127.0.0.1:8000/curriculos/";
-const candidatesUrl = "http://127.0.0.1:8000/candidatos/";
+1const candidatesUrl = "http://127.0.0.1:8000/candidatos/";
 const candidaciesUrl = "http://127.0.0.1:8000/candidaturas/";
 const openingsUrl = "http://127.0.0.1:8000/vagas/";
 

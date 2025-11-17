@@ -33,8 +33,8 @@ router.register(r'empresas', viewsets.EmpresaViewSet, basename='empresas')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('login', viewsets.LoginView.as_view(), name="Log in"),
-    path('logout', viewsets.logout_view, name="Log out"),
+    path('login/', viewsets.LoginView.as_view(), name="login"),
+    path('logout/', viewsets.logout_view, name="logout"),
     path('swagger.json/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

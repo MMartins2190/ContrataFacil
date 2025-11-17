@@ -4,33 +4,41 @@
 
     const curriculumsUrl = "http://127.0.0.1:8000/curriculos/";
     const hints = [
-        "Sugma",
-        "No pics",
-        "Do not lock DLC behind New game plus",
+        "Dados pessoais básicos - Nome completo, cidade/estado (não precisa endereço completo), telefone, e-mail profissional e link do LinkedIn. O CPF é opcional e geralmente não é necessário na primeira etapa.",
+        "Objetivo profissional claro - Uma frase curta (2-3 linhas) explicando qual vaga você busca e o que você pode oferecer. Seja específico e alinhado com a vaga desejada.",
+        "Experiências profissionais em ordem cronológica reversa - Começando pela mais recente. Inclua: nome da empresa, cargo, período (mês/ano), e principalmente as realizações e resultados obtidos, não apenas as responsabilidades.",
+        "Formação acadêmica relevante - Curso, instituição, período. Se você tem ensino superior, não precisa mencionar ensino fundamental. Para recém-formados, pode incluir TCC ou projetos acadêmicos relevantes.",
+        "Adequação à vaga - Personalize o currículo para cada posição, destacando experiências e habilidades que se conectam diretamente com os requisitos da vaga anunciada.",
+        "Evite incluir Foto, estado civil, idade, ou informações pessoais desnecessárias. Isso não é recomendado por boas práticas de recrutamento modernas e pode gerar discriminação. Evite também mencionar religião, time de futebol, ou informações irrelevantes.",
+        "Seja conciso. Profissionais com menos de 10 anos de experiência devem ter currículo de 1 página. Apenas profissionais muito experientes justificam 2 páginas.",
     ]
     let { data } = $props();
     let modalDisplay = $state(false);
+    const user = {
+        id: 1,
+        username: "João Bonifácio",
+    };
 
     async function registerCurriculum(e) {
-        // implementar candidatos!!!!!
-
-        // const file = e.target.files?.[0];
-        // if (!file) {
-        //     return;
-        // }
-        // const bodyData = new FormData();
-        // bodyData.append("curriculo", file);
-        // bodyData.append("usuario", data.)
+        const file = e.target.files?.[0];
+        if (!file) {
+            return;
+        }
+        const bodyData = new FormData();
+        bodyData.append("curriculo", file);
+        bodyData.append("candidato", user.id);
     
-        // try {
-        //     await fetch(curriculumsUrl, {
-        //         method: "POST",
-        //         body: bodyData,
-        //     }).then(res=>console.log(res));
+        try {
+            const postData = await fetch(curriculumsUrl, {
+                method: "POST",
+                body: bodyData,
+            });
+            if (postData.ok) alert("Currículo criado")
+            else console.log(postData);
 
-        // } catch (error) {
-        //     console.warn(error);
-        // }
+        } catch (error) {
+            console.warn(error);
+        }
     }
 
     function showModal() {
@@ -43,7 +51,7 @@
 
 </script>
 
-<title>{"Nome do Usuário"}</title>
+<title>{user.username}</title>
 
 <Header />
 <div class="page-container">
@@ -54,7 +62,7 @@
     <aside class="sidebar">
         <div class="sidebar-content">
             <div class="sidebar-header">
-                <h2>{"Nome do usuário"}</h2>
+                <h2>{user.username}</h2>
                 <button onclick={showModal}>?</button>
             </div>
         </div>
@@ -62,6 +70,8 @@
 </div>
 
 {#if modalDisplay}
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div class="modal-overlay" onclick={closeModal}>
         <div class="modal-content" onclick={e => e.stopPropagation()}>
             <h1>Dicas de criação de um currículo</h1>
@@ -77,12 +87,11 @@
 <style>
     .page-container {
         display: grid;
-        grid-template-columns: 6fr 5fr;
+        grid-template-columns: 1fr;
         min-height: 90vh;
     }
 
     .main-content {
-        background-color: #DDDDFF;
         overflow-y: auto;
         display: flex;
         justify-content: center;
@@ -159,6 +168,7 @@
         background: #5865C7;
         border-radius: 20px;
         color: white;
+        overflow-y: scroll;
     }
 
     .modal-content h1 {
@@ -167,10 +177,6 @@
 
     /* Responsive design */
     @media (max-width: 1024px) {
-        .page-container {
-            grid-template-columns: 1fr;
-        }
-
         .sidebar {
             order: -1;
             min-height: auto;

@@ -67,26 +67,17 @@ class LoginView(APIView):
         password = request.data.get("password")
         user = authenticate(request, username=username, password=password)
         if not user:
-            return Response({"detail": "Invalid credentials"}, status=400)
+            return Response({"detail": "Invalid credentials"}, status.HTTP_400_BAD_REQUEST)
 
         token, _ = Token.objects.get_or_create(user=user)
 
         # Create response and set cookie
         response = Response({"detail": "ok", "user_id": user.id})
-        # cookie options — adjust to your needs:
-        response.set_cookie("auth_token",
-                            token.key,
-                            path="/",
-                            samesite="Lax",
-                            httponly=True,
-                            secure=False,
-                            max_age= timedelta(days=2)
-                            )
         return response
     
 @api_view(["POST"])
 def logout_view(request):
-    resp = Response({"detail": "logged out"}, status=status.HTTP_200_OK)
+    resp = Response({"detail": "logged out"}, status.HTTP_200_OK)
     resp.delete_cookie("auth_token", path="/")
     # Optionally revoke/delete token if desired:
     token_key = request.COOKIES.get("auth_token")

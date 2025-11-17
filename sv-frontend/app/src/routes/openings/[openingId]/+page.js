@@ -14,8 +14,9 @@ export async function load({url, fetch}){
             console.log(openingJSON);
     
             return {
+                id: openingJSON.id,
                 title: openingJSON.titulo,
-                // salary: openingJSON.salario,
+                salary: openingJSON.salario,
                 description: openingJSON.descricao,
                 requisites: openingJSON.requisitos,
                 boosted: openingJSON.impulsionada,
@@ -25,8 +26,9 @@ export async function load({url, fetch}){
         async function openings() {
             const fetchData = await fetch(openingsUrl);
             const openingsJSON = await fetchData.json();
+            const otherOpenings = openingsJSON.filter((opening => opening.id !== Number(pathnameId)));
 
-            return openingsJSON;
+            return otherOpenings;
         }
 
         async function curriculums() {
@@ -50,7 +52,8 @@ export async function load({url, fetch}){
             candidacies: await candidacies(), 
         }
     }
+    else if (Number(pathnameId) === 0) return
     else {
         console.warn("O identificador desse recurso não é um número válido");
-    }
+    };
 }
