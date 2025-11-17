@@ -8,7 +8,6 @@ class UsuarioSerializer(serializers.ModelSerializer):
     # salva no banco certo.
     password = serializers.CharField(write_only=False)
     def create(self, validated_data):
-        print("Serializers Create")
         validated_data["password"] = make_password(validated_data["password"])
         return super().create(validated_data)
         
@@ -19,9 +18,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Usuario
         fields = ["foto_perfil", "username", "password", "email",
-                  "cpf", "telefone", "empresa"]
-        print("Meta")
-        
+                  "cpf", "telefone", "empresa"]        
 
 class CandidatoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -55,3 +52,7 @@ class EmpresaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Empresa
         fields = '__all__'
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)

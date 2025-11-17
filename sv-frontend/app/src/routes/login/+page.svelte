@@ -11,9 +11,9 @@
     <h1>Entrar no ContrataFácil</h1>
     
     <div class="login-container">
-      <form method="POST" onsubmit={login}>
+      <form method="POST">
         <div class="form-group">
-          <label for="username">Nome de usuário ou e-mail</label>
+          <label for="username">Usuário</label>
           <input 
             type="text" 
             id="username" 

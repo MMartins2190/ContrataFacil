@@ -1,6 +1,6 @@
 <script>
-  import { enhance } from '$app/forms';
-  import Header from '$lib/components/Header.svelte';
+  import { goto } from '$app/navigation';
+  import Header from '$lib/components/header.svelte';
 
   const urlString = "http://127.0.0.1:8000/usuarios/";
     let passwordToggle = $state("password");
@@ -21,19 +21,12 @@
     async function registerUser(event) {
         event.preventDefault();
         const data = new FormData(event.currentTarget, event.submitter);
-        const resp = await fetch(urlString, {
+        const postData = await fetch(urlString, {
             method: "POST",
             body: data,
-        })
-        .then(res=>res.json())
-        .then(res=>{
-            console.log(res);
-            return "OK";
-        })
-        .catch(err=>console.warn(err));
-        if (resp === "OK") {
-            location.href = "/homepage";
-        }
+        });
+        if (postData.ok) goto("/perfil")
+        else alert("Erro tentando criar usuário... \nEu sou um bule");
     }
 </script>
 

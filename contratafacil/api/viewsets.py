@@ -1,10 +1,7 @@
-from datetime import timedelta
 from rest_framework import viewsets, status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.views import APIView
-from rest_framework.decorators import api_view
 from contratafacil import models
 from contratafacil.api import serializers
 from drf_yasg.utils import swagger_auto_schema
@@ -12,7 +9,6 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth import authenticate 
 from rest_framework.authtoken.models import Token
-from django.conf import settings
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
@@ -59,30 +55,20 @@ class EmpresaViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.EmpresaSerializer
     permission_classes = [AllowAny]
 
-class LoginView(APIView):
-    permission_classes = [AllowAny]
+class LoginViewSet(viewsets.ViewSet):
+    def create(self, request):
+        serializador = serializers.LoginSerializer(data=request.data)
+        if serializador.is_valid():
+            username = serializador.validated_data["username"]
+            password = serializador.validated_data["password"]
+            user = authenticate(request, username=username, password=password)
+            if not user:
+                return Response({"detail": "Invalid credentials"}, status.HTTP_400_BAD_REQUEST)
 
-    def post(self, request):
-        username = request.data.get("username")
-        password = request.data.get("password")
-        user = authenticate(request, username=username, password=password)
-        print(user)
-        if not user:
-            return Response({"detail": "Invalid credentials"}, status.HTTP_418_IM_A_TEAPOT)
-
-        token, _ = Token.objects.get_or_create(user=user)
-
-        # Create response and set cookie
-        response = Response({"detail": "ok", "user_id": user.id})
-        return response
-    
-@api_view(["POST"])
-def logout_view(request):
-    resp = Response({"detail": "logged out"}, status.HTTP_200_OK)
-    resp.delete_cookie("auth_token", path="/")
-    # Optionally revoke/delete token if desired:
-    token_key = request.COOKIES.get("auth_token")
-    if token_key:
-        from rest_framework.authtoken.models import Token
-        Token.objects.filter(key=token_key).delete()
-    return resp
+            user_dict = {
+                "id":user.id,
+                "username":user.username,
+                "empresa":user.empresa or None,
+            }
+            return Response({"detail": "ok", "user": user_dict})
+        return Response("Dados inválidos", status.HTTP_400_BAD_REQUEST)

@@ -117,7 +117,8 @@
   /* Hero Section */
   .hero {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    text-align: center;
     gap: 4rem;
     align-items: center;
     padding: 4rem 0;
@@ -144,6 +145,7 @@
     display: flex;
     gap: 1rem;
     max-width: 500px;
+    margin: 0 auto;
   }
   
   .btn-primary,

@@ -4,14 +4,16 @@ const apiUrl = "http://127.0.0.1:8000/login/";
 
 export const actions = {
     default: async ({request, fetch, cookies}) => {
-        try {
         const data = await request.formData();
         const loginAttempt = await fetch(apiUrl, {
             method: "POST",
             body: data,
         });
         if (loginAttempt.ok) {
-            cookies.set("auth_token", true, {
+            console.log("Deu certo!");
+            const responseBody = await loginAttempt.json();
+            console.log(responseBody);
+            cookies.set("triste", JSON.stringify(responseBody.user), {
                 path: '/',
                 sameSite: 'lax',
                 httpOnly: true,
@@ -20,8 +22,6 @@ export const actions = {
             });
             redirect(303, "/");
         } else {
-            console.error(loginAttempt);
-        }
-    }
-    catch (e) { console.error(e); }
+            console.log(loginAttempt);
+        };
 }}

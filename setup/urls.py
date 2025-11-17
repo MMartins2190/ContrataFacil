@@ -29,12 +29,11 @@ router.register(r'curriculos', viewsets.CurriculoViewSet, basename='curriculos')
 router.register(r'vagas', viewsets.VagaViewSet, basename='vagas')
 router.register(r'candidaturas', viewsets.CandidaturaViewSet, basename='candidaturas')
 router.register(r'empresas', viewsets.EmpresaViewSet, basename='empresas')
+router.register(r'login', viewsets.LoginViewSet, basename="login")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('login/', viewsets.LoginView.as_view(), name="login"),
-    path('logout/', viewsets.logout_view, name="logout"),
     path('swagger.json/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
