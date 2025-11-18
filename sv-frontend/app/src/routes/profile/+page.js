@@ -15,7 +15,7 @@ export async function load({fetch}){
                 username: userJSON.username,
                 email: userJSON.email,
                 cpf: userJSON.cpf,
-                telephone: userJSON.telephone,
+                telephone: userJSON.telefone,
             }
         }
 
