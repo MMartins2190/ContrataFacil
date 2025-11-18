@@ -1,7 +1,8 @@
 <script>
   let {
     id = 0,
-    curriculo = null,
+    fileName = "Arquivo sem nome",
+    curriculumName = fileName,
     defaultAction = true,
   } = $props();
 
@@ -13,13 +14,18 @@
 
 <a href="/curriculums/{id}" class="curriculo-card" onclick={defaultAction ? "" : noDefault}>
   <div class="card-content">
-    <div class="file-icon">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+    <div class="file-info">
+      <div class="file-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="file-label">{fileName}</p>
     </div>
-    <p class="file-label">arquivo</p>
+    <div class="card-footer">
+      <p>{curriculumName}</p>
+    </div>
   </div>
 </a>
 
@@ -34,8 +40,6 @@
     justify-content: center;
     text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-    padding: 1.5rem;
   }
   
   .curriculo-card:hover {
@@ -44,13 +48,18 @@
   }
   
   .card-content {
+    display: grid;
+    grid-template-rows: 10fr 2fr;
+    width: 100%;
+    height: 100%;
+  }
+
+  .file-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 100%;
-    gap: 0.5rem;
   }
   
   .file-icon {
@@ -69,6 +78,17 @@
     font-size: 1rem;
     color: #333;
     margin: 0;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #5b7bb4;
+    color: white;
+    font-weight: 500;
+    padding: .2rem 0;
+    border-radius: 0 0 10px 10px;
   }
   
   @media (max-width: 768px) {

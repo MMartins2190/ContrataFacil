@@ -4,6 +4,15 @@
     import Header from "$lib/components/header.svelte";
 
     let { data } = $props();
+    let curriculums = data.curriculums;
+
+    function replaceWithFileName() {
+      for (let curriculum of curriculums) {
+        console.log(curriculum);
+      }
+    }
+
+    replaceWithFileName();
 </script>
 
 <title>Currículos</title>
@@ -19,8 +28,8 @@
         <span class="plus-icon">+</span>
       </a>
       
-      {#each data.curriculums as curriculum }
-        <CandidateCurriculumItem id={curriculum.id} curriculo={curriculum.curriculo} />
+      {#each curriculums as curriculum }
+        <CandidateCurriculumItem id={curriculum.id} fileName={curriculum.fileName} />
       {/each}
     </div>
   </main>

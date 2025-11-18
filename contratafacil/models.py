@@ -68,6 +68,7 @@ class Candidato(models.Model):
 EXTENSOES_DOC_PERMITIDAS = ['pdf']
 class Curriculo(models.Model):
 
+    nome = models.CharField(max_length=50, null=True, blank=True)
     curriculo = models.FileField(
         upload_to=RenomearDoc('curriculos/'),
         validators=[FileExtensionValidator(EXTENSOES_DOC_PERMITIDAS)],
@@ -87,7 +88,7 @@ class Curriculo(models.Model):
         self.clean()
         super().save(*args, **kwargs)
 
-
+''
 class Vaga(models.Model):
     titulo = models.CharField(max_length=255)
     salario = models.DecimalField("Salário", max_digits=10, decimal_places=2, blank=True, null=True)

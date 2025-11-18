@@ -21,6 +21,7 @@
     
     <div class="list-vacancies">
         <form onsubmit={searchOpenings} method="get">
+            <div class="form-grid">
                 <div class="search-field">
                     <label for="search-opening">Escolha uma vaga</label>
                     <input class="form-input" id="search-opening" type="text" name="searchOpening" placeholder="Digite uma vaga...">
@@ -33,6 +34,7 @@
                     <label for="search-salary">Escolha o salário</label>
                     <input class="form-input" id="search-salary" type="text" name="searchSalary" placeholder="Digite um salário...">
                 </div>
+            </div>
             <div class="search-field">
                 <input class="pr-blue-btn" type="submit" value="Buscar">
             </div>
@@ -80,24 +82,26 @@
         font: inherit;
     }
 
-    form{
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
+    form {
+        display: flex;
+        flex-direction: column;
         align-self: center;
+        align-items: center;
         font: inherit;
         background: rgb(217, 217, 217);
         border-radius: 20px;
         border: 2px solid #4a6fa5;
         width: 80%;
-        padding: 3rem;
+        padding: 3rem 3rem 1rem 3rem;
         margin: 0 0 3rem 0;
     }
 
-    .search-field > input[type="submit"] {
-        grid: center;
+    form > .form-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin: 0 0 1rem 0;
     }
-    
 
     .vacancies-data{
         display: grid;
