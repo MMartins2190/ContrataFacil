@@ -7,11 +7,9 @@
         salario = "0000,00",
         descricao = "Não há descrição",
         requisitos = "Nenhum Requisito foi posto para essa vaga",
-        propStatus = null,
     } = $props();
 
     const formattedSalary = `R$ ${salario}`;
-    let status = $state(propStatus);
 </script>
 
 <div class="vacancy-item">
@@ -27,24 +25,10 @@
                 <p class="requisites-text">{requisitos}</p>
             </div>
         </div>
-        <!-- {#if status}
-            <div class="vancancy-status">{status}</div>
-        {/if} -->
     </a>
 </div>
 
 <style>
-    .ongoing {
-     background: rgb(255, 155, 0);
-   }
-   .approved {
-    background: rgb(100, 200, 100)
-   }
-   .refused {
-    background: rgb(200, 50, 50);
-   }
-
-
     .vacancy-item {
         position: relative;
         display: flex;

@@ -4,20 +4,19 @@
   
   let { data } = $props();
   const {
-    profilePicture = null,
+    foto_perfil = null,
     username,
     email,
     cpf,
-    telephone,
-    area = "<Àrea de Atuação>",
-  } = data.user;
+    telefone,
+    empresa,
+    area = "<Área de Atuação>",
+  } = data?.user;
   
   // Placeholder for future edit functionality
   function handleEdit() {
     console.log('Edit profile');
   }
-
-  console.log(data);
 </script>
 
 <div class="page">
@@ -30,8 +29,8 @@
         <div class="left-section">
             <div class="profile-picture">
               <div class="avatar-circle">
-                {#if profilePicture}
-                  <img src={profilePicture} alt="Foto de perfil" />
+                {#if foto_perfil}
+                  <img src={foto_perfil} alt="Foto de perfil" />
                 {:else}
                   <span class="avatar-placeholder">{username.charAt(0).toUpperCase()}</span>
                 {/if}
@@ -66,7 +65,7 @@
           
           <div class="detail-item">
             <span class="label">Telefone:</span>
-            <span class="value">{telephone}</span>
+            <span class="value">{telefone}</span>
           </div>
         </div>
       </div>
@@ -119,7 +118,6 @@
                 titulo={opening.titulo}
                 salario={opening.salario}
                 requisitos={opening.requisitos}
-                propStatus="Atenção!"
               />
           </div>
         {/each}
