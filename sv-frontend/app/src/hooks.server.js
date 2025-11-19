@@ -7,7 +7,7 @@ export const handle = async ({ event, resolve }) => {
   const path = event.url.pathname;
   console.log("~~User's requested route ", path);
 
-  if (!userId && (path === "/login" || path === "/signin")) {
+  if (!userId && (path === "/login" || path === "/signin" || path === "/")) {
     console.log(`~~${userId} is falsy AND the ${path} is allowed`);
     return await resolve(event);
   }

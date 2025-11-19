@@ -21,7 +21,7 @@ export const nodes = [
 	() => import('./nodes/17')
 ];
 
-export const server_loads = [];
+export const server_loads = [0];
 
 export const dictionary = {
 		"/": [3],
@@ -37,7 +37,7 @@ export const dictionary = {
 		"/openings": [13,[],[2]],
 		"/openings/[openingId]": [14,[],[2]],
 		"/plans": [15],
-		"/profile": [~16],
+		"/profile": [16],
 		"/signin": [17]
 	};
 

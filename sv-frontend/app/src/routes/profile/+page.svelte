@@ -1,5 +1,5 @@
 <script>
-  import Header from '$lib/components/Header.svelte';
+  import Header from '$lib/components/header.svelte';
   import Opening from '$lib/components/opening-item.svelte';
   
   let { data } = $props();
@@ -18,6 +18,8 @@
     console.log('Edit profile');
   }
 </script>
+
+<title>{username}</title>
 
 <div class="page">
   <Header />
