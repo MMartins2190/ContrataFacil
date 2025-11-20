@@ -1,41 +1,56 @@
 <script>
-  import Header from '$lib/components/Header.svelte';
+  import Header from '$lib/components/header.svelte';
   import CandidateCurriculumItem from '$lib/components/candidate-curriculum.svelte';
-  import OpeningItem from '$lib/components/opening-item.svelte';
+  import Opening from '$lib/components/opening-item.svelte';
   
   let { data } = $props();
   const {
     id, title, salary, description, requisites, boosted,
   } = data.currentOpening;
   const openingsList = data.openings;
-
   const empresa = false;
+  const candidaciesUrl = "http://127.0.0.1:8000/candidaturas/";
 
   let showModal = $state(false);
   let selectedCurriculum = $state(null);
   let showSidebar = $state(false);
   
-  function openModal() {
-    showModal = true;
+  function toggleModal() {
+    showModal = !showModal;
   }
   
-  function closeModal() {
-    showModal = false;
-  }
+  function selectCurriculum(curriculumId) {
+    return async () => {
+      const openingId = id;
+      const candidacyData = new FormData();
   
-  function selectCurriculum(curriculum) {
-    selectedCurriculum = curriculum;
-    closeModal();
-    // Your send curriculum logic here
+      console.log(`ID da vaga ${openingId}, ID do curriculo ${curriculumId}`);
+  
+      candidacyData.append("candidato", curriculumId);
+      candidacyData.append("vaga", openingId);
+      candidacyData.append("status", "EM_ANALISE");
+  
+  
+      const registerCandidacy = await fetch(candidaciesUrl, {
+        method: "POST",
+        body: candidacyData,
+      });
+  
+      if (!registerCandidacy.ok) {
+        console.log(await registerCandidacy.json());
+        alert("Houve um erro enviando currículo. Tente de novo.");
+      };
+
+      selectedCurriculum = {
+        id: curriculumId,
+        
+      }
+      toggleModal();
+    }
   }
   
   function toggleSidebar() {
     showSidebar = !showSidebar;
-  }
-
-  function fartz(e) {
-    e.preventDefault();
-    e.stopPropagation();
   }
 </script>
 
@@ -54,7 +69,7 @@
         <a href="/opening-form?id={id}" class="send-button">Editar Vaga</a>
       {:else}
         {#if !selectedCurriculum}
-          <button class="send-button" onclick={openModal}>Enviar Currículo</button>
+          <button class="send-button" onclick={toggleModal}>Enviar Currículo</button>
           {:else}
             <CandidateCurriculumItem
             id={curriculum.id}
@@ -62,7 +77,7 @@
         {/if}
       {/if}
       <div>
-        {#if boosted}
+        {#if boosted && empresa}
           <span class="boosted">Impulsionada!</span>
         {/if}
         <span class="salary">R$ {salary}</span>
@@ -125,7 +140,7 @@
           {:else}
           {#each openingsList as opening}
           <div class="opening-wrapper">
-            <OpeningItem 
+            <Opening
             id={opening.id}
             titulo={opening.titulo}
             salario={opening.salario}
@@ -145,7 +160,7 @@
       <div class="modal-content" >
         <div class="modal-header">
           <h2>Selecione um currículo</h2>
-          <button class="close-button" onclick={closeModal} aria-label="Close">×</button>
+          <button class="close-button" onclick={toggleModal} aria-label="Close">×</button>
         </div>
         
         <div class="curriculum-list">
@@ -153,13 +168,15 @@
             <p>Você não tem nenhum currículo... Que tal <a href="/curriculums" style:color=#5b7bb4>Criar um?</a></p>
           {:else}
             {#each data.curriculums as curriculum}
-              <CandidateCurriculumItem defaultAction={false}/>
+              <button class="curriculum-wrapper" onclick={selectCurriculum(curriculum.id)}>
+                <CandidateCurriculumItem defaultAction={false}/>
+              </button>
             {/each}
           {/if}
         </div>
         
         <div class="modal-footer">
-          <button class="cancel-button" onclick={closeModal}>Cancelar</button>
+          <button class="cancel-button" onclick={toggleModal}>Cancelar</button>
         </div>
       </div>
     </div>
@@ -327,7 +344,7 @@
   }
 
   .opening-wrapper {
-    height: 300px;
+    height: 250px;
   }
   
   /* Modal */
@@ -391,6 +408,11 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1.5rem;
     align-items: center;
+  }
+
+  .curriculum-wrapper {
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(91, 123, 180, 0.2);
   }
   
   .modal-footer {

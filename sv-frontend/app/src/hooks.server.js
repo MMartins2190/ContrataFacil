@@ -5,14 +5,15 @@ const usersUrl = 'http://127.0.0.1:8000/usuarios/';
 export const handle = async ({ event, resolve }) => {
   const userId = event.cookies.get("userId");
   const path = event.url.pathname;
+  const isPathAllowed = path === "/login" || path === "/signin" || path === "/";
   console.log("~~User's requested route ", path);
 
-  if (!userId && (path === "/login" || path === "/signin" || path === "/")) {
-    console.log(`~~${userId} is falsy AND the ${path} is allowed`);
+  if (isPathAllowed) {
+    console.log(`~~User's ${path} doesn't require user information`);
     return await resolve(event);
   }
   else if (!userId) {
-    console.log(`~~${userId} is falsy but the ${path} is not allowed`);
+    console.log(`~~${userId} is falsy and ${path} is not allowed`);
     throw redirect(303, "/login");
   }
   else {

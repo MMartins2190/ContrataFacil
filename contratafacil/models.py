@@ -58,16 +58,17 @@ class Usuario(AbstractUser):
         self.clean()
         super().save(*args, **kwargs)
 
+
+
 class Candidato(models.Model):
     AREAS = []
 
     plano_pago = models.BooleanField(default=False)
     # area_de_atuacao = models.CharField(choices=AREAS, null=True, blank=True)
-    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, primary_key=True, related_name="candidato")
 
 EXTENSOES_DOC_PERMITIDAS = ['pdf']
 class Curriculo(models.Model):
-
     nome = models.CharField(max_length=50, null=True, blank=True)
     curriculo = models.FileField(
         upload_to=RenomearDoc('curriculos/'),
@@ -88,14 +89,13 @@ class Curriculo(models.Model):
         self.clean()
         super().save(*args, **kwargs)
 
-''
 class Vaga(models.Model):
     titulo = models.CharField(max_length=255)
     salario = models.DecimalField("Salário", max_digits=10, decimal_places=2, blank=True, null=True)
     descricao = models.TextField(null=True, blank=True)
-    requisitos = models.TextField(null=True, blank=True)  # pode ser JSON no futuro
+    requisitos = models.TextField(null=True, blank=True)
     impulsionada = models.BooleanField(default=False)
-    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, null=True, blank=True)
+    empresa = models.ForeignKey(Empresa, related_name="vagas", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.titulo
@@ -107,10 +107,10 @@ class Candidatura(models.Model):
         APROVADO = "APROVADO", "Aprovado"
         REJEITADO = "REJEITADO", "Rejeitado"
 
-    candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, related_name="candidaturas")
+    curriculo = models.ForeignKey(Curriculo, on_delete=models.CASCADE, related_name="candidaturas")
     vaga = models.ForeignKey(Vaga, on_delete=models.CASCADE, related_name="candidaturas")
-    status = models.CharField(max_length=20, choices=Status.choices, default=Status.EM_ANALISE)
+    status = models.CharField(choices=Status.choices, default=Status.EM_ANALISE)
     data_candidatura = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.candidato.usuario.username} -> {self.vaga.titulo} ({self.status})"
+        return f"{self.curriculo.candidato.usuario.username} -> {self.vaga.titulo} ({self.status})"
