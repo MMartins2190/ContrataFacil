@@ -1,9 +1,9 @@
-const apiUrl = "http://127.0.0.1:8000/vagas/";
+import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
 export async function load({url, fetch}){
     const id = url.searchParams.get("id");
     if (!isNaN(id) && Number(id) > 0){
-        const fetchData = await fetch(`${apiUrl}${id}/`);
+        const fetchData = await fetch(`${PUBLIC_API_ROOT_URL}/vagas/${id}/`);
         const openingJSON = await fetchData.json();
 
         return {

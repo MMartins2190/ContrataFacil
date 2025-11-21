@@ -17,7 +17,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
             return super().update(instance, validated_data)
     class Meta:
         model = models.Usuario
-        fields = ["foto_perfil", "username", "password", "email",
+        fields = ["id", "foto_perfil", "username", "password", "email",
                   "cpf", "telefone", "empresa"]        
 
 class CandidatoSerializer(serializers.ModelSerializer):
@@ -32,7 +32,7 @@ class CurriculoSerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {
             'curriculo': {'help_text': 'Arquivo de documento contendo currículo (PDF)'},
-            'usuario': {'help_text': 'Usuário dono do currículo'},
+            'candidato': {'help_text': 'Candidato dono do currículo'},
         }
 
 

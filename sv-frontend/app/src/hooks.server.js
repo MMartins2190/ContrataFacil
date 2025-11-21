@@ -1,6 +1,5 @@
 import { redirect } from "@sveltejs/kit";
-
-const usersUrl = 'http://127.0.0.1:8000/usuarios/';
+import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
 export const handle = async ({ event, resolve }) => {
   const userId = event.cookies.get("userId");
@@ -19,9 +18,9 @@ export const handle = async ({ event, resolve }) => {
   else {
     console.log(`~~${userId} is truthy! Server should fetch corresponding user`);
     try {
-      const res = await fetch(`${usersUrl}${userId}`);
+      const res = await fetch(`${PUBLIC_API_ROOT_URL}/usuarios/${userId}`);
       if (!res.ok) {
-        console.error("~~O servidor não gostou.", res.statusText);
+        console.error(`~~O servidor deu erro: ${res.statusCode} ${res.statusText}`);
         return await resolve(event);
       };
       event.locals.user = await res.json();

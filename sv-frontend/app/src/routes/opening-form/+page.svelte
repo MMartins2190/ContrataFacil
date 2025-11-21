@@ -8,7 +8,6 @@
     let id = page.url.searchParams.get("id");
     let { data } = $props();
     let { title = "", salary = "", description = "", requisites = "", boosted = false } = data;
-    console.log(data);
 
 </script>
 

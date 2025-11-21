@@ -1,52 +1,95 @@
+<!--
+  -> Exibir Status da Candidatura
+  -> Fazer data.candidacy reativo.
+-->
 <script>
+  import { PUBLIC_API_ROOT_URL } from '$env/static/public';
   import Header from '$lib/components/header.svelte';
   import CandidateCurriculumItem from '$lib/components/candidate-curriculum.svelte';
   import Opening from '$lib/components/opening-item.svelte';
   
   let { data } = $props();
   const {
-    id, title, salary, description, requisites, boosted,
+    id, 
+    title,
+    salary,
+    description,
+    requisites,
+    boosted,
   } = data.currentOpening;
-  const openingsList = data.openings;
+
+  // Altere por uma verificação
   const empresa = false;
-  const candidaciesUrl = "http://127.0.0.1:8000/candidaturas/";
+  const openingsList = data.openings;
+  let currentCurriculum = null;
+
+  if (data.candidacy) {
+    currentCurriculum = data.curriculums.find(
+      curriculo => curriculo.id === data.candidacy.curriculo
+    );
+  }
 
   let showModal = $state(false);
-  let selectedCurriculum = $state(null);
+  let selectedCurriculum = $state(currentCurriculum);
   let showSidebar = $state(false);
   
   function toggleModal() {
     showModal = !showModal;
   }
-  
-  function selectCurriculum(curriculumId) {
+
+  function selectCurriculum(curriculumObj) {
     return async () => {
       const openingId = id;
       const candidacyData = new FormData();
-  
-      console.log(`ID da vaga ${openingId}, ID do curriculo ${curriculumId}`);
-  
-      candidacyData.append("candidato", curriculumId);
+    
+      candidacyData.append("curriculo", curriculumObj.id);
       candidacyData.append("vaga", openingId);
-      candidacyData.append("status", "EM_ANALISE");
-  
-  
-      const registerCandidacy = await fetch(candidaciesUrl, {
-        method: "POST",
+      
+      if (selectedCurriculum) {
+        const registerCandidacy = await fetch
+        (`${PUBLIC_API_ROOT_URL}/candidaturas/${data.candidacy.id}/`, {
+        method: "PUT",
         body: candidacyData,
-      });
-  
-      if (!registerCandidacy.ok) {
-        console.log(await registerCandidacy.json());
-        alert("Houve um erro enviando currículo. Tente de novo.");
-      };
+        });
 
-      selectedCurriculum = {
-        id: curriculumId,
-        
+        if (!registerCandidacy.ok) {
+          console.log("Resposta do servidor", await registerCandidacy.json());
+          alert("Houve um erro enviando currículo. Tente de novo.");
+          return;
+        };
       }
-      toggleModal();
+      else {
+        const registerCandidacy = await fetch(`${PUBLIC_API_ROOT_URL}/candidaturas/`, {
+          method: "POST",
+          body: candidacyData,
+        });
+    
+        if (!registerCandidacy.ok) {
+          console.log("Resposta do servidor", await registerCandidacy.json());
+          alert("Houve um erro enviando currículo. Tente de novo.");
+          return;
+        };
+      }
+
+        selectedCurriculum = {
+          id: curriculumObj.id,
+          nome: curriculumObj.nome,
+          curriculo: curriculumObj.curriculo,
+        };
+        toggleModal();
     }
+  }
+
+  async function deleteSelection() {
+    const fetchData = await fetch(
+      `${PUBLIC_API_ROOT_URL}/candidaturas/${data.candidacy.id}/`,
+    { method: "DELETE" }
+    ).catch(e=>console.warn("Erro", e));
+    if (!fetchData.ok) {
+      alert("Não foi possível remover esta candidatura");
+      return console.log(await fetchData.json())
+    };
+    selectedCurriculum = null;
   }
   
   function toggleSidebar() {
@@ -60,29 +103,40 @@
 <div class="page">
   
   <main class="content">
-    <div class="header-section">
-      <h1>{title}</h1>
-    </div>
-    
     <div class="info-bar">
+      <h1>{title}</h1>
+      <div>
+        {#if boosted && empresa}
+        <span class="boosted">Impulsionada!</span>
+        {/if}
+        <span class="salary">R$ {salary}</span>
+      </div>
+    </div>
+
+    <section class="operations-section">
       {#if empresa}
         <a href="/opening-form?id={id}" class="send-button">Editar Vaga</a>
       {:else}
         {#if !selectedCurriculum}
           <button class="send-button" onclick={toggleModal}>Enviar Currículo</button>
           {:else}
-            <CandidateCurriculumItem
-            id={curriculum.id}
-            curriculo={curriculum.curriculo}/>
+            <div>
+              <div class="candidacy-info">
+                <div>
+                  <button class="send-button" onclick={toggleModal}>Mudar Currículo</button>
+                  <button class="send-button" onclick={deleteSelection} style:background=red>Remover</button>
+                </div>
+                <span class="status">{"???"}</span>
+              </div>
+              <CandidateCurriculumItem
+              id={selectedCurriculum.id}
+              file={selectedCurriculum.curriculo}
+              curriculumName={selectedCurriculum.nome}
+              />
+            </div>
         {/if}
       {/if}
-      <div>
-        {#if boosted && empresa}
-          <span class="boosted">Impulsionada!</span>
-        {/if}
-        <span class="salary">R$ {salary}</span>
-      </div>
-    </div>
+    </section>
     
     <section class="description-section">
       <h2>Descrição</h2>
@@ -136,7 +190,7 @@
       
       <div class="job-listings">
         {#if openingsList < 1}
-          <p>Não há outras vagas</p>
+          <p style:color="white">Não há outras vagas</p>
           {:else}
           {#each openingsList as opening}
           <div class="opening-wrapper">
@@ -168,8 +222,12 @@
             <p>Você não tem nenhum currículo... Que tal <a href="/curriculums" style:color=#5b7bb4>Criar um?</a></p>
           {:else}
             {#each data.curriculums as curriculum}
-              <button class="curriculum-wrapper" onclick={selectCurriculum(curriculum.id)}>
-                <CandidateCurriculumItem defaultAction={false}/>
+              <button class="curriculum-wrapper" onclick={selectCurriculum(curriculum)}>
+                <CandidateCurriculumItem 
+                id={curriculum.id}
+                file={curriculum.curriculo}
+                curriculumName={curriculum.nome}
+                defaultAction={false}/>
               </button>
             {/each}
           {/if}
@@ -193,13 +251,6 @@
     max-width: 1200px;
     margin: 0 auto;
     transition: margin-right 0.3s;
-  }
-  
-  .header-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
   }
   
   h1 {
@@ -238,7 +289,35 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  .info-bar div {
+    background:rgba(91, 123, 180, 0.2);
+  }
   
+  .operations-section {
+    margin: 2rem 0;
+  }
+
+  .operations-section div {
+    background: rgba(91, 123, 180, 0.2);
+    display: flex;
+    border-radius: 20px;
+    height: 250px
+  }
+
+  .candidacy-info {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2rem 0 0;
+    justify-content: space-between;
+  }
+
+  .candidacy-info div {
+    display: inherit;
+    flex-direction: inherit;
+    gap: 1rem;
+  }
+
   .send-button {
     padding: 0.875rem 2rem;
     font-size: 1.1rem;
@@ -257,7 +336,7 @@
   }
   
   .salary, .boosted {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 600;
     color: #5b7bb4;
   }

@@ -35,7 +35,7 @@ class CurriculoViewSet(viewsets.ModelViewSet):
 
 class CandidatoViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CandidatoSerializer
-    queryset = models.Curriculo.objects.all()
+    queryset = models.Candidato.objects.all()
     permission_classes = [AllowAny]
 
 class VagaViewSet(viewsets.ModelViewSet):
@@ -65,10 +65,5 @@ class LoginViewSet(viewsets.ViewSet):
             if not user:
                 return Response({"detail": "Invalid credentials"}, status.HTTP_400_BAD_REQUEST)
 
-            user_dict = {
-                "id":user.id,
-                "username":user.username,
-                "empresa":user.empresa or None,
-            }
-            return Response({"detail": "ok", "user": user_dict})
+            return Response({"detail": "ok", "user": user.id})
         return Response("Dados inválidos", status.HTTP_400_BAD_REQUEST)

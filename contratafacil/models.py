@@ -64,7 +64,7 @@ class Candidato(models.Model):
     AREAS = []
 
     plano_pago = models.BooleanField(default=False)
-    # area_de_atuacao = models.CharField(choices=AREAS, null=True, blank=True)
+    # area_de_atuacao = models.CharField(choices=AREAS, null=True, blank=True)'
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, primary_key=True, related_name="candidato")
 
 EXTENSOES_DOC_PERMITIDAS = ['pdf']
@@ -77,7 +77,7 @@ class Curriculo(models.Model):
     candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, related_name="Currículos")
 
     def __str__(self):
-        return f"Currículo de {self.usuario.username}"
+        return f"Currículo de {self.candidato.usuario.username}"
     
     def clean(self):
         if self.curriculo:

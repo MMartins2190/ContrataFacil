@@ -1,11 +1,10 @@
 import { redirect } from "@sveltejs/kit";
-
-const openingsURL = "http://127.0.0.1:8000/vagas/";
+import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
 export const actions = {
     create: async ({request, fetch}) => {
         const data = await request.formData();
-        const postData = await fetch(openingsURL, {
+        const postData = await fetch(`${PUBLIC_API_ROOT_URL}/vagas/`, {
             method: "POST",
             body: data,
         });
@@ -21,7 +20,7 @@ export const actions = {
     update: async ({request, fetch, url}) => {
         const openingId = url.searchParams.get("id");
         const data = await request.formData();
-        const putData = await fetch(`${openingsURL}${openingId}/`, {
+        const putData = await fetch(`${PUBLIC_API_ROOT_URL}/vagas/${openingId}/`, {
             method: "PUT",
             body: data,
         });
@@ -32,7 +31,7 @@ export const actions = {
     delete: async ({request, fetch, url}) => {
         const openingId = url.searchParams.get("id");
         const data = await request.formData();
-        const putData = await fetch(`${openingsURL}${openingId}/`, {
+        const putData = await fetch(`${PUBLIC_API_ROOT_URL}/vagas/${openingId}/`, {
             method: "DELETE",
         });
 

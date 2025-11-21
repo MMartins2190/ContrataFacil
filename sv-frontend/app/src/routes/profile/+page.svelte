@@ -5,11 +5,11 @@
   let { data } = $props();
   const {
     foto_perfil = null,
-    username,
-    email,
-    cpf,
-    telefone,
-    empresa,
+    username = "Erro",
+    email = "erro@coERRO.erro",
+    cpf = "!!!.!!!.!!!-!!",
+    telefone = "Nenhum",
+    empresa = "Errante",
     area = "<Área de Atuação>",
   } = data?.user;
   

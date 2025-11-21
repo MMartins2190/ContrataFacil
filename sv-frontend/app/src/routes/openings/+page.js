@@ -1,13 +1,9 @@
-const apiUrl = "http://127.0.0.1:8000/vagas/";
-const requestAuth = {
-    method: "GET",
-    credentials: "include",
-}
+import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
 export async function load({ fetch }){
     const openings = async () => {
-            const fetchOpenings = await fetch(apiUrl, requestAuth);
-            return await fetchOpenings.json();
+        const fetchOpenings = await fetch(`${PUBLIC_API_ROOT_URL}/vagas`);
+        return await fetchOpenings.json();
     }
 
     return {
