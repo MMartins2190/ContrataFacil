@@ -1,3 +1,7 @@
+<!--
+    -> Salário não aceita valores decimais;
+-->
+
 <script>
     import { enhance } from "$app/forms";
     import { page } from "$app/state";

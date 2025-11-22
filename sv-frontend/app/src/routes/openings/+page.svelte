@@ -1,15 +1,52 @@
+<!--
+-->
+-->
 <script>
     import Header from "$lib/components/header.svelte";
     import Opening from "$lib/components/opening-item.svelte";
     
     let { data } = $props();
-    let openingList = $state(data.openings);
+    let openingsList = $state(data.openings);
+    let searchTitle = $state("");
+    let searchLocal = $state("");
+    let searchSalary = $state("");
+    // Mude no futuro
     const empresa = true;
 
-    function searchOpenings(event) {
-        event.preventDefault();
-        console.log(event);
+    async function searchFilter(e) {
+        e.preventDefault();
+        const titleWords = searchTitle.split(" ");
+        const titleLetters = searchTitle.split();
+        const localWords = searchLocal.split(" ");
+        const localLetters = searchLocal.split();
+        
+
+        openingsList.map(opening => {
+            opening.relevance = 0;
+            if (searchTitle === opening.titulo) {
+                opening.relevance += 1000;
+            };
+            if (searchTitle.toLowerCase() === opening.titulo.toLowerCase()) {
+                opening.relevance += 800;
+            };
+            for (const titleWord of titleWords) {
+                if (opening.titulo.toLowerCase().includes(titleWord.toLowerCase())) {
+                    opening.relevance += 100;
+                };
+            };
+            for (const titleLetter of titleLetters) {
+                if (opening.titulo.toLowerCase().includes(titleLetter.toLowerCase())) {
+                    opening.relevance += 10;
+                }
+            }
+            return opening;
+        })
+
+        
+        return openingsList.sort((opA, opB) => opB.relevance - opA.relevance);
     }
+
+    $inspect(openingsList, searchTitle, searchLocal, searchSalary);
 </script>
 
 <title>Vagas</title>
@@ -20,19 +57,19 @@
     <h1>Vagas</h1>
     
     <div class="list-vacancies">
-        <form onsubmit={searchOpenings} method="get">
+        <form onsubmit={searchFilter}>
             <div class="form-grid">
                 <div class="search-field">
                     <label for="search-opening">Escolha uma vaga</label>
-                    <input class="form-input" id="search-opening" type="text" name="searchOpening" placeholder="Digite uma vaga...">
+                    <input class="form-input" id="search-opening" type="text" bind:value={searchTitle} placeholder="Digite uma vaga...">
                 </div>
                 <div class="search-field">
                     <label for="search-local">Defina um local</label>
-                    <input class="form-input" id="search-local" type="text" name="searchLocal" placeholder="Digite um local...">
+                    <input class="form-input" id="search-local" type="text" bind:value={searchLocal} placeholder="Digite um local...">
                 </div>
                 <div class="search-field">
                     <label for="search-salary">Escolha o salário</label>
-                    <input class="form-input" id="search-salary" type="text" name="searchSalary" placeholder="Digite um salário...">
+                    <input class="form-input" id="search-salary" type="text" bind:value={searchSalary} placeholder="Digite um salário...">
                 </div>
             </div>
             <div class="search-field">
@@ -42,11 +79,11 @@
         {#if empresa}
             <a href="/opening-form" class="pr-blue-btn">Criar nova vaga</a>
         {/if}
-        {#if openingList.length === 0}
+        {#if openingsList.length === 0}
             <h2>Não há nenhuma vaga disponível ¯\_(ツ)_/¯</h2>
             {:else}
             <div class="vacancies-data" id="vacancies-data">
-                {#each openingList as opening}
+                {#each openingsList as opening}
                     <div class="opening-wrapper">
                         <Opening
                             id={opening.id}
