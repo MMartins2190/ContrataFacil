@@ -19,6 +19,8 @@
     let modalCreate = $state(false);
     let modalUpdate = $state(false);
     let fileInputValue = $state("Escolha um Currículo");
+    let curriculumName = $state("");
+    let curriculumId = $state("");
     let curriculums = data.curriculums;
 
     function toggleHints() {
@@ -29,8 +31,15 @@
       modalCreate =  !modalCreate;
     }
 
-    function toggleUpdate() {
-      modalUpdate = !modalUpdate;
+    function toggleUpdate(curriculum = null) {
+      return async () => {
+        modalUpdate = !modalUpdate;
+        if (curriculum) {
+          curriculumId = curriculum.id;
+          curriculumName = curriculum.nome;
+          fileInputValue = curriculum.curriculoNome;
+        }
+      }
     }
 
     function filePicked(event) {
@@ -56,7 +65,7 @@
       </button>
       
       {#each curriculums as curriculum }
-      <button class="curriculum-wrapper" onclick={toggleUpdate}>
+      <button class="curriculum-wrapper" onclick={toggleUpdate(curriculum)}>
         <CandidateCurriculumItem
         id={curriculum.id}
         file={curriculum.curriculo}
@@ -91,7 +100,7 @@
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="modal-overlay" onclick={toggleCreate}>
-      <div class="modal-content create-content" onclick={e => e.stopPropagation()}>
+      <div class="modal-content form-modal" onclick={e => e.stopPropagation()}>
         <form method="POST" action="?/create" enctype="multipart/form-data">
           <input type="text" name="nome" placeholder="Nome do Currículo" required>
             <label class="pr-blue-btn" for="file-create">{fileInputValue}</label>
@@ -113,10 +122,24 @@
 {#if modalUpdate}
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <div class="modal-overlay" onclick={toggleUpdate}>
-      <div class="modal-content update-content" onclick={e => e.stopPropagation()}>
-        <form method="POST">
-          <input type="text" value="Nome do Currículo">
+  <div class="modal-overlay" onclick={toggleUpdate()}>
+      <div class="modal-content form-modal" onclick={e => e.stopPropagation()}>
+        <form method="POST" enctype="multipart/form-data">
+          <input type="text" name="nome" value={curriculumName} placeholder="Nome do Currículo" required>
+            <label class="pr-blue-btn" for="file-update">{fileInputValue}</label>
+            <input
+            onchange={filePicked} 
+            type="file"
+            name="curriculo" 
+            accept=".pdf" 
+            id="file-update"
+            required
+            style:display="none"
+            >
+          <div>
+            <input formaction="?/update&id={curriculumId}" type="submit" class="pr-blue-btn" value="Salvar">
+            <input formaction="?/delete&id={curriculumId}" type="submit" class="pr-blue-btn"style:background="red" value="Apagar">
+          </div>
         </form>
       </div>
   </div>
@@ -247,7 +270,7 @@
     overflow-y: scroll;
   }
 
-  .create-content form {
+  .form-modal form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -256,7 +279,7 @@
     gap: 4rem;
   }
 
-  .create-content input[type="text"] {
+  .form-modal input[type="text"] {
     font-size: 2ch;
     font-weight: 500;
     padding: 0 0 .2ch 0;

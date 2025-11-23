@@ -71,9 +71,11 @@ EXTENSOES_DOC_PERMITIDAS = ['pdf']
 class Curriculo(models.Model):
     nome = models.CharField(max_length=50, null=True, blank=True)
     curriculo = models.FileField(
+        "Arquivo de currículo",
         upload_to=RenomearDoc('curriculos/'),
         validators=[FileExtensionValidator(EXTENSOES_DOC_PERMITIDAS)],
         null=True)
+    curriculoNome = models.CharField("Nome de arquivo do currículo", null=True, blank=True)
     candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, related_name="Currículos")
 
     def __str__(self):
