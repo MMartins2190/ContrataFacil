@@ -26,18 +26,18 @@ export const dictionary = {
 		"/": [2],
 		"/about": [3],
 		"/curriculums": [4],
-		"/curriculums/[curriculumId]": [5],
-		"/enterprise-form": [~6],
-		"/enterprise-intro": [7],
-		"/enterprise-intro/[enterpriseId]": [8],
-		"/homepage": [9],
-		"/login": [~10],
-		"/opening-form": [~11],
-		"/openings": [12],
-		"/openings/[openingId]": [13],
-		"/plans": [14],
-		"/profile": [15],
-		"/signin": [16]
+		"/enterprise-form": [~5],
+		"/enterprise-intro": [6],
+		"/enterprise-intro/[enterpriseId]": [7],
+		"/homepage": [8],
+		"/login": [~9],
+		"/opening-form": [~10],
+		"/openings": [11],
+		"/openings/[openingId]": [12],
+		"/plans": [13],
+		"/profile": [14],
+		"/signin": [15],
+		"/view-pdf": [16]
 	};
 
 export const hooks = {

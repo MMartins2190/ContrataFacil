@@ -6,9 +6,17 @@ from contratafacil import models
 from contratafacil.api import serializers
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import action
+from django.utils.decorators import method_decorator
+from django.views.decorators.clickjacking import xframe_options_exempt
 from rest_framework.response import Response
 from django.contrib.auth import authenticate 
 from rest_framework.authtoken.models import Token
+
+# Experimetal view to test viewing dpfs through iframes
+@method_decorator(xframe_options_exempt, name="dispatch")
+class PdfViewSet(viewsets.ViewSet):
+    def list(self, request):
+        return Response("http://127.0.0.1:8000/media/pdf/file.pdf", status.HTTP_200_OK)
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()

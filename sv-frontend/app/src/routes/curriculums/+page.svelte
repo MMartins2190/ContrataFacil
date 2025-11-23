@@ -3,33 +3,52 @@
     import CandidateCurriculumItem from '$lib/components/candidate-curriculum.svelte';
     import Header from "$lib/components/header.svelte";
 
+    const hints = [
+      "Nome completo, cidade/estado (não precisa endereço completo), telefone, e-mail profissional e link do LinkedIn. O CPF é opcional e geralmente não é necessário na primeira etapa.",
+      "Uma frase curta (2-3 linhas) explicando qual vaga você busca e o que você pode oferecer. Seja específico e alinhado com a vaga desejada.",
+      "Exponha experiências profissionais em ordem cronológica reversa - Começando pela mais recente. Inclua: nome da empresa, cargo, período (mês/ano), e principalmente as realizações e resultados obtidos, não apenas as responsabilidades.",
+      "Formação acadêmica relevante - Curso, instituição, período. Se você tem ensino superior, não precisa mencionar ensino fundamental. Para recém-formados, pode incluir TCC ou projetos acadêmicos relevantes.",
+      "Adequação à vaga - Personalize o currículo para cada posição, destacando experiências e habilidades que se conectam diretamente com os requisitos da vaga anunciada.",
+      "Não exponha informações pessoais desnecessárias - Embora ainda seja comum incluir foto, isso não é recomendado por boas práticas de recrutamento modernas e pode gerar discriminação contra o candidato.",
+      "Seja conciso, exponha toda a informação necessária em uma página.",
+      "Revise cuidadosamente. Erros gramaticais, de concordância ou ortografia causam péssima impressão. Mantenha formatação uniforme (fontes, espaçamentos, alinhamentos)."
+    ];
+
     let { data } = $props();
+    let modalHints = $state(false);
+    let modalDetail = $state(false);
     let curriculums = data.curriculums;
 
-    function replaceWithFileName() {
-      for (let curriculum of curriculums) {
-        console.log(curriculum);
-      }
+    function toggleHints() {
+      modalHints = !modalHints;
     }
 
-    replaceWithFileName();
+    function toggleDetail() {
+      modalDetail = !modalDetail;
+    }
+    
 </script>
 
 <title>Currículos</title>
 
 <div class="page">
   <Header />
+  <button class="hints-toggler" onclick={toggleHints}>?</button>
   
   <main class="content">
     <h1>Meus Currículos:</h1>
     
     <div class="curriculos-grid">
-      <a href="/curriculums/0" class="add-card">
+      <button class="add-card">
         <span class="plus-icon">+</span>
-      </a>
+      </button>
       
       {#each curriculums as curriculum }
-        <CandidateCurriculumItem id={curriculum.id} fileName={curriculum.fileName} />
+        <CandidateCurriculumItem
+        id={curriculum.id}
+        file={curriculum.curriculo}
+        curriculumName={curriculum.nome}
+        />
       {/each}
     </div>
   </main>
@@ -38,6 +57,33 @@
     <span class="plus-icon">+</span>
   </a>
 </div>
+
+{#if modalHints}
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div class="modal-overlay" onclick={toggleHints}>
+      <div class="modal-content" onclick={e => e.stopPropagation()}>
+        <h1>Guia para criar um currículo</h1>
+        <ol>
+          {#each hints as hint}
+            <li>{hint}</li>
+          {/each}
+        </ol>
+      </div>
+  </div>
+{/if}
+
+{#if modalDetail}
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div class="modal-overlay" onclick={toggleDetail}>
+      <div class="modal-content" onclick={e => e.stopPropagation()}>
+        <form method="POST">
+          <input type="text" value="Nome do Currículo">
+        </form>
+      </div>
+  </div>
+{/if}
 
 <style>
   .page {
@@ -51,12 +97,23 @@
     max-width: 1400px;
     margin: 0 auto;
   }
-  
+
   h1 {
     font-size: 2.5rem;
-    font-weight: normal;
-    margin: 0 0 2rem 0;
+    font-weight: 500;
+    margin: 0 0 5rem 0;
     color: #000;
+  }
+
+  .hints-toggler {
+    position: fixed;
+    top: 5rem;
+    right: 2rem;
+    height: 50px;
+    width: 50px;
+    background: #5b7bb4;
+    color: white;
+    border-radius: 100%;
   }
   
   .curriculos-grid {
@@ -118,6 +175,33 @@
     font-weight: 300;
     line-height: 1;
   }
+
+  /* Modal de dicas de currículo */
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 101;
+  }
+
+  .modal-content {
+    background: #F6F7F9;
+    max-height: 80vh;
+    max-width: 60vw;
+    border: 1px solid #4a6fa5;
+    border-radius: 20px;
+    padding: 2rem;
+    overflow-y: scroll;
+  }
+
+  
   
   @media (max-width: 768px) {
     .content {

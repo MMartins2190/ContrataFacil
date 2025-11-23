@@ -23,6 +23,7 @@ schema_view = get_schema_view(
 
 # 🔹 Definição das rotas
 router = routers.DefaultRouter()
+router.register(r'pdf', viewsets.PdfViewSet, basename='pdf')
 router.register(r'usuarios', viewsets.UsuarioViewSet, basename='usuarios')
 router.register(r'candidatos', viewsets.CandidatoViewSet, basename='candidatos')
 router.register(r'curriculos', viewsets.CurriculoViewSet, basename='curriculos')

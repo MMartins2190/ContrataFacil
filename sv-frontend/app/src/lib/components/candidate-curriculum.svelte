@@ -6,17 +6,13 @@
     defaultAction = true,
   } = $props();
 
-  function noDefault(e) {
-    e.preventDefault();
-  }
-
   function getFilename(file) {
     return "Someth1ng";
   }
 
 </script>
 
-<a href="/curriculums/{id}" class="curriculo-card" onclick={defaultAction ? "" : noDefault}>
+<button class="curriculo-card">
   <div class="card-content">
     <div class="file-info">
       <div class="file-icon">
@@ -31,10 +27,11 @@
       <p>{curriculumName}</p>
     </div>
   </div>
-</a>
+</button>
 
 <style>
   .curriculo-card {
+    cursor: pointer;
     aspect-ratio: 1;
     background: white;
     border: 2px solid #5b7bb4;
