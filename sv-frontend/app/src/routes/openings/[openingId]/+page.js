@@ -38,7 +38,6 @@ export async function load({parent, url, fetch}){
         }
 
         async function candidacy() {
-            const layoutData = await parent();
             const fetchData = await fetch(`${PUBLIC_API_ROOT_URL}/candidaturas/`);
             if (!fetchData.ok) console.log(await fetchData.json());
             const candidaciesJSON = await fetchData.json();

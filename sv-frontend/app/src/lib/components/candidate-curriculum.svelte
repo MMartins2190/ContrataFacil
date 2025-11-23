@@ -12,7 +12,7 @@
 
 </script>
 
-<button class="curriculo-card">
+<div class="curriculo-card">
   <div class="card-content">
     <div class="file-info">
       <div class="file-icon">
@@ -27,7 +27,7 @@
       <p>{curriculumName}</p>
     </div>
   </div>
-</button>
+</div>
 
 <style>
   .curriculo-card {

@@ -1,6 +1,3 @@
-<!--
--->
--->
 <script>
     import Header from "$lib/components/header.svelte";
     import Opening from "$lib/components/opening-item.svelte";

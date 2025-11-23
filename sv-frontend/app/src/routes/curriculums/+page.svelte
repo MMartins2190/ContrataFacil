@@ -16,15 +16,27 @@
 
     let { data } = $props();
     let modalHints = $state(false);
-    let modalDetail = $state(false);
+    let modalCreate = $state(false);
+    let modalUpdate = $state(false);
+    let fileInputValue = $state("Escolha um Currículo");
     let curriculums = data.curriculums;
 
     function toggleHints() {
       modalHints = !modalHints;
     }
 
-    function toggleDetail() {
-      modalDetail = !modalDetail;
+    function toggleCreate() {
+      modalCreate =  !modalCreate;
+    }
+
+    function toggleUpdate() {
+      modalUpdate = !modalUpdate;
+    }
+
+    function filePicked(event) {
+      if (event.target.files.length === 1) {
+        fileInputValue = event.target.files[0].name;
+      };
     }
     
 </script>
@@ -39,16 +51,18 @@
     <h1>Meus Currículos:</h1>
     
     <div class="curriculos-grid">
-      <button class="add-card">
+      <button class="add-card" onclick={toggleCreate}>
         <span class="plus-icon">+</span>
       </button>
       
       {#each curriculums as curriculum }
+      <button class="curriculum-wrapper" onclick={toggleUpdate}>
         <CandidateCurriculumItem
         id={curriculum.id}
         file={curriculum.curriculo}
         curriculumName={curriculum.nome}
         />
+      </button>
       {/each}
     </div>
   </main>
@@ -73,11 +87,34 @@
   </div>
 {/if}
 
-{#if modalDetail}
+{#if modalCreate}
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <div class="modal-overlay" onclick={toggleDetail}>
-      <div class="modal-content" onclick={e => e.stopPropagation()}>
+  <div class="modal-overlay" onclick={toggleCreate}>
+      <div class="modal-content create-content" onclick={e => e.stopPropagation()}>
+        <form method="POST" action="?/create" enctype="multipart/form-data">
+          <input type="text" name="nome" placeholder="Nome do Currículo" required>
+            <label class="pr-blue-btn" for="file-create">{fileInputValue}</label>
+            <input
+            onchange={filePicked} 
+            type="file"
+            name="curriculo" 
+            accept=".pdf" 
+            id="file-create"
+            required
+            style:display="none"
+            >
+          <input type="submit" class="pr-blue-btn" value="Criar">
+        </form>
+      </div>
+  </div>
+{/if}
+
+{#if modalUpdate}
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div class="modal-overlay" onclick={toggleUpdate}>
+      <div class="modal-content update-content" onclick={e => e.stopPropagation()}>
         <form method="POST">
           <input type="text" value="Nome do Currículo">
         </form>
@@ -145,6 +182,15 @@
     font-weight: 300;
     line-height: 1;
   }
+
+  .curriculum-wrapper {
+    border-radius: 16px;
+  }
+
+  .curriculum-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(91, 123, 180, 0.2);
+  }
   
   .fab {
     position: fixed;
@@ -176,7 +222,7 @@
     line-height: 1;
   }
 
-  /* Modal de dicas de currículo */
+  /* Modais */
 
   .modal-overlay {
     position: fixed;
@@ -201,7 +247,24 @@
     overflow-y: scroll;
   }
 
-  
+  .create-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(91, 123, 180, 0.2);
+    gap: 4rem;
+  }
+
+  .create-content input[type="text"] {
+    font-size: 2ch;
+    font-weight: 500;
+    padding: 0 0 .2ch 0;
+    background: none;
+    border-bottom: 2px solid #4a6fa5;
+    color: #4a6fa5;
+    display: flex;
+  }
   
   @media (max-width: 768px) {
     .content {
