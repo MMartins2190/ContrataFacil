@@ -20,7 +20,8 @@
 
   // Altere por uma verificação
   const empresa = false;
-  const openingsList = data.openings;
+  let openingsList = $state(data.openings);
+  let searchTitle = $state("");
   let currentCurriculum = null;
 
   if (data.candidacy) {
@@ -92,6 +93,34 @@
     selectedCurriculum = null;
   }
   
+  function searchFilter() {
+        const titleWords = searchTitle.split(" ");
+        const titleLetters = searchTitle.split();
+
+        openingsList.map(opening => {
+            opening.relevance = 0;
+            if (searchTitle === opening.titulo) {
+                opening.relevance += 1000;
+            };
+            if (searchTitle.toLowerCase() === opening.titulo.toLowerCase()) {
+                opening.relevance += 800;
+            };
+            for (const titleWord of titleWords) {
+                if (opening.titulo.toLowerCase().includes(titleWord.toLowerCase())) {
+                    opening.relevance += 100;
+                };
+            };
+            for (const titleLetter of titleLetters) {
+                if (opening.titulo.toLowerCase().includes(titleLetter.toLowerCase())) {
+                    opening.relevance += 10;
+                }
+            }
+            return opening;
+        })
+
+        return openingsList.sort((opA, opB) => opB.relevance - opA.relevance);
+  }
+
   function toggleSidebar() {
     showSidebar = !showSidebar;
   }
@@ -162,10 +191,12 @@
       
       <div class="filter-group">
         <label for="vaga-search">Escolha uma vaga</label>
-        <input 
+        <input
+          oninput={searchFilter}
           type="text" 
           id="vaga-search" 
           placeholder="Digite uma vaga"
+          bind:value={searchTitle}
         />
       </div>
       
@@ -270,16 +301,11 @@
     justify-content: space-between;
   }
 
-  .info-bar div {
-    background:rgba(91, 123, 180, 0.2);
-  }
-  
   .operations-section {
     margin: 2rem 0;
   }
 
   .operations-section div {
-    background: rgba(91, 123, 180, 0.2);
     display: flex;
     border-radius: 20px;
     height: 250px

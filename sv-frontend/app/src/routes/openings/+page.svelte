@@ -31,7 +31,6 @@
             return opening;
         })
 
-        
         return openingsList.sort((opA, opB) => opB.relevance - opA.relevance);
     }
 </script>
