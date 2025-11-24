@@ -1,6 +1,9 @@
 import { goto } from "$app/navigation";
+import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
-const usuariosUrl = "http://127.0.0.1:8000/usuarios"; 
-
-// Lógica de olhar obj de usuário e olhar atributo empresa
-// goto /enterprise-intro/${id_empresa}
+export async function load({ parent }) {
+    const parentData = await parent();
+    if (parentData.user.empresa) {
+        return goto(`/enterprise-intro/${parentData.user.empresa}/`);
+    };
+}

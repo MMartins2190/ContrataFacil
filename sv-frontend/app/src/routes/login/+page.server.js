@@ -1,11 +1,10 @@
 import { redirect } from "@sveltejs/kit";
-
-const apiUrl = "http://127.0.0.1:8000/login/";
+import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
 export const actions = {
     default: async ({request, fetch, cookies}) => {
         const data = await request.formData();
-        const loginAttempt = await fetch(apiUrl, {
+        const loginAttempt = await fetch(`${PUBLIC_API_ROOT_URL}/login/`, {
             method: "POST",
             body: data,
         });

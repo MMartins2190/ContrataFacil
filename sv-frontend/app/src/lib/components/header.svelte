@@ -18,9 +18,17 @@
     <nav class:open={menuOpen}>
         <a href="/openings" class="nav-item nav-link">Vagas</a>
         <a href="/curriculums" class="nav-item nav-link">Currículos</a>
-        <a href="/enterprise-intro" class="nav-item nav-link">Para Empresas</a>
+        <a
+        href="/enterprise-intro"
+        class="nav-item nav-link"
+        data-sveltekit-preload-data="tap"
+        >Para Empresas</a>
         <a href="/about" class="nav-item nav-link">Sobre</a>
-        <a href="/profile" class="nav-item nav-link">Perfil</a>
+        <a
+        href="/profile"
+        class="nav-item nav-link"
+        data-sveltekit-preload-data="false"
+        >Perfil</a>
     </nav>
 </header>
 

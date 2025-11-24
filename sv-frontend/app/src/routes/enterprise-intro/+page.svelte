@@ -11,7 +11,10 @@
         Automatize processos, encontre talentos ideais e reduza o tempo de contratação em até 78% com nossa plataforma de Inteligência Comportamental.
     </p>
     <div class="btn-space">
-        <a href="/enterprise-form" class="pr-blue-btn" style:background="gray">Cadastrar Empresa</a>
+        <a href="/enterprise-form" class="pr-blue-btn"
+        style:background="#bbb"
+        style:border-radius=20px
+        style:color=black>Cadastrar Empresa</a>
     </div>
 </div>
 

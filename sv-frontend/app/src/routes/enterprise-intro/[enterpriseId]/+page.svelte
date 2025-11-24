@@ -7,6 +7,7 @@
     console.log(data);
 
   const {
+    id,
     cnpj,
     name,
     email,
@@ -42,6 +43,12 @@
           <span class="label">E-mail</span>
           <span class="value">{email}</span>
         </div>
+
+          <a
+          href="/enterprise-form?id={id}"
+          class="pr-blue-btn"
+          style:text-align="center"
+          >Editar Informações</a>
       </aside>
       
       <section class="active-jobs">
@@ -51,12 +58,14 @@
         {:else}    
             <div class="jobs-list">
             {#each data.openings as opening}
+              <div class="wrapper-job">
                 <Opening
                 id={opening.id}
                 titulo={opening.titulo}
                 salario={opening.salario}
                 requisitos={opening.requisitos}
                 />
+              </div>
             {/each}
             </div>
         {/if}
@@ -174,7 +183,13 @@
   .jobs-list {
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    max-height: 90vh;
     gap: 1.5rem;
+  }
+
+  .wrapper-job {
+    height: 300px;
   }
   
   /* Scrollbar styling for description */

@@ -28,7 +28,6 @@
         
         <div class="cta-buttons">
           <a href="/login" class="btn-primary">Começar agora</a>
-          <a href="/login?linkedin=true" class="btn-secondary">Entrar com Linkedin</a>
         </div>
       </div>
     </section>
@@ -143,13 +142,13 @@
   
   .cta-buttons {
     display: flex;
+    justify-content: center;
     gap: 1rem;
     max-width: 500px;
     margin: 0 auto;
   }
   
-  .btn-primary,
-  .btn-secondary {
+  .btn-primary {
     padding: 1rem 2rem;
     font-size: 1rem;
     font-weight: 500;
@@ -168,17 +167,6 @@
   
   .btn-primary:hover {
     background: #4a6fa5;
-    transform: translateY(-2px);
-  }
-  
-  .btn-secondary {
-    background: white;
-    color: #5b7bb4;
-    border: 2px solid #5b7bb4;
-  }
-  
-  .btn-secondary:hover {
-    background: #f5f8fc;
     transform: translateY(-2px);
   }
   

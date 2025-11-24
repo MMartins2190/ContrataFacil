@@ -1,5 +1,4 @@
-const enterpriseUrl = "http://127.0.0.1:8000/empresas/";
-const openingsUrl = "http://127.0.0.1:8000/vagas/";
+import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
 export async function load({url, fetch}){
     const pathnameArray = url.pathname.split("/");
@@ -7,10 +6,11 @@ export async function load({url, fetch}){
 
     if (!isNaN(pathnameId) && Number(pathnameId) > 0) {
         async function enterprise() {
-            const fetchData = await fetch(`${enterpriseUrl}${pathnameId}/`);
+            const fetchData = await fetch(`${PUBLIC_API_ROOT_URL}/empresas/${pathnameId}/`);
             const enterpriseJSON = await fetchData.json();
     
             return {
+                id: enterpriseJSON.id,
                 cnpj: enterpriseJSON.cnpj,
                 name: enterpriseJSON.nome,
                 email: enterpriseJSON.email,
@@ -20,7 +20,7 @@ export async function load({url, fetch}){
         }
 
         async function openings() {
-            const fetchData = await fetch(openingsUrl);
+            const fetchData = await fetch(`${PUBLIC_API_ROOT_URL}/vagas/`);
             const openingsJSON = await fetchData.json();
     
             return openingsJSON;

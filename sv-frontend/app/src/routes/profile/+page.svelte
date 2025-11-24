@@ -98,8 +98,10 @@
       
       <div class="profile-actions">
         <button class="pr-blue-btn" onclick={openModal}>Editar Informações</button>
-        <button class="pr-blue-btn">Logout</button>
-        <button class="pr-blue-btn">Excluir conta</button>
+        <form method="post">
+          <button formaction="?/logout" class="pr-blue-btn">Logout</button>
+          <button formaction="?/delete" class="pr-blue-btn">Excluir conta</button>
+        </form>
       </div>
     </section>
     
