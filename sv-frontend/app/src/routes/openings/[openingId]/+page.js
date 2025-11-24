@@ -1,6 +1,7 @@
 import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
 export async function load({parent, url, fetch}){
+    const parentData = await parent();
     const pathnameArray = url.pathname.split("/");
     const pathnameId = pathnameArray[2];
 
@@ -47,6 +48,7 @@ export async function load({parent, url, fetch}){
         }
 
         return {
+            user: parentData.user,
             currentOpening: await currentOpening(),
             openings: await openings(),
             curriculums: await curriculums(),

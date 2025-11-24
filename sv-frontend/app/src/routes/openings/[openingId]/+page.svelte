@@ -1,7 +1,3 @@
-<!--
-  -> Exibir Status da Candidatura
-  -> Fazer data.candidacy reativo.
--->
 <script>
   import { PUBLIC_API_ROOT_URL } from '$env/static/public';
   import Header from '$lib/components/header.svelte';
@@ -18,11 +14,12 @@
     boosted,
   } = data.currentOpening;
 
-  // Altere por uma verificação
-  const empresa = false;
+  const empresa = data.user.empresa;
   let openingsList = $state(data.openings);
   let searchTitle = $state("");
   let currentCurriculum = null;
+
+  console.log("CANDIDATURA", data.candidacy);
 
   if (data.candidacy) {
     currentCurriculum = data.curriculums.find(
@@ -33,6 +30,12 @@
   let showModal = $state(false);
   let selectedCurriculum = $state(currentCurriculum);
   let showSidebar = $state(false);
+
+  function prettyCandid() {
+    if (data.candidacy.status === "EM_ANALISE") return "Em análise";
+    else if (data.candidacy.status === "APROVADO") return "Aprovado";
+    else return "Rejeitado"; 
+  }
   
   function toggleModal() {
     showModal = !showModal;
@@ -55,8 +58,7 @@
 
         if (!registerCandidacy.ok) {
           console.log("Resposta do servidor", await registerCandidacy.json());
-          alert("Houve um erro enviando currículo. Tente de novo.");
-          return;
+          return alert("Houve um erro enviando currículo. Tente de novo.");
         };
       }
       else {
@@ -75,7 +77,7 @@
         selectedCurriculum = {
           id: curriculumObj.id,
           nome: curriculumObj.nome,
-          curriculo: curriculumObj.curriculo,
+          arquivoNome: curriculumObj.arquivoNome,
         };
         toggleModal();
     }
@@ -155,7 +157,7 @@
                   <button class="send-button" onclick={toggleModal}>Mudar Currículo</button>
                   <button class="send-button" onclick={deleteSelection} style:background=red>Remover</button>
                 </div>
-                <span class="status">{"???"}</span>
+                <span class="status">{prettyCandid()}</span>
               </div>
               <CandidateCurriculumItem 
                 fileName={selectedCurriculum.arquivoNome}
@@ -273,23 +275,27 @@
   
   .toggle-sidebar {
     position: fixed;
-    top: 0;
+    top: 50%;
     right: 0;
-    width: 100px;
-    height: 100vh;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 120px;
     background: #7d9ac8;
     color: white;
-    font-size: 5ch;
+    font-size: 2rem;
     cursor: pointer;
-    transition: right 0.3s;
+    transition: right 0.3s, bottom 0.3s, transform 0.3s, width 0.3s, height 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 8px 0 0 8px;
+    z-index: 99;
+    border: none;
   }
 
   .toggle-sidebar.shifted {
     z-index: 100;
-    right: 480px
+    right: 480px;
   }
   
   .info-bar {
@@ -322,6 +328,17 @@
     display: inherit;
     flex-direction: inherit;
     gap: 1rem;
+  }
+
+  .status {
+    font-size: 2ch;
+    font-weight: 900;
+    color: #5b7bb4;
+    background: white;
+    padding: 1rem;
+    border-radius: 100vw;
+    text-align: center;
+    border: 1px solid #5b7bb4;
   }
 
   .send-button {
@@ -377,7 +394,7 @@
     transition: right 0.3s;
     z-index: 100;
     overflow-y: auto;
-    border-left: 2px dotted white
+    border-left: 2px solid rgb(200, 200, 255)
   }
   
   .sidebar.visible {
@@ -525,8 +542,8 @@
   
   @media (max-width: 1024px) {
     .sidebar {
-      width: 100%;
-      right: -100%;
+      width: 60%;
+      right: -60%;
     }
   }
   
