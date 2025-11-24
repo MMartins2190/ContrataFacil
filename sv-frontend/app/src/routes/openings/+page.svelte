@@ -5,18 +5,10 @@
     let { data } = $props();
     let openingsList = $state(data.openings);
     let searchTitle = $state("");
-    let searchLocal = $state("");
-    let searchSalary = $state("");
-    // Mude no futuro
-    const empresa = true;
 
-    async function searchFilter(e) {
-        e.preventDefault();
+    function searchFilter() {
         const titleWords = searchTitle.split(" ");
         const titleLetters = searchTitle.split();
-        const localWords = searchLocal.split(" ");
-        const localLetters = searchLocal.split();
-        
 
         openingsList.map(opening => {
             opening.relevance = 0;
@@ -42,8 +34,6 @@
         
         return openingsList.sort((opA, opB) => opB.relevance - opA.relevance);
     }
-
-    $inspect(openingsList, searchTitle, searchLocal, searchSalary);
 </script>
 
 <title>Vagas</title>
@@ -54,28 +44,19 @@
     <h1>Vagas</h1>
     
     <div class="list-vacancies">
-        <form onsubmit={searchFilter}>
-            <div class="form-grid">
-                <div class="search-field">
-                    <label for="search-opening">Escolha uma vaga</label>
-                    <input class="form-input" id="search-opening" type="text" bind:value={searchTitle} placeholder="Digite uma vaga...">
-                </div>
-                <div class="search-field">
-                    <label for="search-local">Defina um local</label>
-                    <input class="form-input" id="search-local" type="text" bind:value={searchLocal} placeholder="Digite um local...">
-                </div>
-                <div class="search-field">
-                    <label for="search-salary">Escolha o salário</label>
-                    <input class="form-input" id="search-salary" type="text" bind:value={searchSalary} placeholder="Digite um salário...">
-                </div>
-            </div>
-            <div class="search-field">
-                <input class="pr-blue-btn" type="submit" value="Buscar">
-            </div>
-        </form>
-        {#if empresa}
+        {#if data.user.empresa}
             <a href="/opening-form" class="pr-blue-btn">Criar nova vaga</a>
         {/if}
+            <div class="search-field">
+                <label for="search-opening">Escolha uma vaga</label>
+                <input
+                oninput={searchFilter}
+                class="form-input"
+                id="search-opening"
+                type="text"
+                bind:value={searchTitle}
+                placeholder="Digite uma vaga...">
+            </div>
         {#if openingsList.length === 0}
             <h2>Não há nenhuma vaga disponível ¯\_(ツ)_/¯</h2>
             {:else}
@@ -100,7 +81,7 @@
     }
     
     h1 {
-        font-weight: 700;
+        font-weight: 500;
         text-align: center;
         margin: 2rem 0 0 0;
     }
@@ -110,31 +91,11 @@
         flex-direction: column;
         align-items: center;
         margin: 2rem 0 0 0;
+        gap: 2rem;
     }
 
     input, label {
         font: inherit;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        align-self: center;
-        align-items: center;
-        font: inherit;
-        background: rgb(217, 217, 217);
-        border-radius: 20px;
-        border: 2px solid #4a6fa5;
-        width: 80%;
-        padding: 3rem 3rem 1rem 3rem;
-        margin: 0 0 3rem 0;
-    }
-
-    form > .form-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin: 0 0 1rem 0;
     }
 
     .vacancies-data{
@@ -152,6 +113,6 @@
     }
 
     .opening-wrapper {
-        height: 300px;
+        height: 270px;
     }
 </style>

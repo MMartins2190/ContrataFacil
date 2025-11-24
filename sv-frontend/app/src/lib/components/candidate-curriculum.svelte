@@ -3,7 +3,6 @@
     id = 0,
     fileName = "Arquivo sem nome",
     curriculumName = "Sem nome",
-    defaultAction = true,
   } = $props();
 
 </script>

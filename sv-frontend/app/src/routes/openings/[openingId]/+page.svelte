@@ -128,11 +128,10 @@
                 </div>
                 <span class="status">{"???"}</span>
               </div>
-              <CandidateCurriculumItem
-              id={selectedCurriculum.id}
-              file={selectedCurriculum.curriculo}
-              curriculumName={selectedCurriculum.nome}
-              />
+              <CandidateCurriculumItem 
+                fileName={selectedCurriculum.arquivoNome}
+                curriculumName={selectedCurriculum.nome}
+                />
             </div>
         {/if}
       {/if}
@@ -167,24 +166,6 @@
           type="text" 
           id="vaga-search" 
           placeholder="Digite uma vaga"
-        />
-      </div>
-      
-      <div class="filter-group">
-        <label for="salary-filter">Escolha o salário</label>
-        <input 
-          type="number" 
-          id="salary-filter" 
-          placeholder="Digite um salário"
-        />
-      </div>
-      
-      <div class="filter-group">
-        <label for="location-filter">Escolha uma localização</label>
-        <input 
-          type="text" 
-          id="location-filter" 
-          placeholder="Digite uma localização"
         />
       </div>
       
@@ -224,10 +205,9 @@
             {#each data.curriculums as curriculum}
               <button class="curriculum-wrapper" onclick={selectCurriculum(curriculum)}>
                 <CandidateCurriculumItem 
-                id={curriculum.id}
-                file={curriculum.curriculo}
+                fileName={curriculum.arquivoNome}
                 curriculumName={curriculum.nome}
-                defaultAction={false}/>
+                />
               </button>
             {/each}
           {/if}
