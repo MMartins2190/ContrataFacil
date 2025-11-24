@@ -35,7 +35,7 @@ class Empresa(models.Model):
     def __str__(self):
         return self.nome
     
-EXTENSOES_IMG_PERMITIDAS = ['png', 'jpeg', 'jpg', 'gif', 'jfif', 'webp', 'avif', 'svg']
+EXTENSOES_IMG_PERMITIDAS = ['png', 'jpeg', 'jpg', 'gif', 'jfif', 'webp', 'svg']
 class Usuario(AbstractUser):
     foto_perfil = models.ImageField(upload_to=RenomearImagem("ftPerfil/"), null=True, blank=True)
     username = models.CharField("Nome", max_length=100, unique=True, null=True)
@@ -64,7 +64,6 @@ class Candidato(models.Model):
     AREAS = []
 
     plano_pago = models.BooleanField(default=False)
-    # area_de_atuacao = models.CharField(choices=AREAS, null=True, blank=True)'
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, primary_key=True, related_name="candidato")
 
 EXTENSOES_DOC_PERMITIDAS = ['pdf']
