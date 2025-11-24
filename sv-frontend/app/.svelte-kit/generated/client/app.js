@@ -35,8 +35,8 @@ export const dictionary = {
 		"/openings": [11],
 		"/openings/[openingId]": [12],
 		"/plans": [13],
-		"/profile": [14],
-		"/signin": [15],
+		"/profile": [~14],
+		"/signin": [~15],
 		"/view-pdf": [16]
 	};
 

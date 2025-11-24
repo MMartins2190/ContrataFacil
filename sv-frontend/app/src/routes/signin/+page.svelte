@@ -17,17 +17,6 @@
         passwordToggle = "password";
         toggled = false;
     }
-
-    async function registerUser(event) {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget, event.submitter);
-        const postData = await fetch(urlString, {
-            method: "POST",
-            body: data,
-        });
-        if (postData.ok) goto("/perfil")
-        else alert("Erro tentando criar usuário... \nEu sou um bule");
-    }
 </script>
 
 <title>Cadastrar</title>
@@ -58,7 +47,6 @@
               id="cpf" 
               name="cpf" 
               required 
-              pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
               placeholder="000.000.000-00"
             />
           </div>
@@ -97,7 +85,6 @@
               id="telefone" 
               name="telefone" 
               required 
-              pattern="\(\d{2}\) \d{4,5}-\d{4}"
               placeholder="(00) 00000-0000"
             />
           </div>
@@ -108,28 +95,10 @@
               type="email" 
               id="email" 
               name="email" 
-              required 
+              required
               autocomplete="email"
             />
           </div>
-          
-          <!-- <div class="form-group">
-            <label for="area">Área de Atuação</label>
-            <select id="area" name="area" required>
-              <option value="" disabled selected>Selecione...</option>
-              <option value="tecnologia">Tecnologia</option>
-              <option value="administracao">Administração</option>
-              <option value="vendas">Vendas</option>
-              <option value="marketing">Marketing</option>
-              <option value="recursos-humanos">Recursos Humanos</option>
-              <option value="financeiro">Financeiro</option>
-              <option value="engenharia">Engenharia</option>
-              <option value="saude">Saúde</option>
-              <option value="educacao">Educação</option>
-              <option value="design">Design</option>
-              <option value="outro">Outro</option>
-            </select>
-          </div> -->
         </div>
         
         <button type="submit" class="submit-button">Cadastrar</button>

@@ -1,16 +1,15 @@
-const openingsUrl = "http://127.0.0.1:8000/vagas/";
-const candidaciesUrl = "http://127.0.0.1:8000/candidaturas/";
+import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
 export const load = async ({ parent, fetch }) => {
     async function openings() {
-        const fetchData = await fetch(openingsUrl);
+        const fetchData = await fetch(`${PUBLIC_API_ROOT_URL}/vagas/`);
         const openingsJSON = await fetchData.json();
 
         return openingsJSON;
         }
 
     async function candidacies() {
-        const fetchData = await fetch(candidaciesUrl);
+        const fetchData = await fetch(`${PUBLIC_API_ROOT_URL}/candidaturas/`);
         const candidaciesJSON = await fetchData.json();
 
         return candidaciesJSON;

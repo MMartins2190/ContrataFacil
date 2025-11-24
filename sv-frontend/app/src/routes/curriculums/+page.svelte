@@ -68,17 +68,17 @@
       <button class="curriculum-wrapper" onclick={toggleUpdate(curriculum)}>
         <CandidateCurriculumItem
         id={curriculum.id}
-        file={curriculum.curriculo}
         curriculumName={curriculum.nome}
+        fileName={curriculum.arquivoNome}
         />
       </button>
       {/each}
     </div>
   </main>
   
-  <a href="/curriculums/0" class="fab">
+  <button class="add-btn" onclick={toggleCreate}>
     <span class="plus-icon">+</span>
-  </a>
+  </button>
 </div>
 
 {#if modalHints}
@@ -86,6 +86,9 @@
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="modal-overlay" onclick={toggleHints}>
       <div class="modal-content" onclick={e => e.stopPropagation()}>
+        <button class="close-btn" onclick={toggleHints} aria-label="Close modal">
+            ×
+        </button>
         <h1>Guia para criar um currículo</h1>
         <ol>
           {#each hints as hint}
@@ -101,18 +104,21 @@
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="modal-overlay" onclick={toggleCreate}>
       <div class="modal-content form-modal" onclick={e => e.stopPropagation()}>
+        <button class="close-btn" onclick={toggleCreate} aria-label="Close modal">
+            ×
+        </button>
         <form method="POST" action="?/create" enctype="multipart/form-data">
-          <input type="text" name="nome" placeholder="Nome do Currículo" required>
-            <label class="pr-blue-btn" for="file-create">{fileInputValue}</label>
-            <input
+          <input type="text" name="nome" placeholder="Nome do Currículo">
+          <label class="pr-blue-btn" for="file-create">{fileInputValue}</label>
+          <input
             onchange={filePicked} 
             type="file"
             name="curriculo" 
             accept=".pdf" 
             id="file-create"
-            required
             style:display="none"
-            >
+            required
+          >
           <input type="submit" class="pr-blue-btn" value="Criar">
         </form>
       </div>
@@ -124,6 +130,9 @@
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="modal-overlay" onclick={toggleUpdate()}>
       <div class="modal-content form-modal" onclick={e => e.stopPropagation()}>
+        <button class="close-btn" onclick={toggleUpdate()} aria-label="Close modal">
+            ×
+        </button>
         <form method="POST" enctype="multipart/form-data">
           <input type="text" name="nome" value={curriculumName} placeholder="Nome do Currículo" required>
             <label class="pr-blue-btn" for="file-update">{fileInputValue}</label>
@@ -133,7 +142,6 @@
             name="curriculo" 
             accept=".pdf" 
             id="file-update"
-            required
             style:display="none"
             >
           <div>
@@ -215,7 +223,8 @@
     box-shadow: 0 4px 12px rgba(91, 123, 180, 0.2);
   }
   
-  .fab {
+  .add-btn {
+    cursor: pointer;
     position: fixed;
     bottom: 2rem;
     right: 2rem;
@@ -232,13 +241,13 @@
     z-index: 100;
   }
   
-  .fab:hover {
+  .add-btn:hover {
     transform: scale(1.05);
     background: #4a6fa5;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
   
-  .fab .plus-icon {
+  .add-btn .plus-icon {
     font-size: 3rem;
     color: white;
     font-weight: 300;
@@ -261,6 +270,7 @@
   }
 
   .modal-content {
+    position: relative;
     background: #F6F7F9;
     max-height: 80vh;
     max-width: 60vw;
@@ -268,6 +278,25 @@
     border-radius: 20px;
     padding: 2rem;
     overflow-y: scroll;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+  }
+  
+  .close-btn:hover {
+    color: #000;
   }
 
   .form-modal form {
@@ -303,14 +332,14 @@
       gap: 1rem;
     }
     
-    .fab {
+    .add-btn {
       width: 64px;
       height: 64px;
       bottom: 1.5rem;
       right: 1.5rem;
     }
     
-    .fab .plus-icon {
+    .add-btn .plus-icon {
       font-size: 2.5rem;
     }
   }

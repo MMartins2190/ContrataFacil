@@ -75,7 +75,7 @@ class Curriculo(models.Model):
         upload_to=RenomearDoc('curriculos/'),
         validators=[FileExtensionValidator(EXTENSOES_DOC_PERMITIDAS)],
         null=True)
-    curriculoNome = models.CharField("Nome de arquivo do currículo", null=True, blank=True)
+    arquivoNome = models.CharField("Nome de arquivo do currículo", null=True, blank=True)
     candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, related_name="Currículos")
 
     def __str__(self):

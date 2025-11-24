@@ -263,19 +263,17 @@
 
   .opening-wrapper {
     width: 600px;
-    height: 300px;
-    margin: 1rem;
+    height: 100%;
+    margin: 0 .5rem;
   }
   
   .openings-display {
     height: 300px;
     background: linear-gradient(#3d5a85, #4a6fa5);
     display: flex;
-    flex-direction: column;
     overflow-x: auto;
-    flex-shrink: none;
-    flex-wrap: wrap;
     scrollbar-width: none;
+    padding: 1rem 0;
   }
   
   /* Bottom Navigation */

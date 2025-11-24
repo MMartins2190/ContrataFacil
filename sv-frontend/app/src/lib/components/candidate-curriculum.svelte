@@ -1,14 +1,10 @@
 <script>
   let {
     id = 0,
-    file = "Arquivo sem nome",
-    curriculumName = file,
+    fileName = "Arquivo sem nome",
+    curriculumName = "Sem nome",
     defaultAction = true,
   } = $props();
-
-  function getFilename(file) {
-    return "Someth1ng";
-  }
 
 </script>
 
@@ -21,7 +17,7 @@
           <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <p class="file-label">{getFilename(file)}</p>
+      <p class="file-label">{fileName}</p>
     </div>
     <div class="card-footer">
       <p>{curriculumName}</p>

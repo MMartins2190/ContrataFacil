@@ -1,6 +1,3 @@
-<!-- Deve ter tamanho mais maleável!
- -->
-
 <script>
     let {
         id = "0",
@@ -57,18 +54,6 @@
         text-decoration: none;
         color: inherit;
     }
-    
-    /* .vancancy-status {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background: #c4c4c4;
-        padding: 0.75rem;
-        text-align: center;
-        font-size: 0.95rem;
-        color: #333;
-        border-radius: 0 0 20px 20px;
-    } */
 
     .vacancy-header {
         display: flex;
