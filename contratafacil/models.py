@@ -43,7 +43,7 @@ class Usuario(AbstractUser):
     email = models.EmailField(unique=True, null=True)
     cpf = models.CharField(max_length=11, unique=True)
     telefone = models.CharField(max_length=15, null=True, blank=True)
-    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, null=True, blank=True)
+    empresa = models.ForeignKey(Empresa, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.username

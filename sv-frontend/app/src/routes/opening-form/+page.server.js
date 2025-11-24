@@ -31,11 +31,11 @@ export const actions = {
     delete: async ({request, fetch, url}) => {
         const openingId = url.searchParams.get("id");
         const data = await request.formData();
-        const putData = await fetch(`${PUBLIC_API_ROOT_URL}/vagas/${openingId}/`, {
+        const deleteData = await fetch(`${PUBLIC_API_ROOT_URL}/vagas/${openingId}/`, {
             method: "DELETE",
         });
 
-        if (putData.ok) redirect(303, "/openings")
-        else console.error(putData);
+        if (deleteData.ok) redirect(303, "/openings")
+        else console.error(deleteData);
     },
 }

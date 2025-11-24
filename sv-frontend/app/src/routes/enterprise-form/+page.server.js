@@ -1,41 +1,41 @@
 import { redirect } from "@sveltejs/kit";
-
-const enterpriseURL = "http://127.0.0.1:8000/empresas/";
+import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
 export const actions = {
     create: async ({request, fetch}) => {
         const data = await request.formData();
-
-        fetch(enterpriseURL, {
+        const postData = await fetch(`${PUBLIC_API_ROOT_URL}/empresas/`, {
             method: "POST",
             body: data,
-        })
-        .then(response => console.log(response))
-        .catch(e => console.error(e))
+        });
+
+        if (postData.ok) return redirect(303/ "/enterprise-intro");
+        else console.log(await postData.json());
     },
     update: async ({request, fetch, url}) => {
-        console.log(url, "\n", request);
+        console.log(`UPDATE URL: ${url}\n RQUEST: ${request}`);
         const enterpriseId = url.searchParams.get("id");
         const data = await request.formData();
+        console.log(`ID USADO: ${enterpriseId}\n`);
 
-        fetch(`${enterpriseURL}${enterpriseId}/`, {
+        const putData = await fetch(`${PUBLIC_API_ROOT_URL}/empresas/${enterpriseId}/`, {
             method: "PUT",
             body: data,
-        })
-        .then(response => console.log(response))
-        .catch(e => console.error(e))
+        });
+
+        if (putData.ok) redirect(303, "/");
+        else console.log(await putData.json());
+        
     },
     delete: async ({request, fetch, url}) => {
+        console.log(url, "\n", request);
         const enterpriseId = url.searchParams.get("id");
-        const data = await request.formData();
 
-        fetch(`${enterpriseURL}${enterpriseId}/`, {
+        const deleteData = await fetch(`${PUBLIC_API_ROOT_URL}/empresas/${enterpriseId}/`, {
             method: "DELETE",
-        })
-        .then(response => console.log(response))
-        .catch(e => console.error(e))
+        });
+
+        if (deleteData.ok) redirect(303, "/");
+        else console.log(await deleteData.json());
     },
-    redirect: () => {
-        redirect(303, "/empresas");
-    }
 }

@@ -17,7 +17,11 @@
 <Header />
 <main>
     <div class="container">
+        {#if id}
+        <h1>Alterar Informações</h1>
+        {:else}
         <h1>Cadastrar Empresa</h1>
+        {/if}
 
         <form method="post">
             <div class="field">
@@ -52,13 +56,13 @@
             <div class="submit">
                 {#if id}
                     <input
-                    formaction="?/update"
+                    formaction="?/update&id={id}"
                     type="submit"
                     class="pr-blue-btn"
-                    value="Salvar"
+                    value="Atualizar"
                     >
                     <input
-                    formaction="?/delete" 
+                    formaction="?/delete&id={id}" 
                     type="submit" 
                     class="pr-blue-btn" 
                     value="Excluir" 
