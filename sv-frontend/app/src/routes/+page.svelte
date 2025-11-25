@@ -251,7 +251,7 @@
 
   .opening-wrapper {
     width: 600px;
-    height: 100%;
+    flex-shrink: 0;
     margin: 0 .5rem;
   }
   

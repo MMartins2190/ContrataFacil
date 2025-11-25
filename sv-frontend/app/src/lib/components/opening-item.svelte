@@ -11,7 +11,7 @@
 </script>
 
 <div class="vacancy-item">
-    <a href="/openings/{id}/" aria-label="Ver detalhes da vaga: {titulo}" class="vacancy-link">
+    <a href="/openings/{id}/" aria-label="Ver detalhes da vaga: {titulo}" class="vacancy-link" data-sveltekit-preload-data="false">
         <div class="vacancy-header">
             <h3 class="vacancy-title">{titulo}</h3>
             <div class="salary-badge">{formattedSalary}</div>

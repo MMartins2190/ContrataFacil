@@ -1,6 +1,14 @@
 import { redirect } from "@sveltejs/kit";
 import { PUBLIC_API_ROOT_URL } from "$env/static/public";
 
+export const load = async ({fetch}) => {
+    const fetchData = await fetch(`${PUBLIC_API_ROOT_URL}/empresas/`);
+
+    return {
+        enterprises: await fetchData.json(),
+    }
+}
+
 export const actions = {
     default: async ({request, fetch, cookies}) => {
         const data = await request.formData();
@@ -10,7 +18,8 @@ export const actions = {
         });
         if (postUser.ok) {
             const responseBody = await postUser.json();
-            cookies.set("userId", JSON.stringify(responseBody.user), {
+            console.log(responseBody);
+            cookies.set("userId", JSON.stringify(responseBody.id), {
                 path: '/',
                 sameSite: 'lax',
                 httpOnly: true,

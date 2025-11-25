@@ -32,7 +32,7 @@ export const dictionary = {
 		"/login": [~9],
 		"/opening-form": [~10],
 		"/openings": [11],
-		"/openings/[openingId]": [12],
+		"/openings/[openingId]": [~12],
 		"/plans": [13],
 		"/profile": [~14],
 		"/signin": [~15]

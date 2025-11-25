@@ -1,8 +1,9 @@
 <script>
-  import { goto } from '$app/navigation';
   import Header from '$lib/components/header.svelte';
 
-  const urlString = "http://127.0.0.1:8000/usuarios/";
+  let { data } = $props();
+  console.log(data);
+
     let passwordToggle = $state("password");
     let toggled = $state(false);
 
@@ -99,6 +100,20 @@
               autocomplete="email"
             />
           </div>
+          
+          <div class="form-group">
+            <label for="enterprise">Associação</label>
+            <select 
+              id="enterprise" 
+              name="empresa" 
+              required
+            >
+              <option value="Candidato">Candidato</option>
+              {#each data.enterprises as enterprise}
+                <option value={enterprise.id}>{enterprise.nome}</option>
+              {/each}
+            </select>
+          </div>
         </div>
         
         <button type="submit" class="submit-button">Cadastrar</button>
@@ -193,14 +208,27 @@
     border-radius: 0 100vw 100vw 0;
   }
 
-  /* select {
+  select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
     cursor: pointer;
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23333' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     padding-right: 2.5rem;
-  } */
+  }
+
+  select:focus {
+    outline: none;
+    border-color: #5b7bb4;
+    box-shadow: 0 0 0 3px rgba(91, 123, 180, 0.1);
+  }
   
   .submit-button {
     margin: 1rem auto 0;

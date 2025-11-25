@@ -74,7 +74,7 @@ class Curriculo(models.Model):
         upload_to=RenomearDoc('curriculos/'),
         validators=[FileExtensionValidator(EXTENSOES_DOC_PERMITIDAS)],
         null=True)
-    arquivoNome = models.CharField("Nome de arquivo do currículo", null=True, blank=True)
+    arquivo_nome = models.CharField("Nome de arquivo do currículo", null=True, blank=True)
     candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, related_name="Currículos")
 
     def __str__(self):
@@ -84,7 +84,7 @@ class Curriculo(models.Model):
         if self.curriculo:
             arqExtencao = self.curriculo.name.split('.')[-1].lower()
             if arqExtencao not in EXTENSOES_DOC_PERMITIDAS: 
-                raise ValidationError(f"Extensão {arqExtencao} não permitida. As extensões permitidas são: {', '.join(EXTENSOES_IMG_PERMITIDAS)}.")
+                raise ValidationError(f"Extensão {arqExtencao} não permitida. As extensões permitidas são: {', '.join(EXTENSOES_DOC_PERMITIDAS)}.")
     
     def save(self, *args, **kwargs):
         self.clean()

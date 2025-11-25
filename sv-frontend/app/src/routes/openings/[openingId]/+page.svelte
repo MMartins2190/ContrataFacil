@@ -32,8 +32,8 @@
   let showSidebar = $state(false);
 
   function prettyCandid() {
-    if (data.candidacy.status === "EM_ANALISE") return "Em análise";
-    else if (data.candidacy.status === "APROVADO") return "Aprovado";
+    if (data.candidacy?.status === "EM_ANALISE") return "Em análise";
+    else if (data.candidacy?.status === "APROVADO") return "Aprovado";
     else return "Rejeitado"; 
   }
   
